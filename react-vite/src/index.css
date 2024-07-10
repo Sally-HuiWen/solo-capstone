@@ -1,1 +1,92 @@
 /* TODO: Add sitewide styles */
+/* Reset some default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Set a base font family for the entire application */
+  body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f8f9fa;
+    color: #333;
+  }
+  
+  /* Link styles */
+  a {
+    text-decoration: none; 
+    color: inherit; 
+  }
+  
+  a:hover {
+    text-decoration: underline; 
+    color: #007bff; 
+  }
+  
+  a:visited {
+    text-decoration: none; 
+    color: inherit; 
+  }
+  
+  a:active {
+    text-decoration: none; 
+    color: inherit; 
+  }
+  
+  /* Basic layout settings */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Header styles */
+  header {
+    background: #007bff;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+  }
+  
+  /* Footer styles */
+  footer {
+    background: #f8f9fa;
+    color: #333;
+    padding: 10px 0;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+  }
+  
+  /* Button styles */
+  button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Form styles */
+  input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Utility classes */
+  .text-center {
+    text-align: center;
+  }
