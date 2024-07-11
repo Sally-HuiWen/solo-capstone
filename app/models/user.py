@@ -57,8 +57,6 @@ class User(db.Model, UserMixin):
         back_populates = 'users'
     )
 
-
-
     @property
     def password(self):
         return self.hashed_password

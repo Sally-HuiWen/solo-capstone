@@ -1,5 +1,4 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-from .like import likes
 
 class DailyLogImage(db.Model):
     __tablename__ = 'daily_log_images'
@@ -16,13 +15,6 @@ class DailyLogImage(db.Model):
     daily_log = db.relationship(
         'DailyLog',
         back_populates = 'daily_log_images'
-    )
-
-    #many-to-many: users(many)<=>daily_logs(many)
-    users = db.relationship(
-        'User',
-        secondary = likes,
-        back_populates = 'daily_logs'
     )
 
     def to_dict(self):

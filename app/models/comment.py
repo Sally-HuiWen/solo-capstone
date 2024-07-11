@@ -10,7 +10,7 @@ class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
     daily_log_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("daily_logs.id")))
-    comment = db.Comment(db.String(255), nullable = False)
+    comment = db.Column(db.String(255), nullable = False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     
     #one-to-many: users(one)=> comments(many)

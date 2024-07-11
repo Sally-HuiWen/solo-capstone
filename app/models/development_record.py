@@ -9,8 +9,8 @@ class DevelopmentRecord(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     kid_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("kids.id")))
-    height = db.Column(db.Decimal,nullable=False)
-    weight = db.Column(db.Decimal, nullable=False)
+    height = db.Column(db.Numeric,nullable=False)
+    weight = db.Column(db.Numeric,nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     #one-to-many: kid(one)=> development_records(many)
