@@ -91,4 +91,4 @@ def remove_kid(kid_id):
     
     db.session.delete(kid)
     db.session.commit()
-    return {'message': 'kid remove successfully'}
+    return {'message': 'kid remove successfully'}, 200

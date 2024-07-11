@@ -1,0 +1,34 @@
+#landing-page-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    column-gap: 50px;
+    padding: 50px;
+}
+
+#landing-page-left-box {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+
+#big-des {
+    height:60%;
+    font-size: 6em;
+    font-weight: bold;
+    color: black
+}
+
+#small-des {
+    height:40%;
+    font-size: 2em;
+    color: black;
+}
+
+#landing-page-right-box {
+    width: 50%
+}
+
+#landing-page-img {
+    width: 100%
+}

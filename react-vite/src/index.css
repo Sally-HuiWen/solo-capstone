@@ -4,6 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family:Georgia, 'Times New Roman', Times, serif;
   }
   
   /* Set a base font family for the entire application */
@@ -64,7 +65,7 @@
   /* Button styles */
   button {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 10px 15px;
     font-size: 16px;
     border: none;
     background-color: #007bff;

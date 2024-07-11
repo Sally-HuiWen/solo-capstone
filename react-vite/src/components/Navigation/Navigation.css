@@ -1,3 +1,26 @@
+#header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px;
+}
+
+#left-header-box {
+  display: flex;
+  align-items: center;
+  color: #ff544b;
+  text-decoration: none;
+}
+
+#logo {
+  font-size: xx-large;
+}
+
+#website-name {
+  font-size: xx-large;
+}
+
+
 .profile-dropdown {
   position: absolute;
 }
