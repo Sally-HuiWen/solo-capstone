@@ -32,3 +32,4 @@ def undo_daily_log_images():
         db.session.execute(text("DELETE FROM daily_log_images"))
         
     db.session.commit()
+#let me deploy
