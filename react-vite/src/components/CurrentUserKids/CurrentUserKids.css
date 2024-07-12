@@ -1,0 +1,38 @@
+#kids-list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items:start;
+    column-gap: 50px;
+    row-gap:30px;
+    padding: 50px;
+}
+
+#kids-list-box {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+}
+.kid-details {
+   width: 200px;
+   border-radius: 10px;
+   box-shadow: 5px 5px 5px 5px grey;
+   padding-left: 5px;
+}
+
+#update-and-remove-box {
+    display: flex;
+    column-gap:10px;
+}
+
+#add-kid-button {
+    border-radius: 10px;
+    width: 200px;
+    font-size: larger;
+}
+
+.button-button {
+   padding:6px;
+   border-radius: 6px;
+}
+

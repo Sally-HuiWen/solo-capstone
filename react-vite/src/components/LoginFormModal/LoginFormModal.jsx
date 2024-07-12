@@ -3,9 +3,11 @@ import { thunkLogin } from "../../redux/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
+import { useNavigate } from "react-router-dom";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
@@ -19,12 +21,14 @@ function LoginFormModal() {
         email,
         password,
       })
+  
     );
 
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
       closeModal();
+      navigate("/your-kids-list");
     }
   };
 

@@ -44,7 +44,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('name', sa.String(length=50), nullable=False),
-    sa.Column('birthday', sa.Date(), nullable=False),
+    sa.Column('birth_date', sa.Date(), nullable=False),
     sa.Column('relationship', sa.String(length=50), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')

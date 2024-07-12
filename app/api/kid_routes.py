@@ -41,7 +41,7 @@ def add_new_kid():
         new_kid = Kid(
             user_id = current_user.id,
             name = form.data['name'],
-            birthday = form.data['birthday'],
+            birth_date= form.data['birth_date'],
             relationship = form.data['relationship']
         )
         db.session.add(new_kid)
@@ -67,7 +67,7 @@ def update_kid(kid_id):
 
     if form.validate_on_submit():
         updated_kid.name = form.data['name']
-        updated_kid.birthday = form.data['birthday']
+        updated_kid.birth_date = form.data['birth_date']
         updated_kid.relationship = form.data['relationship']
         db.session.commit()
         return updated_kid.to_dict()

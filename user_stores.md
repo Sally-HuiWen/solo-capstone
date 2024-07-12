@@ -58,7 +58,7 @@
 * As a logged in user, I want to be able to view a specific kid
   * When I'm on the `/kids/:kidId` page:
     * I can view the kid detail page
-      * So that I can review a full information of the kid including the kid's name and birthday.
+      * So that I can review a full information of the kid including the kid's name and birth_date.
 
 ### Updating Kids
 

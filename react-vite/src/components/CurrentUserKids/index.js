@@ -1,3 +1,2 @@
-import currentUserKids from './CurrentUserKids';
-
-export default currentUserKids;
+import CurrentUserKids from './CurrentUserKids';
+export default CurrentUserKids ;

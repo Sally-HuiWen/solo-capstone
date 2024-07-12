@@ -9,7 +9,7 @@ class Kid(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
     name = db.Column(db.String(50), nullable=False) 
-    birthday = db.Column(db.Date, nullable=False)
+    birth_date = db.Column(db.Date, nullable=False)
     relationship = db.Column(db.String(50), nullable=False)
     
     # one-to-many: user(one)=>kids(many)
@@ -37,7 +37,7 @@ class Kid(db.Model):
             'id': self.id,
             'user_id': self.user_id,
             'name': self.name,
-            'birthday': self.birthday,
+            'birth_date': self.birth_date,
             'relationship': self.relationship,
         }
     
@@ -47,7 +47,7 @@ class Kid(db.Model):
     #     'id': self.id,
     #     'user_id': self.user_id,
     #     'name': self.name,
-    #     'birthday': self.birthday,
+    #     'birth_date': self.birth_date,
     #     'relationship': self.relationship,
     # }
 

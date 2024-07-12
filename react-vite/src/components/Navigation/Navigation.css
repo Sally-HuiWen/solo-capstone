@@ -23,4 +23,5 @@
 
 .profile-dropdown {
   position: absolute;
+  list-style-type: none;
 }
