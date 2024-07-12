@@ -4,8 +4,8 @@ import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 import LandingPage from '../components/LandingPage';
 import CurrentUserKids from '../components/CurrentUserKids/CurrentUserKids';
-import KidForm from '../components/KidForm';
-import UpdateKidForm from '../components/KidForm';
+import KidForm from '../components/KidForm/KidForm';
+import UpdateKidForm from '../components/KidForm/UpdateKidForm';
 export const router = createBrowserRouter([
   {
     element: <Layout />,

@@ -55,7 +55,7 @@ const KidForm = () => {
     const days = Array.from(new Array(31), (val, i) => i + 1);
 
     return (
-        <form onSubmit={handleSubmit} id='kid-form'>
+        <form onSubmit={handleSubmit} className='kid-form'>
             <div id='name-box1'>
                 <label htmlFor='kid-names'>Name
                     {hasSubmitted && errors.includes('Name is required') && (
@@ -73,7 +73,7 @@ const KidForm = () => {
                     />
             </div>
 
-            <div id='birth-date-box2'>
+            <div className='birth-date-box2'>
                 <label htmlFor='kid-birth-dates'>Birth Date</label>
                 <div id='kid-birth-dates' className='year-month-day-box'>
                     <select value={year} onChange={e => setYear(e.target.value)}>
@@ -110,7 +110,7 @@ const KidForm = () => {
                 </div>
             </div>
 
-            <div id='relationship-box3'>
+            <div className='relationship-box3'>
                 <label htmlFor='kid-relationship-box'>Relationship
                     {hasSubmitted && errors.includes('Please choose a relationship') && (
                     <span className='validation-errors'>Please choose a relationship</span> 

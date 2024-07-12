@@ -1,4 +1,4 @@
-#kid-form {
+.kid-form {
     display: flex;
     flex-direction: column;
     row-gap: 30px;
@@ -21,7 +21,7 @@
     column-gap: 10px;
 }
 
-#relationship-box3 {
+.relationship-box3 {
     display: flex;
     flex-direction: column;
 }
