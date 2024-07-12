@@ -12,7 +12,7 @@ def get_user_kids():
     Get all kids by current logged-in user
     """
     user_kids = Kid.query.filter_by(user_id=current_user.id).all()
-    return {"Kids": [kid.to_dict() for kid in user_kids]}
+    return {"kids": [kid.to_dict() for kid in user_kids]}
 
 @kid_routes.route('/<int:kid_id>')
 @login_required
