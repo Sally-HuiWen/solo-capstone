@@ -9,8 +9,8 @@ const UpdateKidForm = ()=> {
     const dispatch = useDispatch();
     const { kidId } = useParams()
     const kid = useSelector(state => state.kids.kidDetails)
-    console.log('who is this kid?', kid)
-    console.log('what is the kid birth date', kid.birth_date)
+    // console.log('who is this kid?', kid)
+    // console.log('what is the kid birth date', kid.birth_date)
     
     const [name, setName] = useState(kid ? kid.name : '');
     const [year, setYear] = useState(kid ? kid.birth_date?.split('-')[0] : '');
@@ -19,7 +19,7 @@ const UpdateKidForm = ()=> {
     const [relationship, setRelationship] = useState(kid ? kid.relationship : '');
     const [errors, setErrors] = useState([]);
     const [hasSubmitted, setHasSubmitted] = useState(false);
-
+    
     const relationships = [
         'Mom',
         'Dad',
@@ -39,9 +39,11 @@ const UpdateKidForm = ()=> {
     useEffect(() => {
         if (kid) {
             setName(kid.name);
-            setYear(kid.birth_date?.split('-')[0]);
-            setMonth(kid.birth_date?.split('-')[1]);
-            setDay(kid.birth_date?.split('-')[2]);
+            const birthDate = new Date(kid.birth_date);
+            setYear(birthDate.getFullYear());
+            setMonth(String(birthDate.getMonth() + 1).padStart(2, '0'));
+            setDay(String(birthDate.getDate()).padStart(2, '0'));
+            setRelationship(kid.relationship);
             setRelationship(kid.relationship);
         }
     }, [kid]);
