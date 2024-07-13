@@ -9,6 +9,7 @@ from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.kid_routes import kid_routes
 from .api.daily_log_routes import daily_log_routes
+from .api.daily_log_image_routes import daily_log_image_routes
 from .seeds import seed_commands
 from .config import Config
 
@@ -32,6 +33,7 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(kid_routes, url_prefix='/api/kids')
 app.register_blueprint(daily_log_routes, url_prefix='/api/daily_logs')
+app.register_blueprint(daily_log_image_routes, url_prefix='/api/daily_log_images')
 db.init_app(app)
 Migrate(app, db)
 
