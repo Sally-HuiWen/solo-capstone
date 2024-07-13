@@ -45,5 +45,5 @@ class DailyLog(db.Model):
             'kid_id': self.kid_id,
             'content': self.content,
             'created_at': self.created_at,
-            'images': [image.to_dict() for image in self.images] if self.images else [],
+            # 'images': [image.to_dict() for image in self.images] if self.images else [],
         }

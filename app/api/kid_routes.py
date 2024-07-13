@@ -1,7 +1,8 @@
 from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
-from app.models import Kid, db
-from app.forms import KidForm
+from app.models import Kid, DailyLog, db
+from app.forms import KidForm, DailyLogForm
+from datetime import datetime
 
 kid_routes = Blueprint('kids', __name__)
 
@@ -92,3 +93,46 @@ def remove_kid(kid_id):
     db.session.delete(kid)
     db.session.commit()
     return {'message': 'kid remove successfully'}, 200
+
+#READ--get all_daily_logs of a specific kid
+@kid_routes.route('/<int:kid_id>/daily_logs')
+@login_required
+def get_all_daily_logs_by_kid_id(kid_id):
+    """
+    Get all daily logs for a specific kid by current logged-in user 
+    """
+    kid = Kid.query.get(kid_id)
+    if kid is None:
+        return {'errors': {'message': 'Kid not found'}}, 404
+    if kid.user_id != current_user.id:
+        return {'errors': {'message': 'You are not authorized'}}, 403
+    #Do not forget to sort it!
+    all_daily_logs = DailyLog.query.filter_by(kid_id=kid_id).order_by(DailyLog.created_at.desc()).all()
+    return {'daily_logs': [log.to_dict() for log in all_daily_logs]}
+
+#Create--post a new daily_log of a specific kid
+@kid_routes.route('/<int:kid_id>/daily_logs/new', methods = ['POST'])
+@login_required
+def create_new_daily_log(kid_id):
+    """
+    Create a new daily log for a specific kid by current logged-in user 
+    """
+    kid = Kid.query.get(kid_id)
+    if kid is None:
+        return {'errors': {'message': 'Kid not found'}}, 404
+    if kid.user_id != current_user.id:
+        return {'errors': {'message': 'You are not authorized'}}, 403
+    
+    form = DailyLogForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        new_daily_log = DailyLog(
+            kid_id=kid_id,
+            content=form.data['content'],
+            created_at=datetime.utcnow()#set created_at here instead of in forms
+        )
+        db.session.add(new_daily_log)
+        db.session.commit()
+        return new_daily_log.to_dict(), 201
+    else:
+        return {'errors': form.errors}, 400
