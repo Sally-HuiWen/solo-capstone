@@ -11,9 +11,10 @@ const currentUserKids = (kids) => ({
     kids,
 });
 
-const getKidDetails = (kid) => ({
+const getKidDetails = (kid, kidId) => ({
     type: KID_DETAILS,
     kid,
+    kidId,
 })
 
 const addNewKid = (kid) => ({
@@ -47,7 +48,7 @@ export const thunkGetKidDetails = (kidId) => async (dispatch) => {
     const res = await fetch(`/api/kids/${kidId}`);
     if (res.ok) {
         const kid = await res.json();
-        dispatch(getKidDetails(kid))
+        dispatch(getKidDetails(kid, kidId))
     } else {
         const error = await res.json();
         return error;
@@ -121,8 +122,11 @@ export default function kidReducer(state = initialState, action) {
         case KID_DETAILS:
             newState = {
                 ...state, 
-                kidDetails: action.kid
-            }
+                kidDetails: {
+                    ...state.kidDetails,
+                    [action.kidId]: action.kid
+                }
+            };
             return newState;
         case ADD_NEW_KID:
             newState = {

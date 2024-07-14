@@ -44,6 +44,6 @@ class DailyLog(db.Model):
             'id': self.id,
             'kid_id': self.kid_id,
             'content': self.content,
-            'created_at': self.created_at,
-            # 'images': [image.to_dict() for image in self.images] if self.images else [],
+            'created_at': self.created_at.strftime("%a, %d %b %Y"),#display as Sat, 15 Jul 2023 instead of Sat, 15 Jul 2023 00:00:00 GMT
+            'images': [image.to_dict() for image in self.daily_log_images] if self.daily_log_images else [],
         }

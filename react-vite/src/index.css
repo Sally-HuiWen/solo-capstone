@@ -11,11 +11,10 @@
     background-color: #f8f9fa;
     color: #333;
   }
-  
+
   /* Link styles */
-  a {
+  /* a, link {
     text-decoration: none; 
-    color: inherit; 
   }
   
   a:hover {
@@ -31,7 +30,7 @@
   a:active {
     text-decoration: none; 
     color: inherit; 
-  }
+  } */
   
   /* Basic layout settings */
   .container {

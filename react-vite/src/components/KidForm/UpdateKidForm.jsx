@@ -8,7 +8,7 @@ const UpdateKidForm = ()=> {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { kidId } = useParams()
-    const kid = useSelector(state => state.kids.kidDetails)
+    const kid = useSelector(state => state.kids.kidDetails[kidId]);
     // console.log('who is this kid?', kid)
     // console.log('what is the kid birth date', kid.birth_date)
     

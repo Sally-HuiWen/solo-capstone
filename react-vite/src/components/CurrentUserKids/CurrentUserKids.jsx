@@ -5,6 +5,7 @@ import { thunkGetCurrentKids } from '../../redux/kids';
 import './CurrentUserKids.css';
 import OpenModalButton from '../OpenModalButton';
 import RemoveKidModal from './RemoveKidModal'
+import calculateKidAge from '../utility';
 
 const CurrentUserKids = () => {
     const dispatch = useDispatch();
@@ -17,17 +18,6 @@ const CurrentUserKids = () => {
 
     const handleAddNewKid = () => {
         navigate('/kids/add-new')
-    };
-
-    const kidAge = (birth_date) => {
-        const birthDate = new Date(birth_date);
-        const today = new Date();
-        let age = today.getFullYear() - birthDate.getFullYear();
-        const monthDiff = today.getMonth() - birthDate.getMonth();
-        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-            age--;
-        }
-        return age
     };
 
     return (
@@ -45,29 +35,26 @@ const CurrentUserKids = () => {
                     <div id='kids-list-box'>
                         {kids.map((kid, index)=> (
                             <div key={kid?.id || index} className='kid-details'>
-                                <h2>{kid?.name}</h2>
-                                <h2>age: {kidAge(kid?.birth_date)}</h2>
-                                <div id='update-and-remove-box'>
-                                    <Link to={`/kids/${kid?.id}/update`}>
-                                      <button>Update</button>
+                                   <Link to={`/kids/${kid?.id}/dailyLogs`} className='Link-link'>
+                                        <h2>{kid?.name}</h2>
+                                        <p>{calculateKidAge(kid?.birth_date)}</p>
                                     </Link>
-                                    <OpenModalButton
-                                      buttonText='Remove'
-                                      modalComponent={<RemoveKidModal kidId={kid?.id} />}
-                                    />
-                                </div>
+                                    <div id='update-and-remove-box'>
+                                        <Link to={`/kids/${kid?.id}/update`} className='Link-link'>
+                                        <button>Update</button>
+                                        </Link>
+                                        <OpenModalButton
+                                        buttonText='Remove'
+                                        modalComponent={<RemoveKidModal kidId={kid?.id} />}
+                                        />
+                                    </div>
                             </div>
                         ))}
                     </div>
                 )}
-
             </div>
-
         </div>
-
     )
-
-
 }
 
 export default CurrentUserKids
