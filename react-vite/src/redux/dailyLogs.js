@@ -31,8 +31,9 @@ const updateDailyLog = (dailyLog) => ({
     dailyLog,
 });
 
-const deleteDailyLog = (dailyLogId) => ({
+const deleteDailyLog = (kidId, dailyLogId) => ({
     type: DELETE_DAILY_LOG,
+    kidId,
     dailyLogId,
 });
 
@@ -112,12 +113,12 @@ export const thunkUpdateDailyLog = (dailyLog) => async (dispatch) => {
     }
 };
 
-export const thunkDeleteDailyLog = (dailyLogId) => async (dispatch) => {
+export const thunkDeleteDailyLog = (kidId, dailyLogId) => async (dispatch) => {
     const res = await fetch(`/api/daily_logs/${dailyLogId}`,{
         method: 'DELETE',
     });
     if (res.ok) {
-        dispatch(deleteDailyLog(dailyLogId));
+        dispatch(deleteDailyLog(kidId, dailyLogId));
     } else {
         const error = await res.json();
         return error;
@@ -213,17 +214,18 @@ export default function dailyLogReducer(state = initialState, action) {
                 },
                 dailyLogDetails: action.dailyLog.id === state.dailyLogDetails.id ? action.dailyLog : state.dailyLogDetails
             };
-        case DELETE_DAILY_LOG:
+        case DELETE_DAILY_LOG: {
             const newState = {
                 ...state,
                 allDailyLogs: {
                     ...state.allDailyLogs,
-                    [state.dailyLogDetails.kid_id]: state.allDailyLogs[state.dailyLogDetails.kid_id]?.filter(log => log.id !== action.dailyLogId)
+                    [action.kidId]: state.allDailyLogs[action.kidId]?.filter(log => log.id !== action.dailyLogId)
                 },
                 dailyLogDetails: state.dailyLogDetails.id === action.dailyLogId ? {} : state.dailyLogDetails
             };
             console.log("new state for delete daily log:", newState);
             return newState;
+        }
         case ADD_IMAGE:
             return {
                 ...state,

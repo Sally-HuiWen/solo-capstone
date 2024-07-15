@@ -3,13 +3,22 @@
     justify-content: space-between;
     align-items: center;
     margin: 50px;
+    border: 1px solid #ccc;
     border-radius: 10px;
     width: 500px;
     box-shadow: 3px 3px 2px 2px lightslategray;
 }
+#baby-icon {
+    font-size: xx-large;
+    color: pink;
+}
 #kid-icon-and-name {
     display: flex;
     align-items: center;
+}
+
+#kid-age-p {
+    padding-left: 30px;
 }
 .daily-logs-content {
     margin: 50px;

@@ -34,10 +34,10 @@ const KidDailyLogs = () => {
       <div className="daily-logs-header">
         <div>
             <div id='kid-icon-and-name'>  
-                <PiBabyLight />
+                <PiBabyLight id='baby-icon'/>
                 <h2>{kid?.name}</h2>
             </div>
-            <p>{calculateKidAgeFromBirthToNow(kid?.birth_date)}</p> 
+            <p id='kid-age-p'>{calculateKidAgeFromBirthToNow(kid?.birth_date)}</p> 
         </div>
        
         <div>
@@ -74,7 +74,7 @@ const KidDailyLogs = () => {
                     </Link>
                     <OpenModalButton
                       buttonText='Delete' 
-                      modalComponent={<DeleteDailyLogModal dailyLogId={log?.id} />}
+                      modalComponent={<DeleteDailyLogModal kidId={kid?.id} dailyLogId={log?.id} />}
                     />
                   </div>
                 </div>
