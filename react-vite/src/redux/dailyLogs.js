@@ -134,6 +134,7 @@ export const thunkUploadNewImage = (dailyLogId,image) => async (dispatch) => {
     });
     if (res.ok) {
         const newImage = await res.json();
+        console.log('what is the image response in thunk', newImage)
         dispatch(addNewImage(dailyLogId, newImage));
         return newImage;
     } else {
@@ -173,9 +174,9 @@ export const thunkDeleteImage = (imageId) => async (dispatch) => {
 }
 
 const initialState = {
-    allDailyLogs: {}, // Store daily logs by kid ID
-    dailyLogDetails: {}, // Store details of a single daily log
-    images: {} // Store images by daily log ID
+    allDailyLogs: {}, // store all daily logs by kid id
+    dailyLogDetails: {}, // store details for a  daily log
+    images: {} // store images by daily log id
 };
 
 export default function dailyLogReducer(state = initialState, action) {
@@ -213,14 +214,16 @@ export default function dailyLogReducer(state = initialState, action) {
                 dailyLogDetails: action.dailyLog.id === state.dailyLogDetails.id ? action.dailyLog : state.dailyLogDetails
             };
         case DELETE_DAILY_LOG:
-            return {
+            const newState = {
                 ...state,
                 allDailyLogs: {
                     ...state.allDailyLogs,
-                    [state.dailyLogDetails.kid_id]: state.allDailyLogs[state.dailyLogDetails.kid_id].filter(log => log.id !== action.dailyLogId)
+                    [state.dailyLogDetails.kid_id]: state.allDailyLogs[state.dailyLogDetails.kid_id]?.filter(log => log.id !== action.dailyLogId)
                 },
                 dailyLogDetails: state.dailyLogDetails.id === action.dailyLogId ? {} : state.dailyLogDetails
             };
+            console.log("new state for delete daily log:", newState);
+            return newState;
         case ADD_IMAGE:
             return {
                 ...state,

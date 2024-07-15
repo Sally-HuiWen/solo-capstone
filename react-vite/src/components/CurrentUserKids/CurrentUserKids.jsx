@@ -5,7 +5,7 @@ import { thunkGetCurrentKids } from '../../redux/kids';
 import './CurrentUserKids.css';
 import OpenModalButton from '../OpenModalButton';
 import RemoveKidModal from './RemoveKidModal'
-import calculateKidAge from '../utility';
+import { calculateKidAgeFromBirthToNow }from '../utility';
 
 const CurrentUserKids = () => {
     const dispatch = useDispatch();
@@ -37,7 +37,7 @@ const CurrentUserKids = () => {
                             <div key={kid?.id || index} className='kid-details'>
                                    <Link to={`/kids/${kid?.id}/dailyLogs`} className='Link-link'>
                                         <h2>{kid?.name}</h2>
-                                        <p>{calculateKidAge(kid?.birth_date)}</p>
+                                        <p>{calculateKidAgeFromBirthToNow(kid?.birth_date)}</p>
                                     </Link>
                                     <div id='update-and-remove-box'>
                                         <Link to={`/kids/${kid?.id}/update`} className='Link-link'>

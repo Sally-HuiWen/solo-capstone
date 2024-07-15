@@ -1,0 +1,27 @@
+.daily-logs-form {
+    display: flex;
+    flex-direction: column;
+    margin: 50px;
+    row-gap: 20px;
+}
+
+#content-box2 {
+    display: flex;
+    flex-direction: column;
+}
+.each-image-box {
+    display: flex;
+}
+
+.remove-add-image {
+    background-color: purple;
+    padding: 5px;
+}
+
+#images-box3 {
+    border: 1px solid black;
+}
+
+#dailyLog-submit-button {
+    width: 300px;
+}

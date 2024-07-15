@@ -128,6 +128,7 @@ def create_new_daily_log(kid_id):
     if form.validate_on_submit():
         new_daily_log = DailyLog(
             kid_id=kid_id,
+            title=form.data['title'],
             content=form.data['content'],
             created_at=datetime.utcnow()#set created_at here instead of in forms
         )

@@ -52,6 +52,7 @@ def upgrade():
     op.create_table('daily_logs',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('kid_id', sa.Integer(), nullable=True),
+    sa.Column('title', sa.String(length=50), nullable=False),
     sa.Column('content', sa.String(length=2000), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['kid_id'], ['kids.id'], ),

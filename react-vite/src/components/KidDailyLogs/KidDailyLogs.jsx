@@ -4,11 +4,10 @@ import { useNavigate, Link, useParams } from 'react-router-dom';
 import { thunkGetKidDetails } from '../../redux/kids';
 import { thunkGetAllDailyLogs } from '../../redux/dailyLogs';
 import { PiBabyLight } from "react-icons/pi";
-import calculateKidAge from '../utility';
+import {calculateKidAgeFromBirthToNow, calculateKidAgeFromBirthToPostDate }from '../utility';
 import './KidDailyLogs.css';
-
-// import OpenModalButton from '../OpenModalButton';
-// import DeleteProductModal from './DeleteDailyLogModal';
+import OpenModalButton from '../OpenModalButton';
+import DeleteDailyLogModal from './DeleteDailyLogModal';
 
 const KidDailyLogs = () => {
   const { kidId } = useParams();
@@ -26,7 +25,7 @@ const KidDailyLogs = () => {
   }, [dispatch, kidId]);
 
   const handleCreateAddDailyLog = () => {
-    navigate('/kids/:kidId/DailyLogs/new');
+    navigate(`/kids/${kidId}/DailyLogs/new`);
   };
 
   return (
@@ -34,8 +33,11 @@ const KidDailyLogs = () => {
 
       <div className="daily-logs-header">
         <div>
-            <div><PiBabyLight />{kid?.name}</div>
-            <p>{calculateKidAge(kid?.birth_date)}</p> 
+            <div id='kid-icon-and-name'>  
+                <PiBabyLight />
+                <h2>{kid?.name}</h2>
+            </div>
+            <p>{calculateKidAgeFromBirthToNow(kid?.birth_date)}</p> 
         </div>
        
         <div>
@@ -47,37 +49,38 @@ const KidDailyLogs = () => {
     
 
       <div className="daily-logs-content">
-        <h2>{kid?.name}'s Moments</h2>
+        <h2>{kid?.name}&apos;s Moments</h2>
         {allDailyLogsForThisKid.length === 0 ? (
           <p>No Moments found</p>
         ) : (
-          <ul>
+            <div>
             {allDailyLogsForThisKid?.map((log, index) => (
-              <li key={log?.id || index} className="log-item">
+              <div key={log?.id || index} className="log-item">
                 <div className='log-image'>
                   {log?.images?.filter(image=>image.preview)?.length > 0? (
-                    <img src={log.images.filter(image => image.preview)[0].url} alt={log?.name} />
+                    <img src={log.images.filter(image => image.preview)[0].url} alt={log?.name} id='daily-log-image'/>
                   ) : (
                     <p>No image available</p>
                   )}
                 </div>
                 <div className="log-details">
-                  <h2>{log?.created_at}</h2>
-                  <p>{kid?.birthday}</p>
+                  <h3>Post Date: {log?.created_at}</h3>
+                  <p>{kid?.name}&apos;s Age: {calculateKidAgeFromBirthToPostDate(kid?.birth_date, log?.created_at)}</p>
+                  <p>Title: {log?.title}</p>
                   <p>{log?.content}</p>
-                  <div className="listing-actions">
+                  <div className="update-delete-actions">
                     <Link to={`/DailyLogs/${log?.id}/update`}>
                       <button>Update</button>
                     </Link>
-                    {/* <OpenModalButton
+                    <OpenModalButton
                       buttonText='Delete'
                       modalComponent={<DeleteDailyLogModal dailyLogId={log?.id} />}
-                    /> */}
+                    />
                   </div>
                 </div>
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
         )}
       </div>
     </div>

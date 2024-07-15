@@ -10,7 +10,8 @@ class DailyLog(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     kid_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("kids.id")))
-    content = db.Column(db.String(2000),nullable=False)
+    title = db.Column(db.String(50), nullable=False)
+    content = db.Column(db.String(2000), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     #one-to-many: kid(one)=> daily_logs(many)
@@ -43,6 +44,7 @@ class DailyLog(db.Model):
         return {
             'id': self.id,
             'kid_id': self.kid_id,
+            'title': self.title,
             'content': self.content,
             'created_at': self.created_at.strftime("%a, %d %b %Y"),#display as Sat, 15 Jul 2023 instead of Sat, 15 Jul 2023 00:00:00 GMT
             'images': [image.to_dict() for image in self.daily_log_images] if self.daily_log_images else [],

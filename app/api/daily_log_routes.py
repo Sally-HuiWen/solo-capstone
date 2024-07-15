@@ -39,6 +39,7 @@ def update_daily_log(daily_log_id):
     form = DailyLogForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        updated_daily_log.title = form.data['title']
         updated_daily_log.content = form.data['content']
         updated_daily_log.created_at = datetime.utcnow()
         db.session.commit()

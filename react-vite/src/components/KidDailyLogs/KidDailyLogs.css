@@ -7,3 +7,39 @@
     width: 500px;
     box-shadow: 3px 3px 2px 2px lightslategray;
 }
+#kid-icon-and-name {
+    display: flex;
+    align-items: center;
+}
+.daily-logs-content {
+    margin: 50px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 2px 2px lightslategray;
+}
+
+.update-delete-actions {
+    display: flex;
+    column-gap: 10px;
+}
+
+.log-item {
+    display: flex;
+    height: 200px;
+    column-gap: 50px;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.log-image {
+    width: 30%;
+    border: 1px solid black;
+}
+
+.log-details {
+    width: 60%;
+    border: 1px solid black;
+}
+
+#daily-log-image {
+    width: 100%;
+}
