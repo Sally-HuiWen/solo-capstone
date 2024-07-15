@@ -1,7 +1,6 @@
 import { thunkDeleteDailyLog} from '../../redux/dailyLogs';
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import { useNavigate } from 'react-router-dom';
 
 export default function DeleteDailyModal({ dailyLogId }) {
   const dispatch = useDispatch();
@@ -22,7 +21,7 @@ export default function DeleteDailyModal({ dailyLogId }) {
   };
 
   return (
-    <div className="remove-box">
+    <div className='remove-box'>
       <h1>Confirm Delete</h1>
       <p>Are you sure you want to delete this moment?</p>
       <button className='yes-button' onClick={(e) => ClickYes(e)}>Yes (Remove Daily Log)</button>

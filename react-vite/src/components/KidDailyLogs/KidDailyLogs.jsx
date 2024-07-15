@@ -65,15 +65,15 @@ const KidDailyLogs = () => {
                 </div>
                 <div className="log-details">
                   <h3>Post Date: {log?.created_at}</h3>
-                  <p>{kid?.name}&apos;s Age: {calculateKidAgeFromBirthToPostDate(kid?.birth_date, log?.created_at)}</p>
-                  <p>Title: {log?.title}</p>
+                  <h5>{kid?.name}&apos;s Age: {calculateKidAgeFromBirthToPostDate(kid?.birth_date, log?.created_at)}</h5>
+                  <h5>Title: {log?.title}</h5>
                   <p>{log?.content}</p>
                   <div className="update-delete-actions">
                     <Link to={`/DailyLogs/${log?.id}/update`}>
-                      <button>Update</button>
+                      <button >Update</button>
                     </Link>
                     <OpenModalButton
-                      buttonText='Delete'
+                      buttonText='Delete' 
                       modalComponent={<DeleteDailyLogModal dailyLogId={log?.id} />}
                     />
                   </div>

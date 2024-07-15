@@ -13,7 +13,7 @@ def seed_daily_logs():
     daily_log8 = DailyLog(kid_id=2, title = 'Park Fun', content ='Grilling marshmallows in the park ', created_at=datetime(2023,10,6))
     daily_log9 = DailyLog(kid_id=3, title = 'Spending time with friends', content ='Play date with your best friend!', created_at=datetime(2024,6,5))
     daily_log10 = DailyLog(kid_id=3, title = 'Soccer', content ='Kristoff is playing soccer!', created_at=datetime(2024,5,19))
-    daily_log11 = DailyLog(kid_id=3, title = 'Running with Daddy', content ='Kristoff is chasing after Daddy', created_at=datetime(2024,3,21))
+    daily_log11 = DailyLog(kid_id=3, title = 'Running with Daddy', content ='Kristoff is running with Daddy', created_at=datetime(2024,3,21))
     daily_log12 = DailyLog(kid_id=3, title = 'Puppies', content ="Kristoff is patting our neighbor's puppies", created_at=datetime(2024,3,10))
     daily_log13 = DailyLog(kid_id=4, title = 'First Step', content ="Olaf's first step! This little one could walk now!", created_at=datetime(2024,6,9))
     daily_log14 = DailyLog(kid_id=4, title = 'Who is crawling now', content ='first crawling, go Olaf!', created_at=datetime(2024,2,7))

@@ -10,7 +10,7 @@ export default function LandingPage() {
           </div >
 
           <div id='landing-page-right-box'>
-            <img src="/spot-id-2.jpeg" id='landing-page-img'></img>
+            <img src="https://bundle-of-joy-july24.s3.us-west-1.amazonaws.com/capston-upload-images/image17-landing-page.png" id='landing-page-img'></img>
           </div>
         </div>
         

@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
-from app.models import Kid, DailyLog, db
-from app.forms import KidForm, DailyLogForm
+from app.models import Kid, DailyLog, DailyLogImage, db
+from app.forms import KidForm, DailyLogForm, DailyLogImageForm
 from datetime import datetime
 
 kid_routes = Blueprint('kids', __name__)
@@ -137,3 +137,31 @@ def create_new_daily_log(kid_id):
         return new_daily_log.to_dict(), 201
     else:
         return {'errors': form.errors}, 400
+
+# #Create-- create new image for one specific daily log
+# @kid_routes.route('/<int:kid_id>/daily_logs/<int:daily_log_id>/images/new', methods = ['POST'])
+# @login_required
+# def upload_new_image(kid_id, daily_log_id):
+#     """
+#     upload a new image for a specific daily_log by current logged-in user 
+#     """
+#     daily_log = DailyLog.query.get(daily_log_id)
+#     if daily_log is None:
+#         return {'errors': {'message': 'daily_log not found'}}, 404
+#     kid = Kid.query.get(kid_id)
+#     if (kid.user_id != current_user.id):
+#         return {'errors': {'message': 'You are not authorized'}}, 403
+    
+#     form = DailyLogImageForm()
+#     form['csrf_token'].data = request.cookies['csrf_token']
+#     if form.validate_on_submit():
+#         new_image = DailyLogImage(
+#             daily_log_id = daily_log_id,
+#             url = form.data['url'],
+#             preview = form.data['preview']
+#         )
+#         db.session.add(new_image)
+#         db.session.commit()
+#         return new_image.to_dict(), 201
+#     else:
+#         return {'errors': form.errors}, 400
