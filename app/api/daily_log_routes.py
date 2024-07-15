@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from app.models import DailyLog, DailyLogImage, Kid, db
 from app.forms import DailyLogForm, DailyLogImageForm
 from datetime import datetime
+from app.api.AWS_helpers import (upload_file_to_s3, get_unique_filename)
 
 daily_log_routes = Blueprint('daily_logs', __name__)
 
@@ -102,13 +103,29 @@ def upload_new_image(daily_log_id):
     form = DailyLogImageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        image = form.data["image"]
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)#  upload_file_to_s3() is a function that handles the process of uploading the file to Amazon S3 and returns a dictionary with details about the upload, including the URL of the uploaded file
+        print(upload)# print the upload response for debugging purposes
+
+        if "url" not in upload:
+            return  {'errors': upload["errors"]}, 400
+
+        url = upload["url"]
         new_image = DailyLogImage(
             daily_log_id = daily_log_id,
-            url = form.data['url'],
-            preview = form.data['preview']
+            image=url,
+            preview = form.data['preview'],
         )
         db.session.add(new_image)
         db.session.commit()
         return new_image.to_dict(), 201
+        # new_image = DailyLogImage(
+        #     daily_log_id = daily_log_id,
+        #     url = form.data['url'],
+        #     preview = form.data['preview']
+        # )
+        # db.session.add(new_image)
+        # db.session.commit()
     else:
         return {'errors': form.errors}, 400

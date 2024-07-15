@@ -37,8 +37,9 @@ const deleteDailyLog = (kidId, dailyLogId) => ({
     dailyLogId,
 });
 
-const addNewImage = (dailyLogId, image) => ({
+const addNewImage = (kidId, dailyLogId, image) => ({
     type: ADD_IMAGE,
+    kidId,
     dailyLogId,
     image,
 })
@@ -125,24 +126,22 @@ export const thunkDeleteDailyLog = (kidId, dailyLogId) => async (dispatch) => {
     }
 };
 
-export const thunkUploadNewImage = (dailyLogId,image) => async (dispatch) => {
+export const thunkUploadNewImage = (kidId, dailyLogId, formData) => async (dispatch) => {
     const res = await fetch(`api/daily_logs/${dailyLogId}/images/new`, {
         method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(image),
+        body: formData,
     });
+
     if (res.ok) {
         const newImage = await res.json();
-        console.log('what is the image response in thunk', newImage)
-        dispatch(addNewImage(dailyLogId, newImage));
+        console.log('what is the image response in thunk', newImage);
+        dispatch(addNewImage(kidId, dailyLogId, newImage));
         return newImage;
     } else {
         const error = await res.json();
         return error;
     }
-}
+};
 
 export const thunkUpdateImage = (image) => async (dispatch) => {
     const res = await fetch(`api/daily_log_images/${image.id}`, {
@@ -201,6 +200,10 @@ export default function dailyLogReducer(state = initialState, action) {
                 allDailyLogs: {
                     ...state.allDailyLogs,
                     [action.dailyLog.kid_id]: [...(state.allDailyLogs[action.dailyLog.kid_id] || []), action.dailyLog]
+                },
+                dailyLogDetails: {
+                    ...state.dailyLogDetails,
+                    [action.dailyLog.id]: action.dailyLog
                 }
             };
         case UPDATE_DAILY_LOG:
@@ -235,7 +238,10 @@ export default function dailyLogReducer(state = initialState, action) {
                 },
                 dailyLogDetails: {
                     ...state.dailyLogDetails,
-                    images: [...(state.dailyLogDetails.images || []), action.image]
+                    [action.dailyLogId]: {
+                        ...state.dailyLogDetails[action.dailyLogId],
+                        images: [...(state.dailyLogDetails[action.dailyLogId]?.images || []), action.image]
+                    }
                 }
             };
         case UPDATE_IMAGE:

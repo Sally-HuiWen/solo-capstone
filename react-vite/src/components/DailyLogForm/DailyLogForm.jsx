@@ -12,7 +12,7 @@ const DailyLogForm = () => {
     
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-    const [images, setImages] = useState([{url: '', preview: false}]);
+    const [images, setImages] = useState([{image: '', preview: false}]);
     const [errors, setErrors] = useState([]);
     const [hasSubmitted, setHasSubmitted] = useState(false);
 
@@ -42,7 +42,7 @@ const DailyLogForm = () => {
 
     const handleAddImage = () => {
         if (images.length < 6) {
-            setImages([...images, { url: '', preview: false }]);
+            setImages([...images, { image: '', preview: false }]);
         }
     };
 
@@ -70,9 +70,12 @@ const DailyLogForm = () => {
             setErrors(newDailyLogRes.errors);
         } else {
             const uploadedImages = [];
-            for (let image of images) {
-                if (image.url) {
-                    const uploadImageRes = await dispatch(thunkUploadNewImage(newDailyLogRes.id, image));
+            for (let imageObj of images) {
+                if (imageObj.image) {
+                    const formData = new FormData();
+                    formData.append('image', imageObj.image);
+                    formData.append('preview', imageObj.preview);
+                    const uploadImageRes = await dispatch(thunkUploadNewImage(kidId, newDailyLogRes.id, formData));
                     uploadedImages.push(uploadImageRes);
                 }
             }
@@ -82,7 +85,7 @@ const DailyLogForm = () => {
     };
 
     return (
-        <form className='daily-logs-form' onSubmit={handleSubmit}>
+        <form className='daily-logs-form' onSubmit={handleSubmit} encType="multipart/form-data">
             <div id='title-box1'>
                 <label htmlFor='dailyLog-title'>Title
                 {hasSubmitted && errors.includes('Title is required') && (
@@ -124,10 +127,9 @@ const DailyLogForm = () => {
                     <div key={index} className='each-image-box'>
                         <div>
                             <input
-                                type='text'
-                                placeholder='Image URL'
-                                value={image.url}
-                                onChange={(e) => handleImageChange(index, 'url', e.target.value)}
+                                type='file'
+                                accept="image/*"
+                                onChange={(e) => handleImageChange(index, 'image', e.target.files[0])}
                             />
                             <select
                                 value={image.preview}

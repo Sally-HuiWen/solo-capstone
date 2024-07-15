@@ -1,8 +1,10 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, BooleanField, SubmitField
+from flask_wtf.file import FileField, FileAllowed, FileRequired
+from wtforms import BooleanField, SubmitField
 from wtforms.validators import DataRequired, Length, Optional
+from app.api.AWS_helpers import ALLOWED_EXTENSIONS
 
 class DailyLogImageForm(FlaskForm):
-    url = StringField('Url', validators=[DataRequired(), Length(max=2000, message='Url can not be more than 2000 characters')])
+    image = FileField('Image File', validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
     preview = BooleanField('Preview', validators=[Optional()])#can handle False values correctly by using the Optional validator for the BooleanField instead of DataRequired.
     submit = SubmitField('submit')
