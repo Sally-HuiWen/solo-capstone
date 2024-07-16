@@ -114,7 +114,7 @@ def upload_new_image(daily_log_id):
         url = upload["url"]
         new_image = DailyLogImage(
             daily_log_id = daily_log_id,
-            image=url,
+            url=url,
             preview = form.data['preview'],
         )
         db.session.add(new_image)

@@ -127,7 +127,7 @@ export const thunkDeleteDailyLog = (kidId, dailyLogId) => async (dispatch) => {
 };
 
 export const thunkUploadNewImage = (kidId, dailyLogId, formData) => async (dispatch) => {
-    const res = await fetch(`api/daily_logs/${dailyLogId}/images/new`, {
+    const res = await fetch(`/api/daily_logs/${dailyLogId}/images/new`, {
         method: 'POST',
         body: formData,
     });
@@ -192,7 +192,10 @@ export default function dailyLogReducer(state = initialState, action) {
         case DAILY_LOG_DETAILS:
             return {
                 ...state,
-                dailyLogDetails: action.dailyLog
+                dailyLogDetails: {
+                    ...state.dailyLogDetails,
+                    [action.dailyLog.id]: action.dailyLog,
+                },
             };
         case CREATE_NEW_DAILY_LOG:
             return {
@@ -223,6 +226,7 @@ export default function dailyLogReducer(state = initialState, action) {
                 allDailyLogs: {
                     ...state.allDailyLogs,
                     [action.kidId]: state.allDailyLogs[action.kidId]?.filter(log => log.id !== action.dailyLogId)
+                    // [state.dailyLogDetails.kid_id]: state.allDailyLogs[state.dailyLogDetails.kid_id]?.filter(log => log.id !== action.dailyLogId)
                 },
                 dailyLogDetails: state.dailyLogDetails.id === action.dailyLogId ? {} : state.dailyLogDetails
             };

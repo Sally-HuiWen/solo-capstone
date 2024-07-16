@@ -80,7 +80,7 @@ const DailyLogForm = () => {
                 }
             }
             newDailyLogRes.images = uploadedImages;
-            navigate(`/kids/${kidId}/DailyLogs`);
+            navigate(`/dailyLogs/${newDailyLogRes?.id}`);
         }
     };
 

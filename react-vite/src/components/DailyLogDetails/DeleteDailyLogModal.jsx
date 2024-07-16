@@ -1,15 +1,18 @@
 import { thunkDeleteDailyLog} from '../../redux/dailyLogs';
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
+import { useNavigate } from 'react-router-dom';
 
-export default function DeleteDailyModal({ kidId, dailyLogId }) {
+export default function DeleteDailyModal({kidId, dailyLogId }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { closeModal } = useModal();
   const ClickYes = async (e) => {
     e.preventDefault();
     try {
       dispatch(thunkDeleteDailyLog(kidId, dailyLogId))
       closeModal();
+      navigate(`kids/${kidId}/dailyLogs`)
     } catch(error) {
       console.error('Fail to delete this daily log', error);
     }

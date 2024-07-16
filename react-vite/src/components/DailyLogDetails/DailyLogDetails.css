@@ -1,0 +1,34 @@
+.daily-log-details {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 50px;
+    align-items: center;
+    background-color: rgb(244, 197, 204);
+    text-decoration: none;
+    color: black;
+    column-gap: 30px;
+}
+
+.details-images {
+    width: 600px;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.details-details {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    height: 500px;
+
+}
+
+#details-image {
+    width: 600px;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 20px;
+} 

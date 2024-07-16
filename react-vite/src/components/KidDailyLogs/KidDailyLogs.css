@@ -40,6 +40,8 @@
     margin-bottom: 20px;
     align-items: center;
     background-color: rgb(244, 197, 204);
+    text-decoration: none;
+    color: black;
 }
 
 .log-image {
