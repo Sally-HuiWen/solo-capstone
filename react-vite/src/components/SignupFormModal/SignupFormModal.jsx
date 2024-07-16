@@ -31,7 +31,7 @@ function SignupFormModal() {
     if (!confirmPassword) newErrors.confirmPassword = 'confirmPassword is required'
     if (password !== confirmPassword) newErrors.match =  "Confirm Password field must be the same as the Password field"
     setErrors(newErrors)
-}, [first_name, last_name, username, password, confirmPassword])
+}, [first_name, last_name, username,email, password, confirmPassword])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
