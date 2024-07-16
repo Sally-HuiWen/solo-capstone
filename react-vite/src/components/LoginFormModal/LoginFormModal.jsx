@@ -3,15 +3,18 @@ import { thunkLogin } from "../../redux/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
-import { useNavigate } from "react-router-dom";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
+
+  const demoLogIn = () => {
+    setEmail('demo@aa.io');
+    setPassword('password');
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,21 +24,19 @@ function LoginFormModal() {
         email,
         password,
       })
-  
     );
 
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
       closeModal();
-      navigate("/your-kids-list");
     }
   };
 
   return (
-    <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="login-modal-container">
+      <h2>Log In</h2>
+      <form className="login-form" onSubmit={handleSubmit}>
         <label>
           Email
           <input
@@ -45,7 +46,7 @@ function LoginFormModal() {
             required
           />
         </label>
-        {errors.email && <p>{errors.email}</p>}
+        {errors.email && <p className="error-message">{errors.email}</p>}
         <label>
           Password
           <input
@@ -55,10 +56,15 @@ function LoginFormModal() {
             required
           />
         </label>
-        {errors.password && <p>{errors.password}</p>}
+        {errors.password && <p className="error-message">{errors.password}</p>}
         <button type="submit">Log In</button>
+        <button id='demo-user-button'
+        onClick={() => demoLogIn()}
+        >
+        Demo User
+        </button>
       </form>
-    </>
+    </div>
   );
 }
 
