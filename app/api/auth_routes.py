@@ -34,32 +34,24 @@ def login():
     return form.errors, 401
 
 
-@auth_routes.route('/logout')
-def logout():
-    """
-    Logs a user out
-    """
-    logout_user()
-    return {'message': 'User logged out'}
-
-
 @auth_routes.route('/signup', methods=['POST'])
-def sign_up():
-    """
-    Creates a new user and logs them in
-    """
+def signup():
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    
     if form.validate_on_submit():
         user = User(
-            username=form.data['username'],
             email=form.data['email'],
+            first_name=form.data['first_name'],
+            last_name=form.data['last_name'],
+            username=form.data['username'],
             password=form.data['password']
         )
         db.session.add(user)
         db.session.commit()
         login_user(user)
         return user.to_dict()
+    
     return form.errors, 401
 
 
