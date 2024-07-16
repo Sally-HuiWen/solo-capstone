@@ -38,6 +38,7 @@ const CurrentUserKids = () => {
                                    <Link to={`/kids/${kid?.id}/dailyLogs`} className='Link-link'>
                                         <h2>{kid?.name}</h2>
                                         <p>{calculateKidAgeFromBirthToNow(kid?.birth_date)}</p>
+                                        <p className='tooltip'>click here to see {kid?.name}&apos;s dailyLogs</p>
                                     </Link>
                                     <div id='update-and-remove-box'>
                                         <Link to={`/kids/${kid?.id}/update`} className='Link-link'>

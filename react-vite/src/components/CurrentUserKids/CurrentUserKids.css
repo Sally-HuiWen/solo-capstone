@@ -23,6 +23,7 @@
 #update-and-remove-box {
     display: flex;
     column-gap:10px;
+    padding-top: 10px;
 }
 
 #add-kid-button {
@@ -39,5 +40,23 @@
 .Link-link{
     text-decoration: none;
     color: darkorchid;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
 }
 
+.tooltip {
+    visibility: hidden;
+    opacity: 0;
+    color: white;
+    background-color: #007bff;
+    border-radius: 5px;
+    font-size: x-small;
+}
+
+.kid-details:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+    width:180px;
+    background-color: lightpink;
+}

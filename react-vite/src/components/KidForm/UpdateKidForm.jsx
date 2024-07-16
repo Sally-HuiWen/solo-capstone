@@ -44,7 +44,6 @@ const UpdateKidForm = ()=> {
             setMonth(String(birthDate.getMonth() + 1).padStart(2, '0'));
             setDay(String(birthDate.getDate()).padStart(2, '0'));
             setRelationship(kid.relationship);
-            setRelationship(kid.relationship);
         }
     }, [kid]);
     

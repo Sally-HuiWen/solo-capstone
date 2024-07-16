@@ -67,6 +67,7 @@ const KidDailyLogs = () => {
                     <h5>{kid?.name}&apos;s Age: {calculateKidAgeFromBirthToPostDate(kid?.birth_date, log?.created_at)}</h5>
                     <h5>Title: {log?.title}</h5>
                     <p>{log?.content}</p>
+                    <p className='tooltip'>Please Click here to see details</p>
                   </div>
                   </Link>
                 </div>

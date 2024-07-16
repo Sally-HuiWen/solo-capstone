@@ -9,6 +9,7 @@ import UpdateKidForm from '../components/KidForm/UpdateKidForm';
 import KidDailyLogs from '../components/KidDailyLogs/KidDailyLogs';
 import DailyLogForm from '../components/DailyLogForm/DailyLogForm';
 import DailyLogDetails from '../components/DailyLogDetails/DailyLogDetails';
+import DailyLogUpdateForm from '../components/DailyLogForm/DailyLogUpdateForm';
 
 export const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
       {
         path: "/dailyLogs/:dailyLogId",
         element: <DailyLogDetails />,
+      },
+      {
+        path: "/dailyLogs/:dailyLogId/update",
+        element: <DailyLogUpdateForm />,
       },
 
     ],
