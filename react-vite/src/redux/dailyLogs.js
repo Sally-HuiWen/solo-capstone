@@ -37,9 +37,8 @@ const deleteDailyLog = (kidId, dailyLogId) => ({
     dailyLogId,
 });
 
-const addNewImage = (kidId, dailyLogId, image) => ({
+const addNewImage = (dailyLogId, image) => ({
     type: ADD_IMAGE,
-    kidId,
     dailyLogId,
     image,
 })
@@ -126,8 +125,8 @@ export const thunkDeleteDailyLog = (kidId, dailyLogId) => async (dispatch) => {
     }
 };
 
-export const thunkUploadNewImage = (kidId, dailyLogId, formData) => async (dispatch) => {
-    const res = await fetch(`/api/daily_logs/${dailyLogId}/images/new`, {
+export const thunkUploadNewImage = (dailyLogId, formData) => async (dispatch) => {
+    const res = await fetch(`/api/daily_logs/${dailyLogId}/image/new`, {
         method: 'POST',
         body: formData,
     });
@@ -135,7 +134,7 @@ export const thunkUploadNewImage = (kidId, dailyLogId, formData) => async (dispa
     if (res.ok) {
         const newImage = await res.json();
         console.log('what is the image response in thunk', newImage);
-        dispatch(addNewImage(kidId, dailyLogId, newImage));
+        dispatch(addNewImage(dailyLogId, newImage));
         return newImage;
     } else {
         const error = await res.json();
@@ -176,7 +175,6 @@ export const thunkDeleteImage = (imageId) => async (dispatch) => {
 const initialState = {
     allDailyLogs: {}, // store all daily logs by kid id
     dailyLogDetails: {}, // store details for a  daily log
-    images: {} // store images by daily log id
 };
 
 export default function dailyLogReducer(state = initialState, action) {
@@ -236,46 +234,41 @@ export default function dailyLogReducer(state = initialState, action) {
         case ADD_IMAGE:
             return {
                 ...state,
-                images: {
-                    ...state.images,
-                    [action.dailyLogId]: [...(state.images[action.dailyLogId] || []), action.image]
-                },
                 dailyLogDetails: {
                     ...state.dailyLogDetails,
                     [action.dailyLogId]: {
                         ...state.dailyLogDetails[action.dailyLogId],
-                        images: [...(state.dailyLogDetails[action.dailyLogId]?.images || []), action.image]
+                        image: action.image
                     }
                 }
             };
         case UPDATE_IMAGE:
             return {
                 ...state,
-                images: {
-                    ...state.images,
-                    [action.image.daily_log_id]: state.images[action.image.daily_log_id].map(img => 
-                        img.id === action.image.id ? action.image : img
-                    )
-                },
                 dailyLogDetails: {
                     ...state.dailyLogDetails,
-                    images: state.dailyLogDetails.images.map(img => 
-                        img.id === action.image.id ? action.image : img
-                    )
+                    [action.image.daily_log_id]: {
+                        ...state.dailyLogDetails[action.image.daily_log_id],
+                        image: action.image
+                    }
                 }
             };
-        case DELETE_IMAGE:
+        case DELETE_IMAGE: {
+            const dailyLog = state.dailyLogDetails[action.imageId];
+            if (dailyLog) {
+                delete dailyLog.image;
+            }
             return {
                 ...state,
-                images: {
-                    ...state.images,
-                    [action.imageId]: state.images[action.imageId].filter(img => img.id !== action.imageId)
-                },
                 dailyLogDetails: {
                     ...state.dailyLogDetails,
-                    images: state.dailyLogDetails.images.filter(img => img.id !== action.imageId)
+                    [dailyLog.id]: {
+                        ...dailyLog,
+                        image: null
+                    }
                 }
             };
+        }
         default:
             return state;
     }

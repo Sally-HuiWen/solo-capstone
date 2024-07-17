@@ -1,8 +1,8 @@
-"""create eight tables
+"""create 8 tables
 
-Revision ID: c70a4ca8bf9e
+Revision ID: 8092be1f6fdc
 Revises: 
-Create Date: 2024-07-11 06:10:33.187579
+Create Date: 2024-07-17 07:13:30.693789
 
 """
 from alembic import op
@@ -13,7 +13,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = 'c70a4ca8bf9e'
+revision = '8092be1f6fdc'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -81,9 +81,9 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('daily_log_id', sa.Integer(), nullable=True),
     sa.Column('url', sa.String(length=2000), nullable=False),
-    sa.Column('preview', sa.Boolean(), nullable=False),
     sa.ForeignKeyConstraint(['daily_log_id'], ['daily_logs.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('daily_log_id')
     )
     op.create_table('likes',
     sa.Column('user_id', sa.Integer(), nullable=False),

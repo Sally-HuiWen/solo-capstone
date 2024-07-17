@@ -68,12 +68,12 @@ def delete_daily_log(daily_log_id):
     db.session.commit()
     return {'message': 'This daily_log is deleted successfully'}, 200
 
-#Read-- get all daily log images by daily_log_id
-@daily_log_routes.route('/<int:daily_log_id>/images')
+#Read-- get the daily log image by daily_log_id
+@daily_log_routes.route('/<int:daily_log_id>/image')
 @login_required
-def get_all_images_by_daily_log_id(daily_log_id):
+def get_image_by_daily_log_id(daily_log_id):
     """
-    Get all images for a specific daily_log by current logged-in user
+    Get the image for a specific daily_log by current logged-in user
     """
     daily_log = DailyLog.query.get(daily_log_id)
     if daily_log is None:
@@ -83,11 +83,14 @@ def get_all_images_by_daily_log_id(daily_log_id):
     if kid.user_id != current_user.id:
         return {'errors': {'message': 'You are not authorized'}}, 403
     
-    images = DailyLogImage.query.filter_by(daily_log_id=daily_log_id).all()
-    return {"images": [image.to_dict() for image in images]}, 200
+    image = DailyLogImage.query.filter_by(daily_log_id=daily_log_id).first()
+    if image is None:
+        return {'errors': {'message': 'Image not found'}}, 404
+    
+    return {"image": image.to_dict()}, 200
 
 #Create-- create new image for one specific daily log
-@daily_log_routes.route('/<int:daily_log_id>/images/new', methods = ['POST'])
+@daily_log_routes.route('/<int:daily_log_id>/image/new', methods = ['POST'])
 @login_required
 def upload_new_image(daily_log_id):
     """
@@ -100,13 +103,17 @@ def upload_new_image(daily_log_id):
     if (kid.user_id != current_user.id):
         return {'errors': {'message': 'You are not authorized'}}, 403
     
+    #check if the daily log already has an image
+    if daily_log.image:
+        return {'errors': {'message': 'This daily log already has an image'}}, 400
+    
     form = DailyLogImageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         image = form.data["image"]
         image.filename = get_unique_filename(image.filename)
         upload = upload_file_to_s3(image)#  upload_file_to_s3() is a function that handles the process of uploading the file to Amazon S3 and returns a dictionary with details about the upload, including the URL of the uploaded file
-        print(upload)# print the upload response for debugging purposes
+        print('what is your upload', upload)# print the upload response for debugging purposes
 
         if "url" not in upload:
             return  {'errors': upload["errors"]}, 400
@@ -115,17 +122,9 @@ def upload_new_image(daily_log_id):
         new_image = DailyLogImage(
             daily_log_id = daily_log_id,
             url=url,
-            preview = form.data['preview'],
         )
         db.session.add(new_image)
         db.session.commit()
         return new_image.to_dict(), 201
-        # new_image = DailyLogImage(
-        #     daily_log_id = daily_log_id,
-        #     url = form.data['url'],
-        #     preview = form.data['preview']
-        # )
-        # db.session.add(new_image)
-        # db.session.commit()
     else:
         return {'errors': form.errors}, 400

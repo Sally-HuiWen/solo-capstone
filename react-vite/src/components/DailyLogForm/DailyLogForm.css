@@ -3,6 +3,7 @@
     flex-direction: column;
     margin: 50px;
     row-gap: 20px;
+    width: 1000px;
 }
 
 #content-box2 {

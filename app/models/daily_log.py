@@ -19,10 +19,12 @@ class DailyLog(db.Model):
         'Kid',
         back_populates = 'daily_logs'
 
-    )#one-to-many: daily_logs(one)=>daily_log_images(many)
-    daily_log_images = db.relationship(
+    )#one-to-one: daily_logs(one)=>daily_log_image(one)
+    daily_log_image = db.relationship(
         'DailyLogImage',
-        back_populates = 'daily_log'
+        uselist = False,
+        back_populates = 'daily_log',
+        cascade = 'delete'
     )
 
     #one-to-many: daily_logs(one)=> comments(many)
@@ -47,5 +49,5 @@ class DailyLog(db.Model):
             'title': self.title,
             'content': self.content,
             'created_at': self.created_at.strftime("%a, %d %b %Y"),#display as Sat, 15 Jul 2023 instead of Sat, 15 Jul 2023 00:00:00 GMT
-            'images': [image.to_dict() for image in self.daily_log_images] if self.daily_log_images else [],
+            'image': self.daily_log_image.to_dict() if self.daily_log_image else None,
         }

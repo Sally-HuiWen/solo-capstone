@@ -24,9 +24,8 @@ def update_daily_log_image(daily_log_image_id):
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         updated_image.url = form.data['url']
-        updated_image.preview = form.data['preview']
         db.session.commit()
-        return updated_image.to_dict()
+        return updated_image.to_dict(), 200
     elif form.errors:
         return {'errors': form.errors}, 400
     else:

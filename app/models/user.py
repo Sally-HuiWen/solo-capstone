@@ -20,7 +20,8 @@ class User(db.Model, UserMixin):
     # one-to-many: user=>kids
     kids = db.relationship(
         'Kid',
-        back_populates = 'user'
+        back_populates = 'user',
+        cascade = 'delete'
     )
     
     # many-to-many: users=>friends

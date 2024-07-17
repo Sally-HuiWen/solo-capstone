@@ -21,12 +21,8 @@ const DailyLogDetails = () => {
 
     return (
         <div className="daily-log-details">
-            <div className="details-images">
-                {daily_log?.images && daily_log?.images.map((image, index) => (
-                    <div key={index} className="image-container">
-                        <img id='details-image' src={image.url} alt={`Daily log ${dailyLogId} image ${index + 1}`} />
-                    </div>
-                ))}
+            <div className="details-image">
+               <img id='image-image' src={daily_log?.image?.url} alt={daily_log?.title} />
             </div>
             <div className="details-details">
                 <h1>{kid?.name}</h1>

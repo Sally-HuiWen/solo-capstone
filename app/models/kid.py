@@ -21,7 +21,8 @@ class Kid(db.Model):
     #one-to-many: kid(one)=> daily_logs(many)
     daily_logs = db.relationship(
         'DailyLog',
-        back_populates = 'kid'
+        back_populates = 'kid',
+        cascade='delete'
     )
 
     #one-to-many: kid(one)=> development_records(many)

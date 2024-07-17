@@ -11,7 +11,7 @@
     column-gap: 30px;
 }
 
-.details-images {
+.details-image {
     width: 600px;
     text-align: center;
     padding-top: 10px;
@@ -25,7 +25,7 @@
 
 }
 
-#details-image {
+#image-image {
     width: 600px;
     height: 500px;
     object-fit: cover;

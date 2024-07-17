@@ -56,8 +56,8 @@ const KidDailyLogs = () => {
               <div key={log?.id || index} >
                 <Link to={`/dailyLogs/${log?.id}`} className="log-item">
                   <div className='log-image'>
-                    {log?.images?.filter(image=>image.preview)?.length > 0? (
-                      <img src={log.images.filter(image => image.preview)[0].url} alt={log?.name} id='daily-log-image'/>
+                    {log?.image?(
+                      <img src={log?.image?.url} id='daily-log-image'/>
                     ) : (
                       <p>No image available</p>
                     )}

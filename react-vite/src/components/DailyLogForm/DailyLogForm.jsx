@@ -12,7 +12,7 @@ const DailyLogForm = () => {
     
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-    const [images, setImages] = useState([{image: '', preview: false}]);
+    const [image, setImage] = useState(null);
     const [errors, setErrors] = useState([]);
     const [hasSubmitted, setHasSubmitted] = useState(false);
 
@@ -22,36 +22,9 @@ const DailyLogForm = () => {
         if (title.length > 50) errorArr.push('Title cannot be more than 50 characters');
         if (!content) errorArr.push('Content is required');
         if (content.length > 2000) errorArr.push('Content cannot be more than 2000 characters');
-        if (images.length < 1) errorArr.push('At least one image is required');
-        if (images.length > 6) errorArr.push('Cannot upload more than 6 images');
+        if (!image) errorArr.push('Image is required');
         setErrors(errorArr);
-      }, [title, content, images]);
-    
-    const handleImageChange = (index, field, value) => {
-        const newImages = [...images];
-        newImages[index][field] = value;
-
-        // make sure  only one image is set as preview
-        if (field === 'preview' && value === true) {
-            newImages.forEach((image, i) => {
-                if (i !== index) image.preview = false;
-            });
-        }
-        setImages(newImages);
-    };
-
-    const handleAddImage = () => {
-        if (images.length < 6) {
-            setImages([...images, { image: '', preview: false }]);
-        }
-    };
-
-    const handleRemoveImage = (index) => {
-        if (images.length > 1) {
-            const newImages = images.filter((_, i) => i !== index);
-            setImages(newImages);
-        }
-    };
+      }, [title, content, image]);
     
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -61,25 +34,23 @@ const DailyLogForm = () => {
             console.log('Form has errors:', errors);
             return;
         }
+        
         const newDailyLog = { title, content };
         const newDailyLogRes = await dispatch(thunkCreateNewDailyLog(kidId, newDailyLog));
         console.log('what is newDailyLog', newDailyLog)
         console.log('what is newDailyLog response from thunk', newDailyLogRes)
+        console.log('what is image', image)
 
         if (newDailyLogRes.errors) {
             setErrors(newDailyLogRes.errors);
         } else {
-            const uploadedImages = [];
-            for (let imageObj of images) {
-                if (imageObj.image) {
-                    const formData = new FormData();
-                    formData.append('image', imageObj.image);
-                    formData.append('preview', imageObj.preview);
-                    const uploadImageRes = await dispatch(thunkUploadNewImage(kidId, newDailyLogRes.id, formData));
-                    uploadedImages.push(uploadImageRes);
-                }
+            if (image === null) {
+                const formData = new FormData();
+                formData.append('image', image);
+                const imageRes = await dispatch(thunkUploadNewImage(newDailyLogRes.id, formData));
+                console.log('Image upload response:', imageRes);
+                // setImage(imageRes.url)
             }
-            newDailyLogRes.images = uploadedImages;
             navigate(`/dailyLogs/${newDailyLogRes?.id}`);
         }
     };
@@ -122,29 +93,19 @@ const DailyLogForm = () => {
             </div>
 
             <div id='images-box3'>
-                <label>Images</label>
-                {images.map((image, index) => (
-                    <div key={index} className='each-image-box'>
-                        <div>
-                            <input
-                                type='file'
-                                accept="image/*"
-                                onChange={(e) => handleImageChange(index, 'image', e.target.files[0])}
-                            />
-                            <select
-                                value={image.preview}
-                                onChange={(e) => handleImageChange(index, 'preview', e.target.value === 'true')}
-                            >
-                                <option value={true}>Preview</option>
-                                <option value={false}>Not Preview</option>
-                            </select>
-                        </div>
-                        <div><button type='button' className='remove-add-image' onClick={() => handleRemoveImage(index)}>Remove Image</button></div>
-                    </div>
-                ))}
-                {images.length < 6 && <button className='remove-add-image' type='button' onClick={handleAddImage}>Add Image</button>}
-
+                <label htmlFor='dailyLog-image'>Image
+                {hasSubmitted && errors.includes('Image is required') && (
+                    <span className='validation-errors'> Image is required</span> 
+                    )}
+                </label>
+                <input
+                    id='dailyLog-image'
+                    type='file'
+                    accept="image/*"
+                    onChange={(e) => setImage(e.target.files[0])}
+                />
             </div>
+                            
             <button type='submit' id='dailyLog-submit-button'>Add your new dailyLog</button>
         </form>
     );
