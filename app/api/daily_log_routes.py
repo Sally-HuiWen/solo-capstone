@@ -49,7 +49,7 @@ def update_daily_log(daily_log_id):
             image = form.data['image']
             image.filename = get_unique_filename(image.filename)
             upload = upload_file_to_s3(image)
-            print(upload)
+            print('what is upload', upload)
 
             if 'url' not in upload:
                 return {'errors': upload['errors']}, 400
