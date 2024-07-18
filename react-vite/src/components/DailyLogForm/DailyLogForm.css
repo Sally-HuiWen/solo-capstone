@@ -26,3 +26,8 @@
 #dailyLog-submit-button {
     width: 300px;
 }
+
+#current-image {
+    width: '100px';
+    height: '100px';
+}

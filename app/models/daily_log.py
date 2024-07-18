@@ -12,19 +12,13 @@ class DailyLog(db.Model):
     kid_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("kids.id")))
     title = db.Column(db.String(50), nullable=False)
     content = db.Column(db.String(2000), nullable=False)
+    image_url = db.Column(db.String(2000), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     #one-to-many: kid(one)=> daily_logs(many)
     kid = db.relationship(
         'Kid',
         back_populates = 'daily_logs'
-
-    )#one-to-one: daily_logs(one)=>daily_log_image(one)
-    daily_log_image = db.relationship(
-        'DailyLogImage',
-        uselist = False,
-        back_populates = 'daily_log',
-        cascade = 'delete'
     )
 
     #one-to-many: daily_logs(one)=> comments(many)
@@ -48,6 +42,6 @@ class DailyLog(db.Model):
             'kid_id': self.kid_id,
             'title': self.title,
             'content': self.content,
+            'image_url': self.image_url,
             'created_at': self.created_at.strftime("%a, %d %b %Y"),#display as Sat, 15 Jul 2023 instead of Sat, 15 Jul 2023 00:00:00 GMT
-            'image': self.daily_log_image.to_dict() if self.daily_log_image else None,
         }

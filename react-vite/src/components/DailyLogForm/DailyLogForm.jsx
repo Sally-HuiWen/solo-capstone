@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { thunkCreateNewDailyLog, thunkUploadNewImage } from '../../redux/dailyLogs';
+import { thunkCreateNewDailyLog } from '../../redux/dailyLogs';
 import './DailyLogForm.css';
 
 const DailyLogForm = () => {
@@ -28,30 +28,25 @@ const DailyLogForm = () => {
     
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const formData = new FormData();
+        formData.append('image', image);
+        formData.append('title', title);
+        formData.append('content', content);
         setHasSubmitted(true);
 
-        if (errors.length > 0) {
+        if (errors?.length > 0) {
             console.log('Form has errors:', errors);
             return;
         }
         
-        const newDailyLog = { title, content };
-        const newDailyLogRes = await dispatch(thunkCreateNewDailyLog(kidId, newDailyLog));
-        console.log('what is newDailyLog', newDailyLog)
+        const newDailyLogRes = await dispatch(thunkCreateNewDailyLog(kidId, formData));
         console.log('what is newDailyLog response from thunk', newDailyLogRes)
         console.log('what is image', image)
 
-        if (newDailyLogRes.errors) {
-            setErrors(newDailyLogRes.errors);
+        if (newDailyLogRes?.errors) {
+            setErrors(newDailyLogRes?.errors);
         } else {
-            if (image === null) {
-                const formData = new FormData();
-                formData.append('image', image);
-                const imageRes = await dispatch(thunkUploadNewImage(newDailyLogRes.id, formData));
-                console.log('Image upload response:', imageRes);
-                // setImage(imageRes.url)
-            }
-            navigate(`/dailyLogs/${newDailyLogRes?.id}`);
+            navigate(`/dailyLogs/${newDailyLogRes.id}`);
         }
     };
 
@@ -59,10 +54,10 @@ const DailyLogForm = () => {
         <form className='daily-logs-form' onSubmit={handleSubmit} encType="multipart/form-data">
             <div id='title-box1'>
                 <label htmlFor='dailyLog-title'>Title
-                {hasSubmitted && errors.includes('Title is required') && (
+                {hasSubmitted && errors?.includes('Title is required') && (
                     <span className='validation-errors'> Title is required</span> 
                     )}
-                    {hasSubmitted && errors.includes('Title can not be more than 50 characters') && (
+                    {hasSubmitted && errors?.includes('Title can not be more than 50 characters') && (
                     <span className='validation-errors'>Title can not be more than 50 characters</span> 
                     )}
                 </label>
@@ -76,10 +71,10 @@ const DailyLogForm = () => {
 
             <div id='content-box2'>
                 <label htmlFor='dailyLog-content'>Content
-                {hasSubmitted && errors.includes('Content is required') && (
+                {hasSubmitted && errors?.includes('Content is required') && (
                     <span className='validation-errors'> Content is required</span> 
                     )}
-                    {hasSubmitted && errors.includes('Content can not be more than 2000 characters') && (
+                    {hasSubmitted && errors?.includes('Content can not be more than 2000 characters') && (
                     <span className='validation-errors'>Content  can not be more than 2000 characters</span> 
                     )}
                 </label>
@@ -93,8 +88,8 @@ const DailyLogForm = () => {
             </div>
 
             <div id='images-box3'>
-                <label htmlFor='dailyLog-image'>Image
-                {hasSubmitted && errors.includes('Image is required') && (
+                <label htmlFor='dailyLog-image'>Image Upload
+                {hasSubmitted && errors?.includes('Image is required') && (
                     <span className='validation-errors'> Image is required</span> 
                     )}
                 </label>

@@ -22,7 +22,7 @@ const DailyLogDetails = () => {
     return (
         <div className="daily-log-details">
             <div className="details-image">
-               <img id='image-image' src={daily_log?.image?.url} alt={daily_log?.title} />
+               <img id='image-image' src={daily_log?.image_url} alt={daily_log?.title} />
             </div>
             <div className="details-details">
                 <h1>{kid?.name}</h1>
