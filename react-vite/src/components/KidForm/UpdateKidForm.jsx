@@ -42,7 +42,7 @@ const UpdateKidForm = ()=> {
             const birthDate = new Date(kid.birth_date);
             setYear(birthDate.getFullYear());
             setMonth(String(birthDate.getMonth() + 1).padStart(2, '0'));
-            setDay(String(birthDate.getDate()).padStart(2, '0'));
+            setDay(String(birthDate.getDate() + 1).padStart(2, '0'));
             setRelationship(kid.relationship);
         }
     }, [kid]);
@@ -72,6 +72,8 @@ const UpdateKidForm = ()=> {
             navigate(`/your-kids-list`);
         }
     };
+
+    const handleCancel = () => navigate('/your-kids-list')
 
     const years = Array.from(new Array(100), (val, i) => new Date().getFullYear() - i);
     const months = Array.from(new Array(12), (val, i) => i + 1);
@@ -150,7 +152,11 @@ const UpdateKidForm = ()=> {
                     ))}
                 </select>
             </div>
-            <button type="submit">Update</button>
+            <div id='kid-update-two-buttons'>
+                <button type="submit">Update</button>
+                <button type="button" onClick={handleCancel}>Cancel</button>
+            </div>
+            
         </form>
     )
 

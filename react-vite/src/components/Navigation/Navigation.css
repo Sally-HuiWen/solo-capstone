@@ -24,5 +24,10 @@
 .profile-dropdown {
   position: absolute;
   list-style-type: none;
+  border: 2px solid pink;
+  padding:5px;
+  right:50px;
+  border-radius: 10px;
+  font-size: large;
 }
 

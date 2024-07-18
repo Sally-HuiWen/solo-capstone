@@ -1,0 +1,5 @@
+#kid-update-two-buttons {
+    display: flex;
+    column-gap: 30px;
+    justify-content: center;
+}

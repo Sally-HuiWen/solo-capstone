@@ -1,0 +1,26 @@
+.signup-modal-container {
+    display: flex;
+    flex-direction: column;
+    width:1000px;
+    padding:30px;
+    row-gap: 10px;
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+
+}
+
+.signup-labels {
+    padding-right: 10px;
+}
+
+.error-message {
+    color: red;
+}
+
+span {
+    padding: 10px;
+}

@@ -28,9 +28,9 @@ const KidForm = () => {
         const errorArr = [];
         if (!name) errorArr.push('Name is required');
         if (name.length > 50) errorArr.push('Name can not be more than 50 characters');
-        if (!year) errorArr.push('Please choose a year');
-        if (!month) errorArr.push('Please choose a month');
-        if (!day) errorArr.push('Please choose a day');
+        if (!year) errorArr.push('Select Year');
+        if (!month) errorArr.push('Select Month');
+        if (!day) errorArr.push('Select Day');
         if (!relationship) errorArr.push('Please choose a relationship');
         setErrors(errorArr);
     }, [name, year, month, day, relationship]);
@@ -75,38 +75,43 @@ const KidForm = () => {
 
             <div className='birth-date-box2'>
                 <label htmlFor='kid-birth-dates'>Birth Date</label>
-                <div id='kid-birth-dates' className='year-month-day-box'>
-                    <select value={year} onChange={e => setYear(e.target.value)}>
-                        <option value="">Select Year</option>
-                        {years.map((year,i) => (
-                        <option key={i} value={year}>{year}</option>
-                        ))}
+                <div id='year-month-day-box'>
+                    <div className='kid-year-month-day'>
+                        <select value={year} onChange={e => setYear(e.target.value)}>
+                            <option value="">Select Year</option>
+                            {years.map((year,i) => (
+                            <option key={i} value={year}>{year}</option>
+                            ))}
 
-                    </select>
-                    {hasSubmitted && errors.includes('Please choose a year') && (
-                    <p className='validation-errors'> Please choose a year</p> 
+                        </select>
+                        {hasSubmitted && errors.includes('Select Year') && (
+                        <p className='validation-errors'> Select Year</p> 
                     )}
+                    </div>
+                    
+                    <div className='kid-year-month-day'>
+                        <select value={month} onChange={(e) => setMonth(e.target.value)}>
+                            <option value="">Select Month</option>
+                            {months.map((month, i) => (
+                            <option key={i} value={String(month).padStart(2, '0')}>{month}</option>
+                            ))}
+                        </select>
+                        {hasSubmitted && errors.includes('Select Month') && (
+                        <p className='validation-errors'> Select Month</p> 
+                        )}
+                    </div>
 
-
-                    <select value={month} onChange={(e) => setMonth(e.target.value)}>
-                        <option value="">Select Month</option>
-                        {months.map((month, i) => (
-                        <option key={i} value={String(month).padStart(2, '0')}>{month}</option>
-                        ))}
-                    </select>
-                    {hasSubmitted && errors.includes('Please choose a month') && (
-                    <p className='validation-errors'> Please choose a month</p> 
-                    )}
-
-                    <select value={day} onChange={(e) => setDay(e.target.value)}>
-                        <option value="">Select Day</option>
-                        {days.map((day, i) => (
-                        <option key={i} value={String(day).padStart(2, '0')}>{day}</option>
-                        ))}
-                    </select>
-                    {hasSubmitted && errors.includes('Please choose a day') && (
-                    <p className='validation-errors'> Please choose a day</p> 
-                    )}
+                    <div className='kid-year-month-day'>
+                        <select value={day} onChange={(e) => setDay(e.target.value)}>
+                            <option value="">Select Day</option>
+                            {days.map((day, i) => (
+                            <option key={i} value={String(day).padStart(2, '0')}>{day}</option>
+                            ))}
+                        </select>
+                        {hasSubmitted && errors.includes('Select Day') && (
+                        <p className='validation-errors'> Select Day</p> 
+                        )}
+                    </div>
                 </div>
             </div>
 
