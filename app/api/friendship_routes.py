@@ -19,13 +19,13 @@ def send_friend_request():
     if not friend:
         return {"error": "User does not exist"}, 404
     
-    # Check if the friendship already exists
+    # Check if the friendship already exists(eg.other user send friend request to current user)
     existing_friendship = db.session.query(friendships).filter(
         ((friendships.c.user_id == current_user.id) and (friendships.c.friend_id == friend_id)) or
         ((friendships.c.user_id == friend_id) and (friendships.c.friend_id == current_user.id))
     ).first()
     if existing_friendship:
-        return {"error": "You are already friends with this user"}, 400
+        return {"error": f"You have friendship with this user and the status is {existing_friendship.status}"}, 400
 
     # Check if the current user already sent a friend request 
     existing_request = db.session.query(friendships).filter_by(user_id=current_user.id, friend_id=friend_id).first()
@@ -37,7 +37,7 @@ def send_friend_request():
     db.session.execute(new_request)
     db.session.commit()
 
-    print(f"Friend request sent from User {current_user.id} to User {friend_id}")
+    print(f"User {current_user.id} send friend request to User {friend_id}")
     return {"message": "Friend request sent successfully!"}, 200
 
 @friendship_routes.route('/pending_requests_received')
@@ -90,7 +90,7 @@ def get_friends():
         for user in friends
     ]
     
-    return jsonify(friends_dict), 200
+    return friends_dict, 200
     #jsonify converts the friends_dict list of dictionaries into a JSON response.
     # Flask will automatically convert dictionaries and lists to JSON when they are returned from a route, even if you don't explicitly use jsonify
 
