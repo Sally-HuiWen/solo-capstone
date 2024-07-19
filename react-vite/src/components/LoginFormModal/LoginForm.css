@@ -1,3 +1,4 @@
+
 .login-modal-container {
     display: flex;
     flex-direction: column;
@@ -22,11 +23,11 @@
     border-radius: 5px;
 }
 
-/* .login-form button {
+.login-form button {
     padding: 10px;
     color: white;
     margin-top: 20px;
-} */
+}
 
 .error-message {
     color: red;

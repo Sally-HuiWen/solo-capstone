@@ -24,8 +24,12 @@ function LoginFormModal() {
     }, [email, password]);
 
   const demoLogIn = () => {
-    setEmail('demo@aa.io');
-    setPassword('password');
+    dispatch(thunkLogin({
+      email: 'demo@aa.io',
+      password: 'password'
+    }))
+    closeModal();
+    navigate('/your-kids-list')
   }
 
   const handleSubmit = async (e) => {
@@ -81,11 +85,10 @@ function LoginFormModal() {
         </div>
 
         <button type="submit">Log In</button>
-        <button id='demo-user-button' onClick={demoLogIn}>
+        <button type= 'button' id='demo-user-button' onClick={demoLogIn}>
         Demo User
-        </button>
-      </form>
-      
+      </button>
+      </form>   
     </div>
   );
 }
