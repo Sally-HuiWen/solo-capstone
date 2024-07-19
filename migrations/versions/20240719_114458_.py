@@ -1,8 +1,8 @@
-"""create 7 tables
+"""empty message
 
-Revision ID: 74a3c7d2507f
+Revision ID: 51998f68aebe
 Revises: 
-Create Date: 2024-07-17 15:34:00.492421
+Create Date: 2024-07-19 11:44:58.582268
 
 """
 from alembic import op
@@ -12,8 +12,9 @@ import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
+
 # revision identifiers, used by Alembic.
-revision = '74a3c7d2507f'
+revision = '51998f68aebe'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -32,7 +33,7 @@ def upgrade():
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
     )
-    op.create_table('friends',
+    op.create_table('friendships',
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('friend_id', sa.Integer(), nullable=False),
     sa.Column('status', sa.String(length=20), nullable=False),
@@ -88,7 +89,7 @@ def upgrade():
 
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE friends SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE friendships SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE kids SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE daily_logs SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE development_records SET SCHEMA {SCHEMA};")
@@ -104,6 +105,6 @@ def downgrade():
     op.drop_table('development_records')
     op.drop_table('daily_logs')
     op.drop_table('kids')
-    op.drop_table('friends')
+    op.drop_table('friendships')
     op.drop_table('users')
     # ### end Alembic commands ###

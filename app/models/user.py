@@ -1,7 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from .friend import friends
+from .friendship import friendships
 from .like import likes
 
 class User(db.Model, UserMixin):
@@ -28,9 +28,9 @@ class User(db.Model, UserMixin):
     # user_friends represents the users that the current user has added as friends
     user_friends = db.relationship(
         'User',
-        secondary = friends,
-        primaryjoin = id == friends.c.user_id, # primaryjoin links current_user.id to friends table user_id column
-        secondaryjoin = id == friends.c.friend_id, # secondaryjoin links related_user.id to friends table friend_id
+        secondary = friendships,
+        primaryjoin = id == friendships.c.user_id, # primaryjoin links current_user.id to friends table user_id column
+        secondaryjoin = id == friendships.c.friend_id, # secondaryjoin links related_user.id to friends table friend_id
         back_populates = 'friend_users' 
 
     )
@@ -39,9 +39,9 @@ class User(db.Model, UserMixin):
     # represents the users who have added the current user as a friend.
     friend_users = db.relationship(
         'User',
-        secondary = friends,
-        primaryjoin = id == friends.c.friend_id, # primaryjoin links current_user.id to friends table friend_id
-        secondaryjoin = id == friends.c.user_id, # secondaryjoin links related_user.id to friends table user_id
+        secondary = friendships,
+        primaryjoin = id == friendships.c.friend_id, # primaryjoin links current_user.id to friends table friend_id
+        secondaryjoin = id == friendships.c.user_id, # secondaryjoin links related_user.id to friends table user_id
         back_populates = 'user_friends'
     )
 
