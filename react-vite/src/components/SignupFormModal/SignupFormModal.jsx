@@ -70,7 +70,6 @@ function SignupFormModal() {
               type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
             />
           </div>
 
@@ -83,7 +82,6 @@ function SignupFormModal() {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              required
             />
           </div>
 
@@ -96,7 +94,6 @@ function SignupFormModal() {
                 type="text"
                 value={first_name}
                 onChange={(e) => setFirstName(e.target.value)}
-                required
               />
           </div>
 
@@ -109,7 +106,6 @@ function SignupFormModal() {
                 type="text"
                 value={last_name}
                 onChange={(e) => setLastName(e.target.value)}
-                required
               />
           </div>
 
@@ -122,7 +118,6 @@ function SignupFormModal() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                required
               />
           </div>
 
@@ -135,7 +130,6 @@ function SignupFormModal() {
                 type="password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                required
               />
           </div>
         
