@@ -40,20 +40,20 @@ def send_friend_request():
     print(f"User {current_user.id} send friend request to User {friend_id}")
     return {"message": "Friend request sent successfully!"}, 200
 
-@friendship_routes.route('/pending_requests_received')
+@friendship_routes.route('/sending_pending_requests_users')
 @login_required
 def get_pending_friend_requests():
     """
-    get all pending requests sent by other users and received by current logged-in user(status:pending; received only)
+    get all pending requests sent by other users and received by current logged-in user(status:pending)
     """
     pending_requests = db.session.query(User).join(
-        friendships, User.id == friendships.c.user_id
+        friendships, User.id == friendships.c.user_id  #looking for users that send requests
     ).filter(
-        friendships.c.friend_id == current_user.id,
+        friendships.c.friend_id == current_user.id, #he current user is the recipient of the friend request
         friendships.c.status == 'pending'
-    ).all()
+    ).all() # all results as a list of User objects who have sent pending friend requests to the current user.
 
-    pending_dict = [
+    pending_request_dict = [
         {
             "id": user.id,
             "username": user.username,
@@ -62,19 +62,18 @@ def get_pending_friend_requests():
             "email": user.email
         }
         for user in pending_requests]
-    return pending_dict, 200
+    return pending_request_dict, 200 # users list that send pending requests to current user
 
 @friendship_routes.route('/friends')
 @login_required
 def get_friends():
     """
-    get all friends of current logged-in user(status:'accepted')
+    get all friends of current logged-in user(status:'accepted', the current user send friend requests to other users and got accepted response)
     """
-    #This query retrieves all User objects that are "friends" with the current user and have accepted the friend request.
     friends = db.session.query(User).join(
-        friendships, User.id == friendships.c.friend_id #The c attribute of a Table object in SQLAlchemy is a shorthand for columns
+        friendships, User.id == friendships.c.friend_id #looking for users that received friend requests;The c attribute of a Table object in SQLAlchemy is a shorthand for columns
     ).filter(
-        friendships.c.user_id == current_user.id,
+        friendships.c.user_id == current_user.id,  #he current user is the sender of the friend request
         friendships.c.status == 'accepted'
     ).all()
 
@@ -90,7 +89,7 @@ def get_friends():
         for user in friends
     ]
     
-    return friends_dict, 200
+    return friends_dict, 200 # users list that received friend request from current user and accepted
     #jsonify converts the friends_dict list of dictionaries into a JSON response.
     # Flask will automatically convert dictionaries and lists to JSON when they are returned from a route, even if you don't explicitly use jsonify
 
