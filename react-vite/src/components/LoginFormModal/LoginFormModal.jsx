@@ -23,14 +23,21 @@ function LoginFormModal() {
         setErrors(errorObj);
     }, [email, password]);
 
-  const demoLogIn = () => {
-    dispatch(thunkLogin({
-      email: 'demo@aa.io',
-      password: 'password'
+  const demoLogIn = async(e) => {
+
+    const serverResponse = await dispatch(
+      thunkLogin({
+        email: 'demo@aa.io',
+        password: 'password'
     }))
-    closeModal();
-    navigate('/your-kids-list')
-  }
+    
+    if (serverResponse) {
+      setErrors(serverResponse);
+    } else {
+      closeModal();
+      navigate('/your-kids-list')
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -83,10 +90,12 @@ function LoginFormModal() {
         </div>
 
         <button type="submit">Log In</button>
-        <button type= 'button' id='demo-user-button' onClick={demoLogIn}>
+      </form>  
+
+      <button type='button' id='demo-user-button' onClick={demoLogIn}>
         Demo User
       </button>
-      </form>   
+
     </div>
   );
 }

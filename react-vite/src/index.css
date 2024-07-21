@@ -53,7 +53,7 @@
   }
 
   /* Form styles */
-  input, select {
+  input, select, textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
