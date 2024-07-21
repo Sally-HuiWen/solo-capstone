@@ -23,7 +23,7 @@ function LoginFormModal() {
         setErrors(errorObj);
     }, [email, password]);
 
-  const demoLogIn = async(e) => {
+  const demoLogIn = async() => {
 
     const serverResponse = await dispatch(
       thunkLogin({
