@@ -8,11 +8,13 @@ import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import kidReducer from "./kids";
 import dailyLogReducer from "./dailyLogs"
+import friendshipsReducer from "./friendships";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   kids: kidReducer,
   dailyLogs: dailyLogReducer,
+  friendships: friendshipsReducer,
 });
 
 let enhancer;

@@ -1,3 +1,6 @@
+#kids-and-friends-container {
+    display: flex;
+}
 #kids-list-container {
     display: flex;
     flex-direction: column;

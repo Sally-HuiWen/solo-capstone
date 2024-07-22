@@ -10,6 +10,7 @@ import KidDailyLogs from '../components/KidDailyLogs/KidDailyLogs';
 import DailyLogForm from '../components/DailyLogForm/DailyLogForm';
 import DailyLogDetails from '../components/DailyLogDetails/DailyLogDetails';
 import DailyLogUpdateForm from '../components/DailyLogForm/DailyLogUpdateForm';
+import FriendKidDailyLogs from '../components/FriendKidDailyLogs/FriendKidDailyLogs'
 
 export const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ export const router = createBrowserRouter([
         path: "/dailyLogs/:dailyLogId/update",
         element: <DailyLogUpdateForm />,
       },
+      {
+        path: "/friends/:kidId/dailyLogs",
+        element: <FriendKidDailyLogs />,
+      }
 
     ],
   },

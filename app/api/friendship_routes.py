@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
-from app.models import friendships, User, db
+from app.models import friendships, DailyLog, User, Kid,db
 
 friendship_routes = Blueprint('friend_routes', __name__)
 
@@ -84,7 +84,8 @@ def get_friends():
             "username": user.username,
             "first_name": user.first_name,
             "last_name": user.last_name,
-            "email": user.email
+            "email": user.email,
+            "kids": [kid.to_dict() for kid in user.kids]
         }
         for user in friends
     ]
@@ -92,7 +93,29 @@ def get_friends():
     return friends_dict, 200 # users list that received friend request from current user and accepted
     #jsonify converts the friends_dict list of dictionaries into a JSON response.
     # Flask will automatically convert dictionaries and lists to JSON when they are returned from a route, even if you don't explicitly use jsonify
+@friendship_routes.route('/friends/<int:kid_id>/daily_logs')
+@login_required
+def get_friends_kids_daily_logs(kid_id):
+    """
+    Get all daily logs for a specific kid by a friend's kid for the current logged-in user
+    """
+    # Get the kid by ID
+    kid = Kid.query.get(kid_id)
+    if kid is None:
+        return {'errors': {'message': 'Kid not found'}}, 404
 
+    # Check if the current user is friends with the kid's parent/guardian
+    friendship = db.session.query(friendships).filter(
+        (friendships.c.user_id == current_user.id) and (friendships.c.friend_id == kid.user_id) 
+    ).filter(friendship.status == 'accepted').first()
+
+    if friendship is None:
+        return {'errors': {'message': 'You are not authorized'}}, 403
+
+    # Fetch and sort daily logs
+    all_daily_logs = DailyLog.query.filter_by(kid_id=kid_id).order_by(DailyLog.created_at.desc()).all()
+    return {'daily_logs': [log.to_dict() for log in all_daily_logs]}, 200
+    
 @friendship_routes.route('/respond_to_request', methods=['PUT'])
 @login_required
 def respond_to_friend_request():

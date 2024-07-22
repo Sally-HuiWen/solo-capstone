@@ -1,59 +1,53 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, Link, useParams} from 'react-router-dom';
+import { Link, useParams} from 'react-router-dom';
+import { thunkGetFriendsKidsDailyLogs} from '../../redux/friendships';
 import { thunkGetKidDetails } from '../../redux/kids';
-import { thunkGetAllDailyLogs } from '../../redux/dailyLogs';
 import { PiBabyLight } from "react-icons/pi";
 import {calculateKidAgeFromBirthToNow, calculateKidAgeFromBirthToPostDate } from '../utility';
-import './KidDailyLogs.css';
+import './FriendKidDailyLogs.css';
 
-const KidDailyLogs = () => {
-  const { kidId } = useParams();
+const FriendKidDailyLogs = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const kid = useSelector(state=> state.kids.kidDetails[kidId])
-  console.log('who is  this kid', kid)
-  const allDailyLogsForThisKid = useSelector(state => state.dailyLogs.allDailyLogs[kidId] || []);
-  console.log('what is dailyLogs', allDailyLogsForThisKid)
+  const { kidId } = useParams();
+  const kid = useSelector(state => state.kids.kidDetails[kidId]);
+  console.log('who is the kid in FriendKidDailyLogs.jsx', kid)
+  const friendKidDailyLogs = useSelector(state => state.friendships.friendsKidsDailyLogs[kidId] || []);
+  console.log('what is  friendKidDailyLogs', friendKidDailyLogs)
 
   useEffect(() => {
     if (kidId) {
         dispatch(thunkGetKidDetails(kidId));
-        dispatch(thunkGetAllDailyLogs(kidId));
     }
   }, [dispatch, kidId]);
 
-  const handleCreateAddDailyLog = () => {
-    navigate(`/kids/${kidId}/DailyLogs/new`);
-  };
+
+  useEffect(() => {
+    if (kidId) {
+        dispatch(thunkGetFriendsKidsDailyLogs(kidId));
+    }
+  }, [dispatch, kidId]);
+
 
   return (
     <div id="daily-logs-container">
 
       <div className="daily-logs-header">
-        <div>
-            <div id='kid-icon-and-name'>  
-                <PiBabyLight id='baby-icon'/>
-                <h2>{kid?.name}</h2>
-            </div>
-            <p id='kid-age-p'>{calculateKidAgeFromBirthToNow(kid?.birth_date)}</p> 
+        <div id='kid-icon-and-name'>  
+            <PiBabyLight id='baby-icon'/>
+            <h2>{kid?.name}</h2>
         </div>
-       
-        <div>
-          <button className="add-dailyLog-button" onClick={handleCreateAddDailyLog}>
-            Add Sweet Moment
-          </button>
-        </div> 
+        <p id='kid-age-p'>{calculateKidAgeFromBirthToNow(kid?.birth_date)}</p> 
       </div>
     
 
       <div className="daily-logs-content">
         <h2>{kid?.name}&apos;s Moments</h2>
-        {allDailyLogsForThisKid.length === 0 ? (
+        {friendKidDailyLogs.length === 0 ? (
           <p>No Moments found</p>
         ) : (
             <div>
-            {allDailyLogsForThisKid?.map((log, index) => (
+            {friendKidDailyLogs?.map((log, index) => (
               <div key={log?.id || index} >
                 <Link to={`/dailyLogs/${log?.id}`} className="log-item">
                   <div className='log-image'>
@@ -85,4 +79,4 @@ const KidDailyLogs = () => {
 
 
 
-export default KidDailyLogs;
+export default FriendKidDailyLogs;

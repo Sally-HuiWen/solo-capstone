@@ -1,6 +1,8 @@
 export const SEND_FRIEND_REQUEST = "friendships/send_friend_request";
 export const GET_PENDING_REQUESTS = "friendships/pending_requests_received";
 export const GET_FRIENDS = "friendships/friends";
+export const GET_FRIENDS_KID_DETAILS = "friendships/kids/details";
+export const GET_FRIENDS_KIDS_DAILY_LOGS = "friendships/friends/kids/daily_logs";
 export const RESPOND_REQUEST = "friendships/respond_to_requests_received";
 export const DELETE_FRIEND = "friendships/delete";
 
@@ -17,6 +19,17 @@ export const receivePendingRequests = (pendingRequests) => ({
 export const acceptedRequestFriends = (friends) => ({
   type: GET_FRIENDS,
   friends,
+});
+
+export const getFriendsKidDetails = (kid) => ({
+  type: GET_FRIENDS_KID_DETAILS,
+  kid,
+});
+
+export const getFriendsKidsDailyLogs = (kidId, dailyLogs) => ({
+  type: GET_FRIENDS_KIDS_DAILY_LOGS,
+  kidId,
+  dailyLogs
 });
 
 export const respondToRequest = (response) => ({
@@ -62,8 +75,18 @@ export const thunkGetFriends = () => async (dispatch) => {
   
     if (res.ok) {
       const friends = await res.json();
-      dispatch(receiveFriends(friends));
+      dispatch(acceptedRequestFriends(friends));
+      return {friends}
     }
+
+};
+
+export const thunkGetFriendsKidsDailyLogs = (kidId) => async (dispatch) => {
+  const res = await fetch(`/api/friendships/friends/${kidId}/daily_logs`);
+  if (response.ok) {
+    const dailyLogs = await res.json();
+    dispatch(getFriendsKidsDailyLogs(kidId, dailyLogs));
+  }
 };
   
 export const thunkRespondToRequest = (friendId, action) => async (dispatch) => {
@@ -83,6 +106,8 @@ export const thunkRespondToRequest = (friendId, action) => async (dispatch) => {
         return error;
     }
 };
+
+
   
 export const thunkDeleteFriend = (friendId) => async (dispatch) => {
     const res = await fetch("/api/friendships/delete_friend", {
@@ -100,3 +125,63 @@ export const thunkDeleteFriend = (friendId) => async (dispatch) => {
         return error;
     }
 };
+
+const initialState = {
+  pendingRequests: [],
+  friends: [],
+  friendsKidsDailyLogs: {}
+};
+
+const friendshipsReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case SEND_FRIEND_REQUEST:
+      return {
+        ...state,
+        pendingRequests: [...state.pendingRequests, action.friendRequest],
+      };
+    
+    case GET_PENDING_REQUESTS:
+      return {
+        ...state,
+        pendingRequests: action.pendingRequests,
+      };
+    
+    case GET_FRIENDS:
+      return {
+        ...state,
+        friends: action.friends,
+      };
+
+    case GET_FRIENDS_KIDS_DAILY_LOGS:
+      return {
+        ...state,
+        friendsKidsDailyLogs: {
+          ...state.friendsKidsDailyLogs,
+          [action.kidId]: action.dailyLogs,
+        }
+      }
+    
+    case RESPOND_REQUEST:
+      return {
+        ...state,
+        pendingRequests: state.pendingRequests.filter(
+          (request) => request.friend_id !== action.response.friendId
+        ),
+        friends:
+          action.response.action === 'accept'
+            ? [...state.friends, action.response.resMessage]
+            : state.friends,
+      };
+    
+    case DELETE_FRIEND:
+      return {
+        ...state,
+        friends: state.friends.filter((friend) => friend.id !== action.friendId),
+      };
+    
+    default:
+      return state;
+  }
+};
+
+export default friendshipsReducer;

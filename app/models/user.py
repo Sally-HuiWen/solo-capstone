@@ -76,6 +76,7 @@ class User(db.Model, UserMixin):
             'last_name': self.last_name,
             'username': self.username,
             'email': self.email,
+            'kids': [kid.to_dict() for kid in self.kids],
             # 'user_friends': [friend.id for friend in self.user_friends]
             # 'friend_users': [friend.id for friend in self.friend_users]
         }
