@@ -1,14 +1,16 @@
 #kids-and-friends-container {
     display: flex;
 }
-#kids-list-container {
+#kids-list-container, #friends-list-container  {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-items:start;
+    justify-content: flex-start;
     column-gap: 50px;
     row-gap:30px;
     padding: 50px;
+    border: 1px solid #1cc;
+    border-radius: 10px;
+    margin-left: 50px;
 }
 
 #kids-list-box {
@@ -16,7 +18,7 @@
     flex-direction: column;
     row-gap: 30px;
 }
-.kid-details {
+.kid-details, .each-friend {
    width: 200px;
    border-radius: 10px;
    box-shadow: 5px 5px 5px 5px grey;
@@ -29,7 +31,7 @@
     padding-top: 10px;
 }
 
-#add-kid-button {
+#add-kid-button, #add-new-friend-button {
     border-radius: 10px;
     width: 200px;
     font-size: larger;
@@ -62,4 +64,15 @@
     opacity: 1;
     width:180px;
     background-color: lightpink;
+}
+
+.each-kid:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+    width:200px;
+    background-color: lightpink;
+}
+
+.each-friend {
+    width: 220px;
 }

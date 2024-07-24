@@ -1,9 +1,10 @@
 from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
-from app.models import Kid, DailyLog, db
+from app.models import Kid, DailyLog, Friendship, db
 from app.forms import KidForm, DailyLogForm
 from datetime import datetime
 from app.api.AWS_helpers import (upload_file_to_s3, get_unique_filename)
+from sqlalchemy import or_ , and_
 
 kid_routes = Blueprint('kids', __name__)
 
@@ -26,8 +27,19 @@ def get_kid_by_id(kid_id):
     if kid is None:
         return {'errors': {'message': 'Kid not found'}}, 404
     
+     # if the current user is the parent, check if the current user is the friend of the parent
+     # friends of parent could also have access to kids info
     if kid.user_id != current_user.id:
-        return {'errors': {'message': 'You are not authorized'}}, 403
+        friendship = Friendship.query.filter(
+            and_(
+                or_(Friendship.user_id == current_user.id, Friendship.friend_id == current_user.id),
+                or_(Friendship.user_id == kid.user_id, Friendship.friend_id == kid.user_id ),
+                Friendship.pending == False
+            )
+        ).first()
+
+        if not friendship:
+            return {'errors': {'message': 'You are not authorized'}}, 403
     
     return kid.to_dict()
 
@@ -105,8 +117,21 @@ def get_all_daily_logs_by_kid_id(kid_id):
     kid = Kid.query.get(kid_id)
     if kid is None:
         return {'errors': {'message': 'Kid not found'}}, 404
+    
+    # if the current user is the parent, check if the current user is the friend of the parent
+    # friends of parent could also have access to kids' dailyLogs info
     if kid.user_id != current_user.id:
-        return {'errors': {'message': 'You are not authorized'}}, 403
+        friendship = Friendship.query.filter(
+            and_(
+                or_(Friendship.user_id == current_user.id, Friendship.friend_id == current_user.id),
+                or_(Friendship.user_id == kid.user_id, Friendship.friend_id == kid.user_id ),
+                Friendship.pending == False
+            )
+        ).first()
+
+        if not friendship:
+            return {'errors': {'message': 'You are not authorized'}}, 403
+
     #Do not forget to sort it!
     all_daily_logs = DailyLog.query.filter_by(kid_id=kid_id).order_by(DailyLog.created_at.desc()).all()
     return {'daily_logs': [log.to_dict() for log in all_daily_logs]}

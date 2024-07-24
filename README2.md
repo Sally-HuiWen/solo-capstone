@@ -1,2 +1,0 @@
-# solo-capstone
-# solo-capstone

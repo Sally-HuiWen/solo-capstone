@@ -1,8 +1,8 @@
-"""empty message
+"""create 7 tables
 
-Revision ID: 51998f68aebe
+Revision ID: 94b817b3f8b3
 Revises: 
-Create Date: 2024-07-19 11:44:58.582268
+Create Date: 2024-07-22 15:07:35.624176
 
 """
 from alembic import op
@@ -12,9 +12,8 @@ import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
-
 # revision identifiers, used by Alembic.
-revision = '51998f68aebe'
+revision = '94b817b3f8b3'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -34,12 +33,14 @@ def upgrade():
     sa.UniqueConstraint('username')
     )
     op.create_table('friendships',
+    sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('friend_id', sa.Integer(), nullable=False),
-    sa.Column('status', sa.String(length=20), nullable=False),
+    sa.Column('pending', sa.Boolean(), nullable=True),
     sa.ForeignKeyConstraint(['friend_id'], ['users.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('user_id', 'friend_id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('user_id', 'friend_id', name='uq_user_friend')
     )
     op.create_table('kids',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -86,7 +87,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('user_id', 'daily_log_id')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE friendships SET SCHEMA {SCHEMA};")
@@ -95,6 +95,7 @@ def upgrade():
         op.execute(f"ALTER TABLE development_records SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE likes SET SCHEMA {SCHEMA};")
+
     # ### end Alembic commands ###
 
 

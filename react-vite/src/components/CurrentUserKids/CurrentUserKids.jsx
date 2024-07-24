@@ -13,8 +13,8 @@ const CurrentUserKids = () => {
     const navigate = useNavigate();
     const kids = useSelector(state => state.kids.currentUserKids || []);
 
-    const friends = useSelector(state => state.friendships.friends || []);
-    console.log('who are your friends', friends)
+    const confirmedFriends = useSelector(state => state.friendships.confirmedFriends || []);
+    console.log('who are your confirmedFriends', confirmedFriends)
 
     useEffect(() => {
         dispatch(thunkGetCurrentKids());
@@ -29,12 +29,12 @@ const CurrentUserKids = () => {
     };
 
     const handleAddFriend = () => {
-        pass
+        navigate('/friendships/new')
     }
 
     return (
         <div id='kids-and-friends-container'>
-        <div id='kids-list-container'>
+          <div id='kids-list-container'>
             <h1>Your Kids</h1>
             <div >
                 <button onClick={handleAddNewKid} id='add-kid-button'>
@@ -48,7 +48,7 @@ const CurrentUserKids = () => {
                     <div id='kids-list-box'>
                         {kids.map((kid, index)=> (
                             <div key={kid?.id || index} className='kid-details'>
-                                   <Link to={`/friends/${kid?.id}/dailyLogs`} className='Link-link'>
+                                   <Link to={`/kids/${kid?.id}/dailyLogs`} className='Link-link'>
                                         <h2>{kid?.name}</h2>
                                         <p>{calculateKidAgeFromBirthToNow(kid?.birth_date)}</p>
                                         <p className='tooltip'>click here to see {kid?.name}&apos;s dailyLogs</p>
@@ -67,32 +67,32 @@ const CurrentUserKids = () => {
                     </div>
                 )}
             </div>
-        </div>
-        <div id='friends-list-container'>
+          </div>
+          <div id='friends-list-container'>
             <h1>Your Friends List</h1>
             <div >
                 <button onClick={handleAddFriend} id='add-new-friend-button'>
                     Add a new friend
                 </button>
             </div>
-            {friends.length === 0 ? (
+            {confirmedFriends.length === 0 ? (
                 <p>No friends found</p>
             ) : (
-                friends.map((friend, index) => (
+                confirmedFriends.map((friend, index) => (
                 <div key={friend.id || index} className='each-friend'>
-                    <h2>Friend Name: {friend.username}</h2>
+                    <h4>Friend Name: {friend.username}</h4>
                     {friend?.kids?.map((kid, kidIndex) => (
                         <div key={kid.id || kidIndex} className='each-kid'>
-                            <Link to={`/friends/${kid?.id}/dailyLogs`}>
+                            <Link to={`/kids/${kid?.id}/dailyLogs`} className='Link-link'>
                               <p>{friend.username}&apos;s kid name: {kid.name}</p>
-                              <p>kid id: {kid.id}</p>
+                              <p className='tooltip'>click here to see {kid?.name}&apos;s dailyLogs</p>
                             </Link>
                         </div>
                     ))}
                 </div>
                 ))
             )}
-        </div>
+          </div>
         </div>
     )
 }

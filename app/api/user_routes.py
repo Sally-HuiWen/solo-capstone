@@ -1,5 +1,5 @@
-from flask import Blueprint, jsonify
-from flask_login import login_required
+from flask import Blueprint, request, jsonify
+from flask_login import login_required, current_user
 from app.models import User
 
 user_routes = Blueprint('users', __name__)
@@ -23,3 +23,35 @@ def user(id):
     """
     user = User.query.get(id)
     return user.to_dict()
+
+@user_routes.route('/friends')
+@login_required
+def get_user_friends():
+    """
+    Get friends of the current logged-in user
+    """
+    friends = current_user.get_friends()
+    return friends, 200
+
+@user_routes.route('/search-username')
+def search_username():
+    username = request.args.get('username') #retrieve the value of a query parameter from the request URL
+    if not username:
+        return {'errors': {'message': 'No username provided'}}, 400
+
+    user = User.query.filter_by(username=username).first()
+    if user:
+        return {'user_exist': True}, 200
+    return {'user_exist': False}, 200
+
+
+@user_routes.route('/search-email')
+def search_email():
+    email = request.args.get('email')
+    if not email:
+        return {'errors': {'message': 'No email provided'}}, 400
+
+    user = User.query.filter_by(email=email).first()
+    if user:
+        return {'email_exist': True}, 200
+    return {'email_exist': False}, 200

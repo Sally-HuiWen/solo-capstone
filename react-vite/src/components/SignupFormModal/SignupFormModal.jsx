@@ -31,7 +31,34 @@ function SignupFormModal() {
     if (!confirmPassword) newErrors.confirmPassword = 'The confirmPassword is required.'
     if (password !== confirmPassword) newErrors.match =  "Confirm Password field must be the same as the Password field."
     setErrors(newErrors)
-}, [first_name, last_name, username,email, password, confirmPassword])
+  }, [first_name, last_name, username,email, password, confirmPassword])
+
+  const handleUsernameChange = async (e) => {
+    const newUsername = e.target.value;
+    setUsername(newUsername);
+
+    if (newUsername) {
+      const res = await fetch(`/api/users/search-username?username=${newUsername}`);
+      const data = await res.json();
+      if (data.user_exist) {
+        setErrors(prevErrors => ({ ...prevErrors, usernameUnique: 'Username is already taken' }));
+      }
+    }
+  };
+
+  const handleEmailChange = async (e) => {
+    const newEmail = e.target.value;
+    setEmail(newEmail);
+
+    if (newEmail) {
+      const res = await fetch(`/api/users/search-email?email=${newEmail}`);
+      const data = await res.json();
+      if (data.email_exist) {
+        setErrors(prevErrors => ({ ...prevErrors, emailUnique: 'Email is already registered' }));
+      }
+    }
+  };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -65,12 +92,12 @@ function SignupFormModal() {
             <label htmlFor="signup-email" className='signup-labels'>Email</label>
             {hasSubmitted && errors.email && (<span className="error-message">{errors.email}</span>)}
             {hasSubmitted && errors.emailInclude && (<span className="error-message">{errors.emailInclude}</span>)}
+            {hasSubmitted && errors.emailUnique && (<span className="error-message">{errors.emailUnique}</span>)}
             <input
               id='signup-email'
               type="text"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
+              onChange={handleEmailChange}
             />
           </div>
 
@@ -78,12 +105,12 @@ function SignupFormModal() {
             <label htmlFor="signup-username" className='signup-labels'>Username</label>
             {hasSubmitted && errors.username && (<span className="error-message">{errors.username}</span>)}
             {hasSubmitted && errors.usernameLength && (<span className="error-message">{errors.usernameLength}</span>)}
+            {hasSubmitted && errors.usernameUnique && (<span className="error-message">{errors.usernameUnique}</span>)}
             <input
               id='signup-username'
               type="text"
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
+              onChange={handleUsernameChange}
             />
           </div>
 
@@ -96,7 +123,6 @@ function SignupFormModal() {
                 type="text"
                 value={first_name}
                 onChange={(e) => setFirstName(e.target.value)}
-                required
               />
           </div>
 
@@ -109,7 +135,6 @@ function SignupFormModal() {
                 type="text"
                 value={last_name}
                 onChange={(e) => setLastName(e.target.value)}
-                required
               />
           </div>
 
@@ -122,7 +147,6 @@ function SignupFormModal() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                required
               />
           </div>
 
@@ -135,7 +159,6 @@ function SignupFormModal() {
                 type="password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                required
               />
           </div>
         
