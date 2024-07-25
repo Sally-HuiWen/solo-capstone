@@ -57,7 +57,7 @@ export const router = createBrowserRouter([
         element: <DailyLogUpdateForm />,
       },
       {
-        path: "/friendships/new'",
+        path: "/friendships/new",
         element: <SendFriendRequest />,
       }
 

@@ -41,8 +41,8 @@ def search_username():
 
     user = User.query.filter_by(username=username).first()
     if user:
-        return {'user_exist': True}, 200
-    return {'user_exist': False}, 200
+        return {'user_exist': user.to_dict()}, 200
+    return {'message': 'This user does not exist'}, 200
 
 
 @user_routes.route('/search-email')
@@ -53,5 +53,5 @@ def search_email():
 
     user = User.query.filter_by(email=email).first()
     if user:
-        return {'email_exist': True}, 200
-    return {'email_exist': False}, 200
+        return {'email_exist': user.to_dict()}, 200
+    return {'message': 'This user does not exist'}, 200

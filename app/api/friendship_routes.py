@@ -14,6 +14,10 @@ def create_friendship():
     data = request.get_json()
     user_id = current_user.id
     friend_id = data.get('friend_id')
+
+    # Check if the friend is the current user
+    if user_id == friend_id:
+        return {'errors': {'message': 'You cannot send a friend request to yourself'}}, 400
     
     # check if the friend exists
     friend = User.query.get(friend_id)

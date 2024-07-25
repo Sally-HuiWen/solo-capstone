@@ -42,6 +42,9 @@ export const thunkCreateFriendship = (friendId) => async (dispatch) => {
   if (res.ok) {
     const friendship = await res.json();
     dispatch(addFriendship(friendship));
+    return friendship
+  } else {
+    return { errors: res.errors}
   }
 };
 

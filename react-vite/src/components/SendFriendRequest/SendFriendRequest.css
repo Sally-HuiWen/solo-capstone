@@ -1,0 +1,12 @@
+#send-friend-request-container {
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    row-gap: 50px;
+}
+
+.search-by-username-div {
+    display: flex;
+    column-gap: 30px;
+
+}

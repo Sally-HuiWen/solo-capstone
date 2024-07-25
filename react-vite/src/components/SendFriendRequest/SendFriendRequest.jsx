@@ -1,44 +1,84 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { thunkCreateFriendship } from '../../redux/friendships';
+import './SendFriendRequest.css'
 
 const SendFriendRequest = () => {
     const [query, setQuery] = useState('');
+    const [searchResult, setSearchResult] = useState(null);
     const [friendId, setFriendId] = useState('');
+    const [friendship, setFriendship] = useState(null);
+    const [error, setError] = useState('');
     const dispatch = useDispatch();
+
+    const handleInputChange = (e) => {
+        setQuery(e.target.value);
+    };
+
+    const handleSearchClick = async () => {
+        setError('');
+        setSearchResult(null);
+        const res = await fetch(`/api/users/search-username?username=${query}`);
+        const data = await res.json();
+        if (data.errors) {
+            setError(data.errors.message);
+        } else {
+            if (data.user_exist) {
+                setSearchResult(data.user_exist);
+            } else {
+                setError('This user does not exist');
+            }
+        }  
+    };
     
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
-        dispatch(thunkCreateFriendship(friendId));
+        setError('');
+        const res = await dispatch(thunkCreateFriendship(friendId));
+        if (res.errors) {
+            setError(res.errors.message || res.errors);
+            return res.errors
+        } else {
+            setFriendship(res);
+        }
     };
 
     return (
-        <div>
-            <div>
+        <div id='send-friend-request-container'>
+            <div className='search-by-username-div'>
                 <input
-                    type="text"
-                    placeholder="Search for a friend by friend's username"
-                    value={query}
-                    onChange={handleInputChange}
+                  type="text"
+                  placeholder="Search for a friend by username"
+                  value={query}
+                  onChange={handleInputChange}
                 />
-                <button onClick={handleSearchClick}>Search</button>
+                <button onClick={handleSearchClick} disabled={!query}> Search</button>
+            </div>
+            {error && <p className="error-message">{error}</p>}
+            <div>
+                {searchResult ? (
+                    <div>
+                        <p>{searchResult.username}</p>
+                        <button onClick={() => setFriendId(searchResult.id)}>Select</button>
+                    </div>
+                ) : (
+                    query && !searchResult && !error && <p>No results found</p>
+                )}
             </div>
 
-            <h2>Send Friend Request</h2>
+            {searchResult && !error && (
             <form onSubmit={handleSubmit}>
+                <h2>Send Friend Request</h2>
                 <input
                     type="text"
                     placeholder="Friend ID"
                     value={friendId}
-                    onChange={(e) => setFriendId(e.target.value)}
-                    required
+                    readOnly
                 />
-                <button type="submit" disabled={loading}>
-                    {loading ? 'Sending...' : 'Send Request'}
-                </button>
+                <button type="submit" disabled={!friendId}>Send Friend Request</button>
             </form>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            )}
             {friendship && <p>Friend request sent to user with ID {friendship.friend_id}</p>}
         </div>
     );
