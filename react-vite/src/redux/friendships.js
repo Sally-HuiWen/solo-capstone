@@ -2,6 +2,7 @@ const GET_FRIENDS = 'friendships/get_friends';
 const ADD_FRIENDSHIP = 'friendships/add_friendship';
 const UPDATE_FRIENDSHIP = 'friendships/update_';
 const DELETE_FRIENDSHIP = 'friendships/delete';
+const CURRENT_USER_FRIENDSHIPS = 'friendships/current';
 
 const getFriends = (friends) => ({
   type: GET_FRIENDS,
@@ -23,6 +24,10 @@ const deleteFriendship = (friendshipId) => ({
   friendshipId
 });
 
+const getCurrentUserFriendships = (friendships) => ({
+  type: CURRENT_USER_FRIENDSHIPS,
+  friendships,
+});
 
 export const thunkGetFriends = () => async (dispatch) => {
   const res = await fetch('/api/users/friends');
@@ -44,7 +49,8 @@ export const thunkCreateFriendship = (friendId) => async (dispatch) => {
     dispatch(addFriendship(friendship));
     return friendship
   } else {
-    return { errors: res.errors}
+    const error = await res.json()
+    return error
   }
 };
 
@@ -67,9 +73,21 @@ export const thunkDeleteFriendship = (friendshipId) => async (dispatch) => {
   }
 };
 
+export const thunkGetCurrentUserFriendships = () => async (dispatch) => {
+  const res = await fetch('/api/friendships/current');
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(getCurrentUserFriendships(data));
+  } else {
+    const error = await res.json();
+    return error;      
+  }
+};
+
 const initialState = {
   pendingFriends: [],
   confirmedFriends: [],
+  currentUserFriendships: [],
 };
 
 const friendshipsReducer = (state = initialState, action) => {
@@ -97,6 +115,11 @@ const friendshipsReducer = (state = initialState, action) => {
         ...state,
         pendingFriends: state.pendingFriends.filter(friend => friend.id !== action.friendshipId),
         confirmedFriends: state.confirmedFriends.filter(friend => friend.id !== action.friendshipId),
+      };
+    case CURRENT_USER_FRIENDSHIPS:
+      return {
+        ...state,
+        currentUserFriendships: action.friendships,
       };
     default:
       return state;

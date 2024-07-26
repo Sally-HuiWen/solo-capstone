@@ -2,11 +2,16 @@
     display: flex;
     flex-direction: column;
     padding: 50px;
-    row-gap: 50px;
+    width: 800px;
+    row-gap: 20px;
 }
 
-.search-by-username-div {
+#search-by-username-div {
     display: flex;
     column-gap: 30px;
+}
 
+#search-result-div {
+    display: flex;
+    column-gap: 30px;
 }
