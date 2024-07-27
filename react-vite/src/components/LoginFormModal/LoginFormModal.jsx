@@ -74,10 +74,6 @@ function LoginFormModal() {
               type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-<<<<<<< HEAD
-        
-=======
->>>>>>> main
             />
         </div>
 
@@ -90,10 +86,6 @@ function LoginFormModal() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-<<<<<<< HEAD
-
-=======
->>>>>>> main
             />
         </div>
 
@@ -109,3 +101,4 @@ function LoginFormModal() {
 }
 
 export default LoginFormModal;
+
