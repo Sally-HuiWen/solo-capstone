@@ -3,31 +3,22 @@
     flex-direction: column;
     margin: 50px;
     row-gap: 20px;
-    width: 1000px;
+    width: 600px;
 }
 
 #content-box2 {
     display: flex;
     flex-direction: column;
 }
-.each-image-box {
-    display: flex;
-}
 
-.remove-add-image {
-    background-color: purple;
-    padding: 5px;
-}
 
-#images-box3 {
-    border: 1px solid black;
+#images-box3 img {
+    width: 600px;
+    height: 500px;
+    padding-top: 30px;  
 }
 
 #dailyLog-submit-button {
     width: 300px;
 }
 
-#current-image {
-    width: '100px';
-    height: '100px';
-}

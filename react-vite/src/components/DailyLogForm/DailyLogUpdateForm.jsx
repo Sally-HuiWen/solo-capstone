@@ -102,9 +102,11 @@ const DailyLogUpdateForm = () => {
                     cols='50'
                 />
             </div>
-
-            {image && <img src={image} alt="Current Daily Log" id='current_image'/>}
-
+            
+            <div>
+                <p>Current Image</p>
+                {image && <img src={image} alt="Current Daily Log" id='current_image'/>}
+            </div>
             <div id='images-box3'>
                 <label htmlFor='update-image'>Update Image</label>
                 <input

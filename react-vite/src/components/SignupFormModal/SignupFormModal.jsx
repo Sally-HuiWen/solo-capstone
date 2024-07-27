@@ -3,9 +3,12 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { thunkSignup } from "../../redux/session";
 import "./SignupForm.css";
+import { useNavigate } from "react-router-dom";
+
 
 function SignupFormModal() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");
@@ -80,6 +83,7 @@ function SignupFormModal() {
       setErrors(serverResponse);
     } else {
       closeModal();
+      navigate('/your-kids-list')
     }
   };
 
@@ -97,7 +101,7 @@ function SignupFormModal() {
               id='signup-email'
               type="text"
               value={email}
-              onChange={handleEmailChange}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
@@ -110,7 +114,7 @@ function SignupFormModal() {
               id='signup-username'
               type="text"
               value={username}
-              onChange={handleUsernameChange}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
 

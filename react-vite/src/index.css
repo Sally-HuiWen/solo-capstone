@@ -12,6 +12,11 @@
     color: #333;
   }
 
+ /* modal round corners*/
+  #modal-content {
+    border-radius: 30px;
+}
+
   /* Link styles */
   a, link {
     text-decoration: none; 
@@ -29,16 +34,6 @@
     padding: 20px;
   }
   
-  /* Footer styles */
-  footer {
-    background: #f8f9fa;
-    color: #333;
-    padding: 10px 0;
-    text-align: center;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-  }
   
   /* Button styles */
   button {
@@ -57,9 +52,8 @@
     transform: scale(1.05);
   }
 
-  
   /* Form styles */
-  input, select {
+  input, select, textarea {
     width: 100%;
     padding: 10px 15px;
     border: 1px solid #ccc;

@@ -23,10 +23,21 @@ function LoginFormModal() {
         setErrors(errorObj);
     }, [email, password]);
 
-  const demoLogIn = () => {
-    setEmail('demo@aa.io');
-    setPassword('password');
-  }
+  const demoLogIn = async() => {
+
+    const serverResponse = await dispatch(
+      thunkLogin({
+        email: 'demo@aa.io',
+        password: 'password'
+    }))
+    
+    if (serverResponse) {
+      setErrors(serverResponse);
+    } else {
+      closeModal();
+      navigate('/your-kids-list')
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -63,7 +74,10 @@ function LoginFormModal() {
               type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+<<<<<<< HEAD
         
+=======
+>>>>>>> main
             />
         </div>
 
@@ -76,16 +90,20 @@ function LoginFormModal() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
             />
         </div>
 
         <button type="submit">Log In</button>
-        <button id='demo-user-button' onClick={demoLogIn}>
+      </form>  
+
+      <button type='button' id='demo-user-button' onClick={demoLogIn}>
         Demo User
-        </button>
-      </form>
-      
+      </button>
+
     </div>
   );
 }
