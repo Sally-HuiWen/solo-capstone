@@ -101,7 +101,7 @@ def delete_friendship(friendship_id):
         return {'errors': {'message': 'Friendship not found'}}, 404
     
     # check if the current_user is either the user_id or friend_id in the friendship
-    if current_user.id not in [friendship.user_id, friendship.friend_id]:
+    if current_user.id != friendship.user_id and current_user.id !=friendship.friend_id:
         return {'errors': {'message': 'You are not authorized'}}, 403
     
     db.session.delete(friendship)

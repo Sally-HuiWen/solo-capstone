@@ -61,6 +61,10 @@ export const thunkUpdateFriendship = (friendshipId) => async (dispatch) => {
   if (res.ok) {
     const friendship = await res.json();
     dispatch(updateFriendship(friendship));
+    return friendship;
+  } else {
+    const error = await res.json()
+    return error
   }
 };
 

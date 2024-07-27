@@ -1,7 +1,8 @@
 #kids-and-friends-container {
     display: flex;
+    column-gap: 50px;
 }
-#kids-list-container, #friends-list-container  {
+#kids-list-container, #friends-list-container, #friend-request-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -19,13 +20,13 @@
     row-gap: 30px;
 }
 .kid-details, .each-friend {
-   width: 200px;
+   width: 220px;
    border-radius: 10px;
    box-shadow: 5px 5px 5px 5px grey;
    padding-left: 5px;
 }
 
-#update-and-remove-box {
+.update-and-remove-box {
     display: flex;
     column-gap:10px;
     padding-top: 10px;
@@ -73,6 +74,14 @@
     background-color: lightpink;
 }
 
-.each-friend {
+#friend-request-div {
+    display: flex;
+    flex-direction: column;
     width: 220px;
+
+}
+
+.friend-info-div {
+    display: flex;
+    column-gap: 10px;
 }
