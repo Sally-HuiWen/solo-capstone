@@ -12,9 +12,11 @@ const CurrentUserKids = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const kids = useSelector(state => state.kids.currentUserKids || []);
-
+    const sessionUser = useSelector(state => state.session.user);
     const confirmedFriends = useSelector(state => state.friendships.confirmedFriends || []);
+    const pendingFriends = useSelector(state => state.friendships.pendingFriends || []);
     console.log('who are your confirmedFriends', confirmedFriends)
+    console.log('who are your pendingFriends', pendingFriends)
 
     useEffect(() => {
         dispatch(thunkGetCurrentKids());
@@ -31,6 +33,11 @@ const CurrentUserKids = () => {
     const handleAddFriend = () => {
         navigate('/friendships/new')
     }
+
+    // filter out the received friend requests from the pendingFriends list
+    const receivedFriendRequests = pendingFriends.filter(request =>
+        request.id === sessionUser?.id // The request was received by the current user
+    );
 
     return (
         <div id='kids-and-friends-container'>
@@ -87,12 +94,23 @@ const CurrentUserKids = () => {
                               <p>{friend.username}&apos;s kid name: {kid.name}</p>
                               <p className='tooltip'>click here to see {kid?.name}&apos;s dailyLogs</p>
                             </Link>
+                            <button>Delete</button>
                         </div>
                     ))}
                 </div>
                 ))
             )}
           </div>
+
+          {pendingFriends.length === 0 ? (
+                <p>No friend requests received</p>
+            ) : (
+            receivedFriendRequests?.map((request, index) => (
+            <div key={request.id || index} className='each-request'>
+                <h4>Friend Name that send me friend request : {request.username}</h4>
+            </div>
+            )))}
+
         </div>
     )
 }

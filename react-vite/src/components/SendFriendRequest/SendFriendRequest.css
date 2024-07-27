@@ -1,9 +1,14 @@
 #send-friend-request-container {
     display: flex;
     flex-direction: column;
+    margin: 0px 50px;
     padding: 50px;
     width: 800px;
-    row-gap: 20px;
+    row-gap: 30px;
+    height : 200px;
+    box-shadow: 5px 5px 5px 5px grey;
+    border-radius: 10px;
+    background-color:lightblue;
 }
 
 #search-by-username-div {
@@ -11,7 +16,22 @@
     column-gap: 30px;
 }
 
+#search-by-username-div input {
+    width: 300px;
+}
+
 #search-result-div {
     display: flex;
-    column-gap: 30px;
+    column-gap: 60px;
+}
+
+#success-message {
+    color: black;
+    font-size: medium;
+    font-weight: bold;
+    background-color: #007bff;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid white;
+    width: 400px;
 }
