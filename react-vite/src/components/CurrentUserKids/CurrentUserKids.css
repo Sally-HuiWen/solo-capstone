@@ -2,7 +2,7 @@
     display: flex;
     column-gap: 50px;
 }
-#kids-list-container, #friends-list-container, #friend-request-container {
+#kids-list-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -19,7 +19,7 @@
     flex-direction: column;
     row-gap: 30px;
 }
-.kid-details, .each-friend {
+.kid-details {
    width: 220px;
    border-radius: 10px;
    box-shadow: 5px 5px 5px 5px grey;
@@ -74,7 +74,3 @@
     background-color: lightpink;
 }
 
-.friend-info-div {
-    display: flex;
-    column-gap: 10px;
-}

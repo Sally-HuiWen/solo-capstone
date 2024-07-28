@@ -1,13 +1,38 @@
-#friends-container {
+#two-lists {
     display: flex;
-    flex-direction: column;
-    row-gap: 50px;
-    width: 500px;
+    align-items: flex-start;
 }
 
-#friend-request-div {
+#friends-container, #friend-request-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    column-gap: 50px;
+    row-gap:30px;
+    padding: 50px;
+    border: 1px solid #1cc;
+    border-radius: 10px;
+    margin-left: 50px;
+    width: 350px;
+}
+
+.friend-request-div {
     display: flex;
     flex-direction: column;
     width: 220px;
+    column-gap: 10px;
+    row-gap: 10px;
 
+}
+
+.friend-info-div {
+    display: flex;
+    column-gap: 10px;
+}
+
+.each-friend {
+width: 220px;
+border-radius: 10px;
+box-shadow: 5px 5px 5px 5px grey;
+padding-left: 5px;
 }

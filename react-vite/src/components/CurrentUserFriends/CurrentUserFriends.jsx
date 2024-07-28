@@ -77,54 +77,56 @@ const CurrentUserFriends = () => {
     };
 
     return (
-        <div id='friends-container'>
-            <div id='friends-list-container'>
-            <h2>Your Friends List</h2>
-            <div >
-                <button onClick={handleAddFriend} id='add-new-friend-button'>
-                    Add a new friend
-                </button>
-            </div>
-            {confirmedFriends.length === 0 ? (
-                <p>No friends found</p>
-            ) : (
-                confirmedFriends.map((friend, index) => (
-                <div key={friend.id || index} className='each-friend'>
-                    <div className='friend-info-div'>
-                        <h4>Friend: {friend.username}</h4>
-                        <button className='button-button' onClick={() => handleRemoveFriend(friend.id)}>remove</button>
+        <div id='two-lists'>
+            <div id='friends-container'>
+                <div id='friends-list-container'>
+                    <h2>Your Friends List</h2>
+                    <div >
+                        <button onClick={handleAddFriend} id='add-new-friend-button'>
+                            Add a new friend
+                        </button>
                     </div>
-                    {friend?.kids?.map((kid, kidIndex) => (
-                        <div key={kid.id || kidIndex} className='each-kid'>
-                            <Link to={`/kids/${kid?.id}/dailyLogs`} className='Link-link'>
-                              <p>{friend.username}&apos;s kid: {kid.name}</p>
-                              <p className='tooltip'>click here to see {kid?.name}&apos;s dailyLogs</p>
-                            </Link>
+                </div>
+                {confirmedFriends.length === 0 ? (
+                    <p>No friends found</p>
+                ) : (
+                    confirmedFriends.map((friend, index) => (
+                    <div key={friend.id || index} className='each-friend'>
+                        <div className='friend-info-div'>
+                            <h4>Friend: {friend.username}</h4>
+                            <button className='button-button' onClick={() => handleRemoveFriend(friend.id)}>remove</button>
                         </div>
-                    ))}
-                </div>
-                ))
-            )}
-          </div>
-          
-          <div id='friend-request-container'>
-          {receivedFriendRequests.length === 0 ? (
-             <h2>No friend requests received</h2>
-            ) : (
-            <div id='friend-request-div'>
-            <h2>Friend Requests</h2>
-            {receivedFriendRequests.map((friendship, index) => (
-                <div key={friendship.id || index} className='each-friend'>
-                    <h4>{getUsernameById(friendship.user_id)}</h4>
-                    <div className='update-and-remove-box'>
-                    <button onClick={() => handleConfirmRequest(friendship.id)}>Confirm</button>
-                    <button onClick={() => handleDeleteRequest(friendship.id)}>Delete</button>
+                        {friend?.kids?.map((kid, kidIndex) => (
+                            <div key={kid.id || kidIndex} className='each-kid'>
+                                <Link to={`/kids/${kid?.id}/dailyLogs`} className='Link-link'>
+                                <p>{friend.username}&apos;s kid: {kid.name}</p>
+                                <p className='tooltip'>click here to see {kid?.name}&apos;s dailyLogs</p>
+                                </Link>
+                            </div>
+                        ))}
                     </div>
-                </div>
-            ))}
-           </div>
-          )}
-           </div>
+                    ))
+                )}
+            </div>
+          
+            <div id='friend-request-container'>
+            {receivedFriendRequests.length === 0 ? (
+                <h2>No friend requests received</h2>
+                ) : (
+                <div className='friend-request-div'>
+                  <h2>Friend Requests</h2>
+                {receivedFriendRequests.map((friendship, index) => (
+                    <div key={friendship.id || index} className='each-friend'>
+                        <h4>{getUsernameById(friendship.user_id)}</h4>
+                        <div className='update-and-remove-box'>
+                        <button onClick={() => handleConfirmRequest(friendship.id)}>Confirm</button>
+                        <button onClick={() => handleDeleteRequest(friendship.id)}>Delete</button>
+                        </div>
+                    </div>
+                ))}
+               </div>
+                )}
+            </div>
         </div>
     )
 }
