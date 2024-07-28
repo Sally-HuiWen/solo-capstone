@@ -74,13 +74,6 @@
     background-color: lightpink;
 }
 
-#friend-request-div {
-    display: flex;
-    flex-direction: column;
-    width: 220px;
-
-}
-
 .friend-info-div {
     display: flex;
     column-gap: 10px;

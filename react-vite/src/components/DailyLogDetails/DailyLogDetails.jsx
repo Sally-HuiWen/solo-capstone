@@ -13,6 +13,7 @@ const DailyLogDetails = () => {
     const daily_log = useSelector(state=>state.dailyLogs.dailyLogDetails[dailyLogId])
     console.log('what is your dailyLog by dailyLogId', daily_log)
     const kid = useSelector(state=>state.kids.kidDetails[daily_log?.kid_id])
+    const sessionUser = useSelector(state=>state.session.user)
     console.log('what is your kid', kid)
 
     useEffect(() => {
@@ -29,7 +30,8 @@ const DailyLogDetails = () => {
                 <h3>{kid ? calculateKidAgeFromBirthToPostDate(kid.birth_date, daily_log.created_at) : ''}</h3>
                 <h3>{daily_log?.title}</h3>
                 <p>{daily_log?.content}</p>          
-            
+                
+                {kid?.user_id === sessionUser?.id && (
                 <div className="update-delete-actions">
                         <Link to={`/dailyLogs/${dailyLogId}/update`}>
                             <button >Update</button>
@@ -39,6 +41,7 @@ const DailyLogDetails = () => {
                             modalComponent={<DeleteDailyLogModal kidId={kid?.id} dailyLogId={daily_log?.id} />}
                         />
                 </div>
+                )}
             </div>
         </div>
     );

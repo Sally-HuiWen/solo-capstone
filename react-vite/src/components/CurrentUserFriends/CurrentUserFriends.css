@@ -1,0 +1,13 @@
+#friends-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 50px;
+    width: 500px;
+}
+
+#friend-request-div {
+    display: flex;
+    flex-direction: column;
+    width: 220px;
+
+}

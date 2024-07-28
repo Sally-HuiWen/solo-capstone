@@ -10,6 +10,7 @@ import KidDailyLogs from '../components/KidDailyLogs/KidDailyLogs';
 import DailyLogForm from '../components/DailyLogForm/DailyLogForm';
 import DailyLogDetails from '../components/DailyLogDetails/DailyLogDetails';
 import DailyLogUpdateForm from '../components/DailyLogForm/DailyLogUpdateForm';
+import CurrentUserFriends from '../components/CurrentUserFriends/CurrentUserFriends';
 import SendFriendRequest from '../components/SendFriendRequest/SendFriendRequest';
 
 export const router = createBrowserRouter([
@@ -56,6 +57,11 @@ export const router = createBrowserRouter([
         path: "/dailyLogs/:dailyLogId/update",
         element: <DailyLogUpdateForm />,
       },
+      {
+        path: "/current/friends",
+        element: <CurrentUserFriends />,
+      },
+
       {
         path: "/friendships/new",
         element: <SendFriendRequest />,

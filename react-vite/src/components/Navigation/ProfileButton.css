@@ -1,4 +1,10 @@
+#friends-button {
+    border: none;
+    color: black;
+    background-color: white;
+    padding: 0px;
 
+}
 #logout-button {
     padding:5px;
 

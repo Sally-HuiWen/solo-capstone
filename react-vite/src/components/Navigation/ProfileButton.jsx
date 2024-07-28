@@ -36,6 +36,10 @@ function ProfileButton() {
 
   const closeMenu = () => setShowMenu(false);
 
+  const handleFriends = () => {
+    navigate('/current/friends')
+    closeMenu();
+  }
   const logout = (e) => {
     e.preventDefault();
     dispatch(thunkLogout());
@@ -54,6 +58,9 @@ function ProfileButton() {
             <>
               <li>{user.username}</li>
               <li>{user.email}</li>
+              <li>
+                <button id='friends-button' onClick={handleFriends}>Friends</button>
+              </li>
               <li>
                 <button id='logout-button' onClick={logout}>Log Out</button>
               </li>

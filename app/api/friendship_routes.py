@@ -66,7 +66,6 @@ def update_friendship(friendship_id):
     """
     Update pending from true to false by current logged-in user 
     """
-    data = request.get_json()
     friendship = Friendship.query.get(friendship_id)
     
     # Check if friendship already exists
@@ -76,6 +75,8 @@ def update_friendship(friendship_id):
     # check if the current_user is either the user_id or friend_id in the friendship
     if current_user.id not in [friendship.user_id, friendship.friend_id]:
         return {'errors': {'message': 'You are not authorized'}}, 403
+    
+    print(f"Friendship ID: {friendship_id}, Pending: {friendship.pending}")
     
     # Only allow the friend_id to change the pending status from true to false
     if current_user.id == friendship.friend_id:

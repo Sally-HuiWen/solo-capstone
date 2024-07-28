@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
-from app.models import DailyLog, Kid, db
+from app.models import DailyLog, Kid, Friendship, db
 from app.forms import DailyLogForm
 from datetime import datetime
 from app.api.AWS_helpers import (upload_file_to_s3, get_unique_filename)
@@ -12,16 +12,31 @@ daily_log_routes = Blueprint('daily_logs', __name__)
 def get_daily_log_by_id(daily_log_id):
     """
     Get one daily_log details for a daily_log_id by current logged-in user 
+    Also allows friends of the current logged-in user to see the detail page.
     """
     daily_log = DailyLog.query.get(daily_log_id)
     if daily_log is None:
         return {'errors': {'message': 'Daily_log not found'}}, 404
     
     kid = Kid.query.get(daily_log.kid_id)
-    if (kid.user_id != current_user.id):
-        return {'errors': {'message': 'You are not authorized'}}, 403
+    if kid is None:
+        return {'errors': {'message': 'Kid not found'}}, 404
+
+    # Check if the current user is the parent 
+    if kid.user_id == current_user.id:
+        return daily_log.to_dict(), 200
     
-    return daily_log.to_dict(), 200
+    # Check if the current user is the friend of the parent
+    friendship = Friendship.query.filter(
+        (Friendship.friend_id == current_user.id) and
+        (Friendship.user_id == kid.user_id) and
+        (Friendship.pending == False)
+    ).first()
+    
+    if friendship:
+        return daily_log.to_dict(), 200
+    
+    return {'errors': {'message': 'You are not authorized'}}, 403
 
 
 @daily_log_routes.route('/<int:daily_log_id>', methods=['GET', 'PUT'])
