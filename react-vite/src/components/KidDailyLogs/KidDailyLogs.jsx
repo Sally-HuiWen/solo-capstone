@@ -12,9 +12,9 @@ const KidDailyLogs = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const kid = useSelector(state=> state.kids.kidDetails[kidId])
-  console.log('who is  this kid', kid)
+  // console.log('who is  this kid', kid)
   const allDailyLogsForThisKid = useSelector(state => state.dailyLogs.allDailyLogs[kidId] || []);
-  console.log('what is dailyLogs', allDailyLogsForThisKid)
+  // console.log('what is dailyLogs', allDailyLogsForThisKid)
 
   useEffect(() => {
     if (kidId) {
@@ -70,7 +70,7 @@ const KidDailyLogs = () => {
                     <p>{log?.content}</p>
                     <p className='tooltip'>Please Click here to see details</p>
                   </div>
-                  </Link>
+                </Link>
                 </div>
             ))}
           </div>

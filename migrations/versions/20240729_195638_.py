@@ -1,8 +1,8 @@
-"""create 7 tables
+"""empty message
 
-Revision ID: 94b817b3f8b3
+Revision ID: 3de7b660f5e8
 Revises: 
-Create Date: 2024-07-22 15:07:35.624176
+Create Date: 2024-07-29 19:56:38.060575
 
 """
 from alembic import op
@@ -13,7 +13,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = '94b817b3f8b3'
+revision = '3de7b660f5e8'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -81,12 +81,14 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('likes',
+    sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('daily_log_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['daily_log_id'], ['daily_logs.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('user_id', 'daily_log_id')
+    sa.PrimaryKeyConstraint('id')
     )
+
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE friendships SET SCHEMA {SCHEMA};")
@@ -95,7 +97,6 @@ def upgrade():
         op.execute(f"ALTER TABLE development_records SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE likes SET SCHEMA {SCHEMA};")
-
     # ### end Alembic commands ###
 
 

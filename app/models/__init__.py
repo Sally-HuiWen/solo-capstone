@@ -6,4 +6,4 @@ from .daily_log import DailyLog
 from .friendship import Friendship
 from .comment import Comment
 from .development_record import DevelopmentRecord
-from .like import likes
+from .like import Like

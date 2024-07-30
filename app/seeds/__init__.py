@@ -3,6 +3,7 @@ from .users import seed_users, undo_users
 from .kids import seed_kids, undo_kids
 from .daily_logs import seed_daily_logs, undo_daily_logs
 from .friendships import seed_friendships, undo_friendships
+from .likes import seed_likes, undo_likes
 from app.models.db import db, environment, SCHEMA
 
 # Creates a seed group to hold our commands
@@ -18,6 +19,7 @@ def seed():
         # command, which will  truncate all tables prefixed with 
         # the schema name (see comment in users.py undo_users function).
         # Make sure to add all your other model's undo functions below
+        undo_likes()
         undo_friendships()
         undo_daily_logs()
         undo_kids()
@@ -26,6 +28,7 @@ def seed():
     seed_kids()
     seed_daily_logs()
     seed_friendships()
+    seed_likes()
     # Add other seed functions here
 
 
@@ -36,4 +39,5 @@ def undo():
     undo_kids()
     undo_users()
     undo_friendships()
+    undo_likes()
     # Add other undo functions here

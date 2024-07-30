@@ -1,12 +1,20 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 
-likes = db.Table(
-    'likes',
-    db.Model.metadata,
-    db.Column('user_id', db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), primary_key=True),
-    db.Column('daily_log_id', db.Integer, db.ForeignKey(add_prefix_for_prod('daily_logs.id')), primary_key=True),
-)
+class Like(db.Model):
+    __tablename__ ='likes'
+    
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
 
-if environment == "production":
-    likes.schema = SCHEMA
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    daily_log_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('daily_logs.id')), nullable=False)
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'daily_log_id': self.daily_log_id,
+        }
+
 

@@ -1,6 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
-from .like import likes
+from .like import Like
 
 class DailyLog(db.Model):
     __tablename__ = 'daily_logs'
@@ -30,7 +30,7 @@ class DailyLog(db.Model):
     #many-to-many: users(many)<=>daily_logs(many)
     users = db.relationship(
         'User',
-        secondary = likes,
+        secondary = 'likes',
         back_populates = 'daily_logs'
     )
 

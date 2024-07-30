@@ -2,7 +2,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from .friendship import Friendship
-from .like import likes
+from .like import Like
 from sqlalchemy.orm import aliased
 from sqlalchemy import or_
 
@@ -103,7 +103,7 @@ class User(db.Model, UserMixin):
     #many-to-many: users(many)<=>daily_logs(many)
     daily_logs = db.relationship(
         'DailyLog',
-        secondary = likes,
+        secondary = 'likes',
         back_populates = 'users'
     )
 

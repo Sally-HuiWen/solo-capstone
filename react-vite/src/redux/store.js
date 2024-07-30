@@ -9,12 +9,13 @@ import sessionReducer from "./session";
 import kidReducer from "./kids";
 import dailyLogReducer from "./dailyLogs"
 import friendshipsReducer from "./friendships";
-
+import likesReducer from "./likes";
 const rootReducer = combineReducers({
   session: sessionReducer,
   kids: kidReducer,
   dailyLogs: dailyLogReducer,
   friendships: friendshipsReducer,
+  likes: likesReducer,
 });
 
 let enhancer;
