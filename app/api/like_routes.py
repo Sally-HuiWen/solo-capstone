@@ -10,7 +10,7 @@ def are_friends(user_id1, user_id2):
         ((Friendship.user_id == user_id2) and (Friendship.friend_id == user_id1))
     ).count() > 0
 
-@like_routes.route('/<int:daily_log_id>', methods=['POST'])
+@like_routes.route('/<int:daily_log_id>/like', methods=['POST'])
 @login_required
 def like_daily_log(daily_log_id):
     daily_log = DailyLog.query.get(daily_log_id)
@@ -34,7 +34,7 @@ def like_daily_log(daily_log_id):
 
     return like.to_dict(), 201
 
-@like_routes.route('/<int:daily_log_id>', methods=['DELETE'])
+@like_routes.route('/<int:daily_log_id>/unlike', methods=['DELETE'])
 @login_required
 def unlike_daily_log(daily_log_id):
     like = Like.query.filter_by(user_id=current_user.id, daily_log_id=daily_log_id).first()
@@ -46,11 +46,19 @@ def unlike_daily_log(daily_log_id):
 
     return {'message': 'Like removed'}, 200
 
-@like_routes.route('/<int:daily_log_id>/usernames')
+@like_routes.route('/<int:daily_log_id>')
 @login_required
 def users_clicked_like(daily_log_id):
     likes = Like.query.filter_by(daily_log_id=daily_log_id).all()
     user_ids = [like.user_id for like in likes]
-    users = User.query.filter(User.id.in_(user_ids)).all()
-    user_usernames = [user.username for user in users]
-    return {'user_usernames': user_usernames}, 200
+    users = {user.id: user.username for user in User.query.filter(User.id.in_(user_ids)).all()}
+    
+    likes_with_usernames = [
+        {   
+            'daily_log_id': like.daily_log_id,
+            'user_id': like.user_id,
+            'username': users[like.user_id]
+        } for like in likes
+    ]
+    
+    return likes_with_usernames, 200

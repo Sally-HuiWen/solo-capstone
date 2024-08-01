@@ -9,6 +9,7 @@
     text-decoration: none;
     color: black;
     column-gap: 30px;
+    width: 1000px;
 }
 
 .details-image {
@@ -22,7 +23,6 @@
     flex-direction: column;
     row-gap: 8px;
     height: 500px;
-
 }
 
 #image-image {
@@ -32,3 +32,121 @@
     border-radius: 10px;
     margin-right: 20px;
 } 
+
+.likes-div {
+    position: relative;
+    margin-top: 50px;
+}
+
+#likes-count-div {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.likes-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    display: none;
+    background-color: #CCCCCC;
+    color: black;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.likes-list.show {
+    display: block;
+    border-radius: 10px;
+}
+
+.likes-list li {
+    padding: 5px;
+}
+
+.likes-list li:last-child {
+    border-bottom: none;
+}
+
+#like-and-comment-div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-left: 30px;
+}
+
+#comment-button {
+    display: flex;
+    gap: 10px;
+    border-radius: 0%;
+    padding: 5px 10px;
+    background-color: transparent;
+    color: black;
+}
+
+.like-button {
+    display: flex;
+    background-color: transparent;
+    border-radius: 0%;
+    gap: 10px;
+    border: none;
+    padding: 5px 10px;
+}
+
+#comment-button:hover, .like-button:hover {
+    background-color:#CCCCCC;
+}
+
+.icon {
+    font-size: x-large;
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%; /* This makes the corners round */
+    padding: 2px;
+}
+
+.icon-two {
+    color: black;                                                      
+    padding: 0px;
+}
+
+.div-like {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#icon-and-count {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icon-container,.icon-two-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+.like-like {
+    color: black;
+}
+
+.liked .like-like {
+    color: #007bff;
+}
+
+.liked .icon-two {
+    background-color: #007bff;
+}
+
+#count-num {
+    padding-bottom: 8px;
+}

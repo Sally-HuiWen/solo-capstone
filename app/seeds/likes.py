@@ -17,10 +17,10 @@ def seed_likes():
     like13 = Like(user_id=2, daily_log_id=9)
     like14 = Like(user_id=2, daily_log_id=10)
     like15 = Like(user_id=3, daily_log_id=1)
-    like16 = Like(user_id=3, daily_log_id=1)
-    like17 = Like(user_id=3, daily_log_id=2)
-    like18 = Like(user_id=3, daily_log_id=3)
-    like19 = Like(user_id=3, daily_log_id=4)
+    like16 = Like(user_id=3, daily_log_id=2)
+    like17 = Like(user_id=3, daily_log_id=3)
+    like18 = Like(user_id=3, daily_log_id=4)
+    like19 = Like(user_id=3, daily_log_id=5)
     like20 = Like(user_id=3, daily_log_id=15)
 
 
