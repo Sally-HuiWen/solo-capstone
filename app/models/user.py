@@ -30,7 +30,7 @@ class User(db.Model, UserMixin):
     # user_friends represents the users that the current user has added as friends
     user_friends = db.relationship(
         'User',
-        secondary = 'Friendship',
+        secondary = Friendship.__tablename__,
         primaryjoin = (id == Friendship.user_id), # primaryjoin links current_user.id to friendships table user_id column
         secondaryjoin = (id == Friendship.friend_id), # secondaryjoin links related_user.id to friendships table friend_id
         back_populates = 'friend_users' 
@@ -41,7 +41,7 @@ class User(db.Model, UserMixin):
     # represents the users who have added the current user as a friend.
     friend_users = db.relationship(
         'User',
-        secondary = 'Friendship',
+        secondary = Friendship.__tablename__,
         primaryjoin = (id == Friendship.friend_id), # primaryjoin links current_user.id to friends table friend_id
         secondaryjoin = (id == Friendship.user_id), # secondaryjoin links related_user.id to friends table user_id
         back_populates = 'user_friends'
@@ -56,7 +56,7 @@ class User(db.Model, UserMixin):
     #many-to-many: users(many)<=>daily_logs(many)
     daily_logs = db.relationship(
         'DailyLog',
-        secondary = 'likes',
+        secondary = Like.__tablename__,
         back_populates = 'users'
     )
     
