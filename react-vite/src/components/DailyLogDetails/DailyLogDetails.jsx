@@ -7,8 +7,8 @@ import OpenModalButton from '../OpenModalButton';
 import DeleteDailyLogModal from './DeleteDailyLogModal';
 import { thunkClickLike, thunkRemoveLike, thunkGetLikes } from '../../redux/likes';
 import { calculateKidAgeFromBirthToPostDate } from '../utility';
-import { AiOutlineLike } from "react-icons/ai";
 import { BiMessageRounded } from "react-icons/bi";
+import { IoMdThumbsUp } from "react-icons/io";
 
 const DailyLogDetails = () => {
     const { dailyLogId } = useParams();
@@ -80,7 +80,7 @@ const DailyLogDetails = () => {
                         onMouseLeave={() => setShowLikesList(false)}
                     >
                         <div id='icon-and-count'>
-                            <div><AiOutlineLike className='icon'/></div>
+                            <div><IoMdThumbsUp className='icon'/></div>
                             <div id='count-num'>{likes.length}</div>
                         </div>
                         <ul className={`likes-list ${showLikesList ? 'show' : ''}`}>
@@ -98,7 +98,7 @@ const DailyLogDetails = () => {
                             className={`like-button ${userLiked ? 'liked' : ''}`}
                         >
                             <div className='div-like'>
-                              <div><AiOutlineLike className='icon-two'/></div>
+                              <div><IoMdThumbsUp className='icon-two'/></div>
                               <div className='like-like'>Like</div>
                             </div>
                         </button>
@@ -109,7 +109,7 @@ const DailyLogDetails = () => {
                             className={`like-button ${userLiked ? 'liked' : ''}`}
                         >
                             <div className='div-like'>
-                              <div><AiOutlineLike className='icon-two'/></div>
+                              <div><IoMdThumbsUp className='icon-two'/></div>
                               <div className='like-like'>Like</div>
                             </div>
                         </button>

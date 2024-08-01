@@ -141,10 +141,11 @@
 
 .liked .like-like {
     color: #007bff;
+    font-weight: bold;
 }
 
 .liked .icon-two {
-    background-color: #007bff;
+    color: #007bff;
 }
 
 #count-num {
