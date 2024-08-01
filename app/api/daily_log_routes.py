@@ -28,9 +28,10 @@ def get_daily_log_by_id(daily_log_id):
     
     # Check if the current user is the friend of the parent
     friendship = Friendship.query.filter(
-        (Friendship.friend_id == current_user.id) and
-        (Friendship.user_id == kid.user_id) and
-        (Friendship.pending == False)
+        (
+            (Friendship.friend_id == current_user.id) & (Friendship.user_id == kid.user_id) |
+            (Friendship.user_id == current_user.id) & (Friendship.friend_id == kid.user_id)
+        ) & (Friendship.status == 'accepted')
     ).first()
     
     if friendship:

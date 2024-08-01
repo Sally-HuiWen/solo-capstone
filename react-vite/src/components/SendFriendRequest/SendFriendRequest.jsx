@@ -58,8 +58,8 @@ const SendFriendRequest = () => {
             setQuery(''); // clear the input field
             return;
         }
-
-        const res = await fetch(`/api/users/search-username?username=${query}`);
+        const queryAllCases = query.trim().toLowerCase();
+        const res = await fetch(`/api/users/search-username?username=${queryAllCases}`);
         const data = await res.json();
         if (data.errors) {
             setErrors([data.errors.message]);
@@ -104,10 +104,10 @@ const SendFriendRequest = () => {
     return (
         <div id='send-friend-request-container'>
             <div id='search-by-username-div'>
-                <h3>Check if the friend exists</h3>
+                <h3>Check if the user exists</h3>
                 <input
                     type="text"
-                    placeholder="Search for a friend by username"
+                    placeholder="Search for a user by username"
                     value={query}
                     onChange={handleInputChange}
                 />
@@ -119,8 +119,8 @@ const SendFriendRequest = () => {
             )}
             {searchResult &&!errors.includes('You cannot send a friend request to yourself.') && !errors.includes('Friendship already exists. Please try another username.') && (
                 <div id='search-result-div'>
-                    <h3>Friend exists: {searchResult.username}</h3>
-                    <button onClick={handleSubmit}>Send Friend Request</button>
+                    <h3>Send {searchResult.username} a friend request</h3>
+                    <button onClick={handleSubmit}>Send</button>
                 </div>
             )}
             {message && <p id="success-message">{message}</p>}

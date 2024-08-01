@@ -7,7 +7,7 @@ class Friendship(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     friend_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    pending = db.Column(db.Boolean, default=True)
+    status = db.Column(db.String, nullable=False, default='pending')
     
     __table_args__ = (
         UniqueConstraint('user_id', 'friend_id', name='uq_user_friend'),
@@ -24,6 +24,6 @@ class Friendship(db.Model):
             'id': self.id,
             'user_id': self.user_id,
             'friend_id': self.friend_id,
-            'pending': self.pending
+            'status': self.status
         }
 

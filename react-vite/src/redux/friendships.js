@@ -54,9 +54,11 @@ export const thunkCreateFriendship = (friendId) => async (dispatch) => {
   }
 };
 
-export const thunkUpdateFriendship = (friendshipId) => async (dispatch) => {
+export const thunkUpdateFriendship = (friendshipId, status) => async (dispatch) => {
   const res = await fetch(`/api/friendships/${friendshipId}/update`, {
     method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ status }),
   });
   if (res.ok) {
     const friendship = await res.json();
@@ -91,6 +93,7 @@ export const thunkGetCurrentUserFriendships = () => async (dispatch) => {
 const initialState = {
   pendingFriends: [],
   confirmedFriends: [],
+  deniedFriends: [],
   currentUserFriendships: [],
 };
 
@@ -101,9 +104,10 @@ const friendshipsReducer = (state = initialState, action) => {
         ...state,
         pendingFriends: action.friends.pending_friends,
         confirmedFriends: action.friends.confirmed_friends,
+        deniedFriends: action.friends.denied_friends,
       };
     case ADD_FRIENDSHIP:
-      // Assume a new friendship is always a pending friend request
+      // a new friendship is a pending friend request
       return {
         ...state,
         pendingFriends: [...state.pendingFriends, action.friendship],
@@ -112,13 +116,19 @@ const friendshipsReducer = (state = initialState, action) => {
       return {
         ...state,
         pendingFriends: state.pendingFriends.filter(friend => friend.id !== action.friendship.id),
-        confirmedFriends: [...state.confirmedFriends, action.friendship],
+        confirmedFriends: action.friendship.status === 'accepted'
+          ? [...state.confirmedFriends, action.friendship]
+          : state.confirmedFriends,
+        deniedFriends: action.friendship.status === 'denied'
+          ? [...state.deniedFriends, action.friendship]
+          : state.deniedFriends,
       };
     case DELETE_FRIENDSHIP:
       return {
         ...state,
         pendingFriends: state.pendingFriends.filter(friend => friend.id !== action.friendshipId),
         confirmedFriends: state.confirmedFriends.filter(friend => friend.id !== action.friendshipId),
+        deniedFriends: state.deniedFriends.filter(friend => friend.id !== action.friendshipId),
       };
     case CURRENT_USER_FRIENDSHIPS:
       return {

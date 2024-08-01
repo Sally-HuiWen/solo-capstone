@@ -47,6 +47,14 @@ const DailyLogDetails = () => {
     };
 
     const userLiked = likes.some(like => like.user_id === sessionUser?.id);
+
+    const handleLike = () => {
+        if (userLiked) {
+            clickToUnlike();
+        } else {
+            clickToLike();
+        }
+    };
     
     const handleCommentClick = ()=> {
         alert('This feature coming soon!')
@@ -91,9 +99,8 @@ const DailyLogDetails = () => {
                     </div>
                 
                     <div id='like-and-comment-div'>
-                    {userLiked ? (
                         <button 
-                            onClick={clickToUnlike} 
+                            onClick={handleLike} 
                             disabled={isProcessing} 
                             className={`like-button ${userLiked ? 'liked' : ''}`}
                         >
@@ -102,18 +109,7 @@ const DailyLogDetails = () => {
                               <div className='like-like'>Like</div>
                             </div>
                         </button>
-                    ) : (
-                        <button 
-                            onClick={clickToLike} 
-                            disabled={isProcessing} 
-                            className={`like-button ${userLiked ? 'liked' : ''}`}
-                        >
-                            <div className='div-like'>
-                              <div><IoMdThumbsUp className='icon-two'/></div>
-                              <div className='like-like'>Like</div>
-                            </div>
-                        </button>
-                    )}
+                
                         <button id='comment-button' onClick={handleCommentClick}>
                             <div><BiMessageRounded/></div>
                             <div>Comment</div>

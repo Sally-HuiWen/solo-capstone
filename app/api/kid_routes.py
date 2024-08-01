@@ -34,7 +34,7 @@ def get_kid_by_id(kid_id):
             and_(
                 or_(Friendship.user_id == current_user.id, Friendship.friend_id == current_user.id),
                 or_(Friendship.user_id == kid.user_id, Friendship.friend_id == kid.user_id ),
-                Friendship.pending == False
+                Friendship.status == 'accepted'
             )
         ).first()
 
@@ -125,7 +125,7 @@ def get_all_daily_logs_by_kid_id(kid_id):
             and_(
                 or_(Friendship.user_id == current_user.id, Friendship.friend_id == current_user.id),
                 or_(Friendship.user_id == kid.user_id, Friendship.friend_id == kid.user_id ),
-                Friendship.pending == False
+                Friendship.status == 'accepted'
             )
         ).first()
 

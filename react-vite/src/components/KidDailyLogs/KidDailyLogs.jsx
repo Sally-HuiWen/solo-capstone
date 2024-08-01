@@ -11,6 +11,7 @@ const KidDailyLogs = () => {
   const { kidId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const sessionUser = useSelector(state=> state.session.user)
   const kid = useSelector(state=> state.kids.kidDetails[kidId])
   // console.log('who is  this kid', kid)
   const allDailyLogsForThisKid = useSelector(state => state.dailyLogs.allDailyLogs[kidId] || []);
@@ -39,11 +40,13 @@ const KidDailyLogs = () => {
             <p id='kid-age-p'>{calculateKidAgeFromBirthToNow(kid?.birth_date)}</p> 
         </div>
        
+       {sessionUser.id === kid?.user_id && (
         <div>
           <button className="add-dailyLog-button" onClick={handleCreateAddDailyLog}>
             Add Sweet Moment
           </button>
         </div> 
+       )}
       </div>
     
 

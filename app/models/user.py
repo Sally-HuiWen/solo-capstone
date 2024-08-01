@@ -37,6 +37,7 @@ class User(db.Model, UserMixin):
 
         pending_friends = []
         confirmed_friends = []
+        denied_friends = []
 
         for friendship, user_alias, friend_alias in friendships_query:
             if friendship.user_id == self.id:
@@ -44,7 +45,7 @@ class User(db.Model, UserMixin):
                 friend_info = {
                     'id': friend_alias.id,
                     'username': friend_alias.username,
-                    'pending': friendship.pending,
+                    'status': friendship.status,
                     'kids': [kid.to_dict() for kid in friend_alias.kids],
                 }
             else:
@@ -52,18 +53,21 @@ class User(db.Model, UserMixin):
                 friend_info = {
                     'id': user_alias.id,
                     'username': user_alias.username,
-                    'pending': friendship.pending,
+                    'status': friendship.status,
                     'kids': [kid.to_dict() for kid in user_alias.kids],
                 }
 
-            if friendship.pending:
+            if friendship.status == 'pending':
                 pending_friends.append(friend_info)
-            else:
+            elif friendship.status == 'accepted':
                 confirmed_friends.append(friend_info)
+            elif friendship.status == 'denied':
+                denied_friends.append(friend_info)
 
         return {
             'pending_friends': pending_friends,
-            'confirmed_friends': confirmed_friends
+            'confirmed_friends': confirmed_friends,
+            'denied_friends': denied_friends
         }
 
     # one-to-many: user=>kids

@@ -38,8 +38,9 @@ def search_username():
     username = request.args.get('username') #retrieve the value of a query parameter from the request URL
     if not username:
         return {'errors': {'message': 'No username provided'}}, 400
-
-    user = User.query.filter_by(username=username).first()
+    
+    user = User.query.filter(User.username.ilike(username)).first()
+    
     if user:
         return {'user_exist': user.to_dict()}, 200
     return {'message': 'This user does not exist'}, 200

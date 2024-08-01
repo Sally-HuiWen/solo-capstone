@@ -6,8 +6,10 @@ like_routes = Blueprint('likes', __name__)
 
 def are_friends(user_id1, user_id2):
     return Friendship.query.filter(
-        ((Friendship.user_id == user_id1) and (Friendship.friend_id == user_id2)) or
-        ((Friendship.user_id == user_id2) and (Friendship.friend_id == user_id1))
+        (
+            (Friendship.user_id == user_id1) & (Friendship.friend_id == user_id2) |
+            (Friendship.user_id == user_id2) & (Friendship.friend_id == user_id1)
+        ) & (Friendship.status == 'accepted')
     ).count() > 0
 
 @like_routes.route('/<int:daily_log_id>/like', methods=['POST'])

@@ -3,13 +3,13 @@
     align-items: flex-start;
 }
 
-#friends-container, #friend-request-container {
+#friends-container, #request-received-container, #request-send-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     column-gap: 50px;
     row-gap:30px;
-    padding: 50px;
+    padding: 30px;
     border: 1px solid #1cc;
     border-radius: 10px;
     margin-left: 50px;
@@ -35,4 +35,21 @@ width: 220px;
 border-radius: 10px;
 box-shadow: 5px 5px 5px 5px grey;
 padding-left: 5px;
+}
+
+#friends-list-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+#add-new-friend-button {
+    font-size: medium;
+    width: 170px;
+}
+
+.denied-label {
+    color: red;
+    font-size: medium;
+    padding-top: 5px;
 }

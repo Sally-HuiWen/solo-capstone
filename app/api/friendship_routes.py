@@ -36,7 +36,7 @@ def create_friendship():
     if existing_friendship:
         return {'errors': {'message': 'friendship already exists'}}, 400
 
-    new_friendship = Friendship(user_id=user_id, friend_id=friend_id)
+    new_friendship = Friendship(user_id=user_id, friend_id=friend_id, status ='pending')
     db.session.add(new_friendship)
     db.session.commit()
     
@@ -66,28 +66,25 @@ def update_friendship(friendship_id):
     """
     Update pending from true to false by current logged-in user 
     """
+    data = request.get_json()
+    new_status = data.get('status')
+    
+    if new_status not in ['accepted', 'denied']:
+        return {'errors': {'message': 'Invalid status update'}}, 400
+    
     friendship = Friendship.query.get(friendship_id)
     
     # Check if friendship already exists
     if not friendship:
         return {'errors': {'message': 'Friendship not found'}}, 404
     
-    # check if the current_user is either the user_id or friend_id in the friendship
-    if current_user.id not in [friendship.user_id, friendship.friend_id]:
-        return {'errors': {'message': 'You are not authorized'}}, 403
+    # check if the current_user is the recipient of the friend request
+    if current_user.id != friendship.friend_id:
+        return {'errors': {'message': 'Only the recipient can update the friend request status'}}, 403
     
-    print(f"Friendship ID: {friendship_id}, Pending: {friendship.pending}")
-    
-    # Only allow the friend_id to change the pending status from true to false
-    if current_user.id == friendship.friend_id:
-        if friendship.pending:
-            friendship.pending = False
-            db.session.commit()
-            return friendship.to_dict(), 200
-        else:
-            return {'errors': {'message': 'Friendship is already confirmed'}}, 400
-    else:
-        return {'errors': {'message': 'Only the recipient can accept the friend request'}}, 403
+    friendship.status = new_status
+    db.session.commit()
+    return friendship.to_dict(), 200
 
 @friendship_routes.route('/<int:friendship_id>', methods=['DELETE'])
 @login_required

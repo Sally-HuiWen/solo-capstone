@@ -12,9 +12,10 @@ const addLike = (like) => ({
   like,
 });
 
-const removeLike = (like) => ({
+const removeLike = (dailyLogId, likeId) => ({
   type: REMOVE_LIKE,
-  like,
+  dailyLogId,
+  likeId,
 });
 
 export const thunkGetLikes = (dailyLogId) => async (dispatch) => {
@@ -43,9 +44,9 @@ export const thunkRemoveLike = (dailyLogId) => async (dispatch) => {
     method: 'DELETE',
   });
   if (res.ok) {
-    const like = await res.json();
-    console.log('what is unlike in thunk', like)
-    dispatch(removeLike(like));
+    const data = await res.json();
+    console.log('what is unlike in thunk', data);
+    dispatch(removeLike(dailyLogId, data.id));
     dispatch(thunkGetLikes(dailyLogId));
   }
 };
@@ -65,37 +66,20 @@ export default function likesReducer(state = initialState, action) {
           };
       }
       case CLICK_LIKE: {
-          const { daily_log_id } = action.like;
-          return {
-              ...state,
-              [daily_log_id]: [...(state[daily_log_id] || []), action.like],
-          };
+        const { daily_log_id } = action.like;
+        return {
+          ...state,
+          [daily_log_id]: [...(state[daily_log_id] || []), action.like],
+        };
       }
       case REMOVE_LIKE: {
-          const { daily_log_id, id } = action.like;
-          return {
-              ...state,
-              [daily_log_id]: state[daily_log_id]?.filter((like) => like.id !== id),
-          };
+        const { dailyLogId, likeId } = action;
+        return {
+          ...state,
+          [dailyLogId]: state[dailyLogId]?.filter((like) => like.id !== likeId),
+        };
       }
       default:
           return state;
   }
 }
-
-// export default function likesReducer(state = initialState, action) {
-//   switch (action.type) {
-//     case GET_LIKES:
-//       return { ...state, ...action.likes };
-//     case CLICK_LIKE:
-//       return { ...state, [action.like.daily_log_id]: action.like };
-//     case REMOVE_LIKE: {
-//       const newState = { ...state };
-//       delete newState[action.likeId];
-//       return newState;
-//     }
-//     default:
-//       return state;
-//   }
-// }
-
