@@ -20,7 +20,7 @@ function Navigation() {
     <div id='header-container'>
       <div onClick={handleClick} id='left-header-box'>
           <RiSeedlingFill id='logo'/>
-          <h2 id='website-name'>BundleOfJoy</h2>
+          <button id='website-name'><h2>BundleOfJoy</h2></button>
       </div>
 
       <div id='right-header-box'>

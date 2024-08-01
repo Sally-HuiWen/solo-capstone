@@ -53,7 +53,6 @@
 .log-details {
     display: flex;
     flex-direction: column;
-    row-gap: 8px;
     width: 60%;
     height: 200px;
 }
@@ -80,4 +79,13 @@
 .log-item:hover .tooltip {
     visibility: visible;
     opacity: 1;
+}
+
+#log-details-link {
+    color: black;
+}
+
+#likesAndComments-div {
+    margin: 0px;
+    padding: 0px;
 }

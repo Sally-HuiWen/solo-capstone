@@ -17,14 +17,16 @@
 }
 
 #website-name {
+  background-color: transparent;
   font-size: xx-large;
+  color: #ff544b;
 }
 
 
 .profile-dropdown {
   position: absolute;
   list-style-type: none;
-  border: 2px solid pink;
+  background-color: pink;
   padding:5px;
   right:50px;
   border-radius: 10px;

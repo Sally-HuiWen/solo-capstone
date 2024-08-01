@@ -97,7 +97,7 @@ const SendFriendRequest = () => {
                 setQuery('');
                 setFriendId('');
                 setHasClicked(false);
-            },5000);
+            },3000);
         }
     };
 

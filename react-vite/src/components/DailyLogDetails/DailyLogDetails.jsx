@@ -1,14 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { thunkDailyLogDetails } from '../../redux/dailyLogs';
 import './DailyLogDetails.css';
 import OpenModalButton from '../OpenModalButton';
 import DeleteDailyLogModal from './DeleteDailyLogModal';
-import { thunkClickLike, thunkRemoveLike, thunkGetLikes } from '../../redux/likes';
+import LikesAndComments from '../LikesAndComments/LikesAndComments'; 
 import { calculateKidAgeFromBirthToPostDate } from '../utility';
-import { BiMessageRounded } from "react-icons/bi";
-import { IoMdThumbsUp } from "react-icons/io";
 
 const DailyLogDetails = () => {
     const { dailyLogId } = useParams();
@@ -16,49 +14,11 @@ const DailyLogDetails = () => {
     const daily_log = useSelector(state => state.dailyLogs.dailyLogDetails[dailyLogId]);
     const kid = useSelector(state => state.kids.kidDetails[daily_log?.kid_id]);
     const sessionUser = useSelector(state => state.session.user);
-    const likes = useSelector(state => state.likes[dailyLogId] || []);
-    const [isProcessing, setIsProcessing] = useState(false);
-    const [showLikesList, setShowLikesList] = useState(false);
 
     useEffect(() => {
         dispatch(thunkDailyLogDetails(dailyLogId));
     }, [dispatch, dailyLogId]);
 
-    useEffect(() => {
-        if (daily_log) {
-            dispatch(thunkGetLikes(daily_log.id));
-        }
-    }, [dispatch, daily_log]);
-
-    const clickToLike = () => {
-        setIsProcessing(true);
-        dispatch(thunkClickLike(dailyLogId)).then(() => {
-            dispatch(thunkGetLikes(dailyLogId));
-            setIsProcessing(false);
-        });
-    };
-
-    const clickToUnlike = () => {
-        setIsProcessing(true);
-        dispatch(thunkRemoveLike(dailyLogId)).then(() => {
-            dispatch(thunkGetLikes(dailyLogId));
-            setIsProcessing(false);
-        });
-    };
-
-    const userLiked = likes.some(like => like.user_id === sessionUser?.id);
-
-    const handleLike = () => {
-        if (userLiked) {
-            clickToUnlike();
-        } else {
-            clickToLike();
-        }
-    };
-    
-    const handleCommentClick = ()=> {
-        alert('This feature coming soon!')
-    }
     return (
         <div className="daily-log-details">
             <div className="details-image">
@@ -81,41 +41,8 @@ const DailyLogDetails = () => {
                         />
                     </div>
                 )}
-                <div className='likes-div'>
-                    <div 
-                        id='likes-count-div' 
-                        onMouseEnter={() => setShowLikesList(true)}
-                        onMouseLeave={() => setShowLikesList(false)}
-                    >
-                        <div id='icon-and-count'>
-                            <div><IoMdThumbsUp className='icon'/></div>
-                            <div id='count-num'>{likes.length}</div>
-                        </div>
-                        <ul className={`likes-list ${showLikesList ? 'show' : ''}`}>
-                            {likes.map((like, index) => (
-                                <li key={index}>{like.username}</li>
-                            ))}
-                        </ul>
-                    </div>
                 
-                    <div id='like-and-comment-div'>
-                        <button 
-                            onClick={handleLike} 
-                            disabled={isProcessing} 
-                            className={`like-button ${userLiked ? 'liked' : ''}`}
-                        >
-                            <div className='div-like'>
-                              <div><IoMdThumbsUp className='icon-two'/></div>
-                              <div className='like-like'>Like</div>
-                            </div>
-                        </button>
-                
-                        <button id='comment-button' onClick={handleCommentClick}>
-                            <div><BiMessageRounded/></div>
-                            <div>Comment</div>
-                        </button>
-                    </div>
-                </div>
+                <LikesAndComments dailyLogId={dailyLogId} />
             </div>
         </div>
     );
