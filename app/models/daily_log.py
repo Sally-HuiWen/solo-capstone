@@ -30,7 +30,7 @@ class DailyLog(db.Model):
     #many-to-many: users(many)<=>daily_logs(many)
     users = db.relationship(
         'User',
-        secondary = Like.__tablename__,
+        secondary = Like.__table__,
         back_populates = 'daily_logs'
     )
 
