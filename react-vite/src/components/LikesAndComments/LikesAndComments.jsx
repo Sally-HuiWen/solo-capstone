@@ -18,24 +18,20 @@ const LikesAndComments = ({ dailyLogId }) => {
         }
     }, [dispatch, dailyLogId]);
 
-    const clickToLike = async () => {
+    const clickToLike = () => {
         setIsProcessing(true);
-        const res = await dispatch(thunkClickLike(dailyLogId));
-        if (res) {
-            // Update state directly after liking instead of dispatch(thunkGetLikes(dailyLogId));
-            dispatch({ type: 'likes/addLike', like: res });
-        }
-        setIsProcessing(false);
+        dispatch(thunkClickLike(dailyLogId)).then(() => {
+            dispatch(thunkGetLikes(dailyLogId));
+            setIsProcessing(false);
+        });
     };
 
-    const clickToUnlike = async () => {
+    const clickToUnlike = () => {
         setIsProcessing(true);
-        const res = await dispatch(thunkRemoveLike(dailyLogId));
-        if (res) {
-            // Update state directly after unliking
-            dispatch({ type: 'likes/removeLike', dailyLogId, likeId: res.id });
-        }
-        setIsProcessing(false);
+        dispatch(thunkRemoveLike(dailyLogId)).then(() => {
+            dispatch(thunkGetLikes(dailyLogId));
+            setIsProcessing(false);
+        });
     };
             
     const userLiked = likes.some(like => like.user_id === sessionUser?.id);

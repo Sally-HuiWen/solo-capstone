@@ -35,7 +35,6 @@ export const thunkClickLike = (dailyLogId) => async (dispatch) => {
     const like = await res.json();
     console.log('what is new like in thunk', like)
     dispatch(addLike(like));
-    dispatch(thunkGetLikes(dailyLogId));
   }
 };
 
@@ -47,7 +46,6 @@ export const thunkRemoveLike = (dailyLogId) => async (dispatch) => {
     const data = await res.json();
     console.log('what is unlike in thunk', data);
     dispatch(removeLike(dailyLogId, data.id));
-    dispatch(thunkGetLikes(dailyLogId));
   }
 };
 
