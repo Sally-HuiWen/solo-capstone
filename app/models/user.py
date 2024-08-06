@@ -18,6 +18,8 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(50), nullable = False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    user_image_url = db.Column(db.String(2000), nullable=False)
+
 
     # one-to-many: user=>kids
     kids = db.relationship(
@@ -130,6 +132,7 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'kids': [kid.to_dict() for kid in self.kids],
+            'user_image': self.user_image,
             # 'user_friends': [friend.id for friend in self.user_friends] # List of IDs of the users this user has added as friends
             # 'friend_users': [user.id for user in self.friend_users]# List of IDs of the users who have added this user as a friend
         }

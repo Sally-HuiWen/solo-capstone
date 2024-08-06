@@ -11,6 +11,7 @@ class Kid(db.Model):
     name = db.Column(db.String(50), nullable=False) 
     birth_date = db.Column(db.Date, nullable=False)
     relationship = db.Column(db.String(50), nullable=False)
+    kid_image_url = db.Column(db.String(2000), nullable=False)
     
     # one-to-many: user(one)=>kids(many)
     user = db.relationship(
@@ -31,8 +32,6 @@ class Kid(db.Model):
         back_populates = 'kid'
     )
 
-
-
     def to_dict(self):
         return {
             'id': self.id,
@@ -40,22 +39,6 @@ class Kid(db.Model):
             'name': self.name,
             'birth_date': self.birth_date,
             'relationship': self.relationship,
+            'kid_image_url': self.kid_image_url,
         }
     
-    #Adding the user and daily_logs to the to_dict method 
-    #def to_dict(self, include_user=False, include_daily_logs=False):
-    # kid_dict = {
-    #     'id': self.id,
-    #     'user_id': self.user_id,
-    #     'name': self.name,
-    #     'birth_date': self.birth_date,
-    #     'relationship': self.relationship,
-    # }
-
-    # if include_user:
-    #     kid_dict['user'] = self.user.to_dict() if self.user else None
-
-    # if include_daily_logs:
-    #     kid_dict['daily_logs'] = [log.to_dict() for log in self.daily_logs]
-
-    # return kid_dict
