@@ -49,8 +49,12 @@ function ProfileButton() {
 
   return (
     <>
-      <button onClick={toggleMenu}>
-        <FaUserCircle />
+      <button onClick={toggleMenu} id='profile-account-button'>
+       {user?.user_image_url ? (
+        <img id="user-profile-image" src={user?.user_image_url} alt="User Profile Image" />
+       ) : (
+       <FaUserCircle id='user-profile-icon'/>
+       )}
       </button>
       {showMenu && (
         <ul className={"profile-dropdown"} ref={ulRef}>
@@ -58,8 +62,12 @@ function ProfileButton() {
             <>
               <li>{user.username}</li>
               <li>{user.email}</li>
+              {user?.user_image_url ? (
+                <li><button className='profile-buttons'>Update Your Photo</button></li>
+              ): (<li><button className='profile-buttons'>Add Your Photo</button></li>)
+              }
               <li>
-                <button id='friends-button' onClick={handleFriends}>Friends</button>
+                <button className='profile-buttons' onClick={handleFriends}>Friends</button>
               </li>
               <li>
                 <button id='logout-button' onClick={logout}>Log Out</button>

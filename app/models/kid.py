@@ -26,12 +26,6 @@ class Kid(db.Model):
         cascade='delete'
     )
 
-    #one-to-many: kid(one)=> development_records(many)
-    development_records = db.relationship(
-        'DevelopmentRecord',
-        back_populates = 'kid'
-    )
-
     def to_dict(self):
         return {
             'id': self.id,

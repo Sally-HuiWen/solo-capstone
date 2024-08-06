@@ -1,6 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 from .like import Like
+from .comment import Comment
 
 class DailyLog(db.Model):
     __tablename__ = 'daily_logs'
@@ -20,12 +21,6 @@ class DailyLog(db.Model):
         'Kid',
         back_populates = 'daily_logs'
     )
-
-    #one-to-many: daily_logs(one)=> comments(many)
-    comments = db.relationship(
-        'Comment',
-        back_populates = 'daily_log'
-    )
     
     #many-to-many: users(many)<=>daily_logs(many)
     users = db.relationship(
@@ -34,7 +29,12 @@ class DailyLog(db.Model):
         back_populates = 'daily_logs'
     )
 
-
+    #many-to-many: users(many)<=>daily_logs(many)
+    users = db.relationship(
+        'User',
+        secondary = Comment.__table__,
+        back_populates = 'daily_logs'
+    )
 
     def to_dict(self):
         return {

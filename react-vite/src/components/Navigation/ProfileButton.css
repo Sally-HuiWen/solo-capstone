@@ -1,13 +1,35 @@
-#friends-button {
+#profile-account-button {
+    border-radius: 50%;
+    width:60px;
+    height:60px;
+    padding: 0px;
+    margin: 0px;
+}
+
+#profile-account-button:hover {
+    border: none;
+}
+
+#user-profile-image {
+    width: 100%;
+    border-radius: 50%;
+}
+
+#user-profile-icon {
+   font-size: x-large;
+}
+
+.profile-buttons {
     border: none;
     color: black;
     background-color: pink;
     padding: 0px;
 }
 
-#friends-button:hover {
+.profile-buttons:hover {
     color: blueviolet;
     font-weight: bold;
+    background-color: pink;
 }
 
 #logout-button {

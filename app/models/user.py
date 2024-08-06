@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from .friendship import Friendship
 from .like import Like
+from .comment import Comment
 from sqlalchemy.orm import aliased
 from sqlalchemy import or_
 
@@ -49,16 +50,17 @@ class User(db.Model, UserMixin):
         back_populates = 'user_friends'
     )
 
-    #one-to-many: users(one)=> comments(many)
-    comments = db.relationship(
-        'Comment',
-        back_populates = 'user'
+    #many-to-many: users(many)<=>daily_logs(many)
+    daily_logs = db.relationship(
+        'DailyLog',
+        secondary = Like.__table__,
+        back_populates = 'users'
     )
 
     #many-to-many: users(many)<=>daily_logs(many)
     daily_logs = db.relationship(
         'DailyLog',
-        secondary = Like.__table__,
+        secondary = Comment.__table__,
         back_populates = 'users'
     )
     
@@ -88,6 +90,7 @@ class User(db.Model, UserMixin):
                 friend_info = {
                     'id': friend_alias.id,
                     'username': friend_alias.username,
+                    'user_image_url': friend_alias.user_image_url,
                     'status': friendship.status,
                     'kids': [kid.to_dict() for kid in friend_alias.kids],
                 }
@@ -96,6 +99,7 @@ class User(db.Model, UserMixin):
                 friend_info = {
                     'id': user_alias.id,
                     'username': user_alias.username,
+                    'user_image_url': user_alias.user_image_url,
                     'status': friendship.status,
                     'kids': [kid.to_dict() for kid in user_alias.kids],
                 }
@@ -131,8 +135,8 @@ class User(db.Model, UserMixin):
             'last_name': self.last_name,
             'username': self.username,
             'email': self.email,
+            'user_image_url': self.user_image_url,
             'kids': [kid.to_dict() for kid in self.kids],
-            'user_image': self.user_image,
             # 'user_friends': [friend.id for friend in self.user_friends] # List of IDs of the users this user has added as friends
             # 'friend_users': [user.id for user in self.friend_users]# List of IDs of the users who have added this user as a friend
         }

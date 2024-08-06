@@ -5,5 +5,4 @@ from .kid import Kid
 from .daily_log import DailyLog
 from .friendship import Friendship
 from .comment import Comment
-from .development_record import DevelopmentRecord
 from .like import Like
