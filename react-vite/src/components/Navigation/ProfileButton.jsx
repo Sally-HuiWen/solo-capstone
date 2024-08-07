@@ -7,6 +7,7 @@ import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import { useNavigate } from "react-router-dom";
 import OpenModalButton from '../OpenModalButton';
+import UpdateUserPictureModal from './UpdateUserPictureModal'
 import './ProfileButton.css';
 
 function ProfileButton() {
@@ -64,16 +65,18 @@ function ProfileButton() {
               <li>{user.username}</li>
               <li>{user.email}</li>
               {user?.user_image_url ? (
-                <li className='profile-buttons'>
+                <li>
                   <OpenModalButton
-                    buttonText='Update or Delete profile picture'
-                    modalComponent={<UpdateUserPictureModal />}
+                    className='profile-buttons'
+                    buttonText='Update/Delete profile picture'
+                    modalComponent={<UpdateUserPictureModal user={user}/>}
                   />
                 </li>
-              ): (<li className='profile-buttons'>
+              ): (<li>
                 <OpenModalButton
+                    className='profile-buttons'
                     buttonText='Add profile picture'
-                    modalComponent={<UpdateUserPictureModal />}
+                    modalComponent={<UpdateUserPictureModal user={user}/>}
                   />
               </li>)
               }

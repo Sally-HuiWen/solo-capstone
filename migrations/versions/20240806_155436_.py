@@ -28,7 +28,7 @@ def upgrade():
     sa.Column('last_name', sa.String(length=50), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
-    sa.Column('user_image_url', sa.String(length=2000), nullable=False),
+    sa.Column('user_image_url', sa.String(length=2000), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
@@ -49,7 +49,7 @@ def upgrade():
     sa.Column('name', sa.String(length=50), nullable=False),
     sa.Column('birth_date', sa.Date(), nullable=False),
     sa.Column('relationship', sa.String(length=50), nullable=False),
-    sa.Column('kid_image_url', sa.String(length=2000), nullable=False),
+    sa.Column('kid_image_url', sa.String(length=2000), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

@@ -11,7 +11,7 @@ class Kid(db.Model):
     name = db.Column(db.String(50), nullable=False) 
     birth_date = db.Column(db.Date, nullable=False)
     relationship = db.Column(db.String(50), nullable=False)
-    kid_image_url = db.Column(db.String(2000), nullable=False)
+    kid_image_url = db.Column(db.String(2000), nullable=True)
     
     # one-to-many: user(one)=>kids(many)
     user = db.relationship(

@@ -1,0 +1,84 @@
+.update-profile-picture-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+}
+
+.modal-title {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#current-profile-picture {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 5px;
+}
+
+#upload-profile-picture-div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 20px 0;
+    width: 100%;
+}
+
+label[for="profile-picture"] {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.validation-errors {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+#profile-picture {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.update-and-cancel-box, .submit-and-cancel-box {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#profile-picture-submit-button, #profile-picture-delete-button, #profile-picture-cancel-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+}
+
+#profile-picture-submit-button {
+    background-color: #007bff;
+}
+
+#profile-picture-delete-button,#profile-picture-cancel-button {
+    background-color: #6c757d;
+}
+
+#profile-picture-submit-button:hover, #profile-picture-delete-button:hover,#profile-picture-cancel-button:hover {
+    background-color: red;
+} 
+
+

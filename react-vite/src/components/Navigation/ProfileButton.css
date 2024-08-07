@@ -1,5 +1,6 @@
 #profile-account-button {
     border-radius: 50%;
+    background-color: transparent;
     width:60px;
     height:60px;
     padding: 0px;
@@ -16,7 +17,8 @@
 }
 
 #user-profile-icon {
-   font-size: x-large;
+   font-size: xxx-large;
+   color: #007bff;
 }
 
 .profile-buttons {
@@ -24,6 +26,8 @@
     color: black;
     background-color: pink;
     padding: 0px;
+    margin: 0px;
+    text-align: left;
 }
 
 .profile-buttons:hover {
