@@ -64,7 +64,7 @@ export default function UpdateUserPictureModal({ user }) {
                     <h2 className='modal-title'>Update Or Delete Your Profile Picture</h2>
                     <div id='current-profile-picture'>
                         <img src={user.user_image_url} alt="Current Profile Picture" className='profile-image' />
-                        <button type='button' id='profile-picture-delete-button' onClick={handleDelete}>Delete</button>
+                        <button type='button' id='profile-picture-delete-button' onClick={handleDelete}>Delete Image</button>
                     </div>
                     <div id='upload-profile-picture-div'>
                         <label htmlFor='profile-picture'>Profile Picture Upload

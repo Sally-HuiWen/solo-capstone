@@ -1,13 +1,12 @@
 #kids-and-friends-container {
     display: flex;
-    column-gap: 50px;
+    gap: 50px;
 }
 #kids-list-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    column-gap: 50px;
-    row-gap:30px;
+    row-gap:20px;
     padding: 20px;
     border: 1px solid orchid;
     border-radius: 10px;
@@ -37,7 +36,7 @@
 
 #add-kid-button {
     border-radius: 10px;
-    width: 200px;
+    width: 320px;
     font-size: larger;
     background-color:orchid;
 }
@@ -57,7 +56,7 @@
     opacity: 0;
     width:270px;
     color:black;
-    background-color: lightpink;
+    background-color: orchid;
     border-radius: 10px;
     font-size: medium;
     position: absolute;
@@ -68,7 +67,7 @@
     opacity: 1;
     width:270px;
     color:black;
-    background-color: lightpink;
+    background-color: orchid;
     border-radius: 10px;
     font-size: medium;
 }
@@ -80,10 +79,9 @@
     gap:20px;
 }
 .kid-profile-image {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
-
 }
 
 .remove-kid-button {

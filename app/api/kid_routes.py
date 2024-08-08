@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from app.models import Kid, DailyLog, Friendship, db
 from app.forms import KidForm, DailyLogForm
 from datetime import datetime
-from app.api.AWS_helpers import (upload_file_to_s3, get_unique_filename)
+from app.api.AWS_helpers import (upload_file_to_s3, get_unique_filename, remove_file_from_s3)
 from sqlalchemy import or_ , and_
 
 kid_routes = Blueprint('kids', __name__)
@@ -52,11 +52,25 @@ def add_new_kid():
     form = KidForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        image = form.data['image']
+        if image:
+            image.filename = get_unique_filename(image.filename)
+            upload = upload_file_to_s3(image)
+            print('what is upload in creating new kid backend route', upload)
+
+            if 'url' not in upload:
+                return {'errors': upload['errors']}, 400
+
+            url = upload['url']
+        else:
+            url = None
+
         new_kid = Kid(
-            user_id = current_user.id,
-            name = form.data['name'],
-            birth_date= form.data['birth_date'],
-            relationship = form.data['relationship']
+            user_id=current_user.id,
+            name=form.data['name'],
+            birth_date=form.data['birth_date'],
+            relationship=form.data['relationship'],
+            kid_image_url=url  
         )
         db.session.add(new_kid)
         db.session.commit()
@@ -83,8 +97,23 @@ def update_kid(kid_id):
         updated_kid.name = form.data['name']
         updated_kid.birth_date = form.data['birth_date']
         updated_kid.relationship = form.data['relationship']
+
+        image = form.data['image']
+        if image:
+            image.filename = get_unique_filename(image.filename)
+            upload = upload_file_to_s3(image)
+            print('what is upload in updating kid backend route', upload)
+            
+            if 'url' not in upload:
+                return {'errors': upload['errors']}, 400
+            
+            # Delete old image from S3
+            if updated_kid.kid_image_url:
+                remove_file_from_s3(updated_kid.kid_image_url)
+
+            updated_kid.kid_image_url = upload['url']
         db.session.commit()
-        return updated_kid.to_dict()
+        return updated_kid.to_dict(), 200
     elif form.errors:
         return {'errors': form.errors}, 400
     else:
@@ -103,6 +132,10 @@ def remove_kid(kid_id):
     if kid.user_id != current_user.id:
         return {'errors': {'message': 'You are not authorized'}}, 403
     
+    # Delete old image from S3
+    if kid.kid_image_url:
+        remove_file_from_s3(kid.kid_image_url)
+
     db.session.delete(kid)
     db.session.commit()
     return {'message': 'kid remove successfully'}, 200

@@ -7,6 +7,7 @@ import OpenModalButton from '../OpenModalButton';
 import RemoveKidModal from './RemoveKidModal'
 import { calculateKidAgeFromBirthToNow }from '../utility';
 import { FaUserFriends } from "react-icons/fa";
+import { PiBabyThin } from "react-icons/pi";
 
 const CurrentUserKids = () => {
     const dispatch = useDispatch();
@@ -42,7 +43,9 @@ const CurrentUserKids = () => {
                             <div key={kid?.id || index} className='kid-details'>
                                    <Link to={`/kids/${kid?.id}/dailyLogs`} className='Link-link'>
                                         <div className='image-and-name-div'>
-                                            <img className='kid-profile-image' src={kid?.kid_image_url}/>
+                                            {kid?.kid_image_url? (
+                                              <img className='kid-profile-image' src={kid?.kid_image_url}/>  
+                                            ): (<PiBabyThin className='kid-profile-image'/>)}
                                             <div>
                                                <h2>{kid?.name}</h2> 
                                                <p>{calculateKidAgeFromBirthToNow(kid?.birth_date)}</p> 

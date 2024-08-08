@@ -5,7 +5,6 @@ import { thunkCreateNewDailyLog } from '../../redux/dailyLogs';
 import './DailyLogForm.css';
 
 const DailyLogForm = () => {
-
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {kidId} = useParams();

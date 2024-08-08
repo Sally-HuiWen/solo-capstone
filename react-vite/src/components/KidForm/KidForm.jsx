@@ -13,6 +13,7 @@ const KidForm = () => {
     const [month, setMonth] = useState('');
     const [day, setDay] = useState('');
     const [relationship, setRelationship] = useState('');
+    const [image, setImage] = useState(null);
     const [errors, setErrors] = useState([]);
     const [hasSubmitted, setHasSubmitted] = useState(false);
 
@@ -35,33 +36,38 @@ const KidForm = () => {
         setErrors(errorArr);
     }, [name, year, month, day, relationship]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         setHasSubmitted(true);
 
         if (errors.length > 0) return //prevent submission to backend if frontend errors exist
         
-        const newKid = {
-            name, 
-            birth_date: `${year}-${month}-${day}`,
-            relationship
-        };
-        dispatch(thunkAddNewKid(newKid));
-        navigate('/your-kids-list')
-    }
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('birth_date', `${year}-${month}-${day}`);
+        formData.append('relationship', relationship);
+        formData.append('image', image); // Append the image to formData
+
+        const newKidRes = await dispatch(thunkAddNewKid(formData));
+        if (newKidRes?.errors) {
+            setErrors(newKidRes.errors);
+        } else {
+            navigate('/your-kids-list');
+        }
+    };
 
     const years = Array.from(new Array(100), (val, i) => new Date().getFullYear() - i);
     const months = Array.from(new Array(12), (val, i) => i + 1);
     const days = Array.from(new Array(31), (val, i) => i + 1);
 
     return (
-        <form onSubmit={handleSubmit} className='kid-form'>
+        <form onSubmit={handleSubmit} className='kid-form' encType="multipart/form-data">
             <div id='name-box1'>
                 <label htmlFor='kid-names'>Name
-                    {hasSubmitted && errors.includes('Name is required') && (
+                    {hasSubmitted && errors?.includes('Name is required') && (
                        <span className='validation-errors'> Name is required</span> 
                     )}
-                    {hasSubmitted && errors.includes('Name can not be more than 50 characters') && (
+                    {hasSubmitted && errors?.includes('Name can not be more than 50 characters') && (
                        <span className='validation-errors'>Name can not be more than 50 characters</span> 
                     )}
                 </label>
@@ -84,7 +90,7 @@ const KidForm = () => {
                             ))}
 
                         </select>
-                        {hasSubmitted && errors.includes('Select Year') && (
+                        {hasSubmitted && errors?.includes('Select Year') && (
                         <p className='validation-errors'> Select Year</p> 
                     )}
                     </div>
@@ -96,7 +102,7 @@ const KidForm = () => {
                             <option key={i} value={String(month).padStart(2, '0')}>{month}</option>
                             ))}
                         </select>
-                        {hasSubmitted && errors.includes('Select Month') && (
+                        {hasSubmitted && errors?.includes('Select Month') && (
                         <p className='validation-errors'> Select Month</p> 
                         )}
                     </div>
@@ -108,7 +114,7 @@ const KidForm = () => {
                             <option key={i} value={String(day).padStart(2, '0')}>{day}</option>
                             ))}
                         </select>
-                        {hasSubmitted && errors.includes('Select Day') && (
+                        {hasSubmitted && errors?.includes('Select Day') && (
                         <p className='validation-errors'> Select Day</p> 
                         )}
                     </div>
@@ -117,7 +123,7 @@ const KidForm = () => {
 
             <div className='relationship-box3'>
                 <label htmlFor='kid-relationship-box'>Relationship
-                    {hasSubmitted && errors.includes('Please choose a relationship') && (
+                    {hasSubmitted && errors?.includes('Please choose a relationship') && (
                     <span className='validation-errors'>Please choose a relationship</span> 
                     )}
                 </label>
@@ -131,6 +137,16 @@ const KidForm = () => {
                     <option key={index} value={relationship}>{relationship}</option>
                     ))}
                 </select>
+            </div>
+
+            <div id='image-box4'>
+                <label htmlFor='kid-image'>Profile Image Upload</label>
+                <input
+                    id='kid-image'
+                    type='file'
+                    accept="image/*"
+                    onChange={(e) => setImage(e.target.files[0])}
+                />
             </div>
             <button type="submit">Add a new kid</button>
         </form>

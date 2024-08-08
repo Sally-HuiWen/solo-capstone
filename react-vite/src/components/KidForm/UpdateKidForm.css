@@ -1,5 +1,31 @@
+.kid-form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    margin-left: 50px;
+    padding: 50px;
+    width: 600px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px 5px grey;
+}
 #kid-update-two-buttons {
     display: flex;
     column-gap: 30px;
     justify-content: center;
+}
+
+.current-kid-profile-image {
+    width:500px;
+}
+
+.current-kid-profile-image img{
+    width:100%;
+    border-radius: 10px;
+}
+
+#kid-birth-dates {
+    display: flex;
+    justify-content: space-between;
+    gap:20px;
+
 }

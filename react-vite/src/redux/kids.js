@@ -56,13 +56,10 @@ export const thunkGetKidDetails = (kidId) => async (dispatch) => {
 
 };
 
-export const thunkAddNewKid = (kid) => async (dispatch) => {
+export const thunkAddNewKid = (formData) => async (dispatch) => {
     const res = await fetch('/api/kids/new', {
         method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(kid)
+        body: formData,
     });
     if (res.ok) {
         const newKid = await res.json();
@@ -74,13 +71,10 @@ export const thunkAddNewKid = (kid) => async (dispatch) => {
     }
 };
 
-export const thunkUpdateKid = (kid) => async (dispatch) => {
-    const res = await fetch(`/api/kids/${kid.id}`, {
+export const thunkUpdateKid = (kidId, formData) => async (dispatch) => {
+    const res = await fetch(`/api/kids/${kidId}`, {
         method: 'PUT',
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(kid),
+        body: formData,
     });
     if (res.ok) {
         const updatedKid = await res.json();

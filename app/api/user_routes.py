@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
 from app.models import User, db
 from app.forms import UserProfilePictureForm
-from app.api.AWS_helpers import (upload_file_to_s3, get_unique_filename)
+from app.api.AWS_helpers import (upload_file_to_s3, get_unique_filename, remove_file_from_s3)
 
 user_routes = Blueprint('users', __name__)
 
@@ -97,6 +97,11 @@ def update_profile_image():
 
             if 'url' not in upload:
                 return {'errors': upload['errors']}, 400
+            
+            # Delete old image from S3
+            if current_user.user_image_url:
+                remove_file_from_s3(current_user.user_image_url)
+
             url = upload['url']
             current_user.user_image_url = url
         
@@ -117,6 +122,10 @@ def delete_profile_image():
     existing_image = current_user.user_image_url
     if existing_image is None:
         return {'errors': {'message': 'profile picture not found'}}, 404
+    
+    # Delete old image from S3
+    if current_user.user_image_url:
+        remove_file_from_s3(current_user.user_image_url)
 
     current_user.user_image_url = None
     db.session.commit()
