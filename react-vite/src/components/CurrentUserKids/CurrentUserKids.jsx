@@ -6,6 +6,7 @@ import './CurrentUserKids.css';
 import OpenModalButton from '../OpenModalButton';
 import RemoveKidModal from './RemoveKidModal'
 import { calculateKidAgeFromBirthToNow }from '../utility';
+import { FaUserFriends } from "react-icons/fa";
 
 const CurrentUserKids = () => {
     const dispatch = useDispatch();
@@ -40,15 +41,21 @@ const CurrentUserKids = () => {
                         {kids.map((kid, index)=> (
                             <div key={kid?.id || index} className='kid-details'>
                                    <Link to={`/kids/${kid?.id}/dailyLogs`} className='Link-link'>
-                                        <h2>{kid?.name}</h2>
-                                        <p>{calculateKidAgeFromBirthToNow(kid?.birth_date)}</p>
+                                        <div className='image-and-name-div'>
+                                            <img className='kid-profile-image' src={kid?.kid_image_url}/>
+                                            <div>
+                                               <h2>{kid?.name}</h2> 
+                                               <p>{calculateKidAgeFromBirthToNow(kid?.birth_date)}</p> 
+                                            </div>
+                                        </div>
                                         <p className='tooltip'>click here to see {kid?.name}&apos;s dailyLogs</p>
                                     </Link>
                                     <div className='update-and-remove-box'>
                                         <Link to={`/kids/${kid?.id}/update`} className='Link-link'>
-                                        <button>Update</button>
+                                        <button className='kid-update-button'>Update</button>
                                         </Link>
                                         <OpenModalButton
+                                        className='remove-kid-button'
                                         buttonText='Remove'
                                         modalComponent={<RemoveKidModal kidId={kid?.id} />}
                                         />
@@ -61,7 +68,10 @@ const CurrentUserKids = () => {
           </div>
 
           <div>
-            <button onClick={handleFriends}>Friends</button>
+            <button id='friends-button' onClick={handleFriends}>
+                <FaUserFriends id='friends-icon'/>
+                <span>Friends</span>
+            </button>
           </div>
         </div>
     )

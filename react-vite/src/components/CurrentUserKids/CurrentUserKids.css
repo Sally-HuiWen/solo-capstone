@@ -8,8 +8,8 @@
     justify-content: flex-start;
     column-gap: 50px;
     row-gap:30px;
-    padding: 50px;
-    border: 1px solid #1cc;
+    padding: 20px;
+    border: 1px solid orchid;
     border-radius: 10px;
     margin-left: 50px;
 }
@@ -20,22 +20,26 @@
     row-gap: 30px;
 }
 .kid-details {
-   width: 220px;
+   display: flex;
+   flex-direction: column;
+   width: 320px;
    border-radius: 10px;
    box-shadow: 5px 5px 5px 5px grey;
-   padding-left: 5px;
+   padding-left: 20px;
+   height:200px;
 }
 
 .update-and-remove-box {
     display: flex;
-    column-gap:10px;
-    padding-top: 10px;
+    justify-content: space-around;
+    padding-top:50px
 }
 
-#add-kid-button, #add-new-friend-button {
+#add-kid-button {
     border-radius: 10px;
     width: 200px;
     font-size: larger;
+    background-color:orchid;
 }
 
 .button-button {
@@ -46,31 +50,57 @@
 .Link-link{
     text-decoration: none;
     color: darkorchid;
-    display: flex;
-    flex-direction: column;
-    row-gap: 10px;
 }
 
 .tooltip {
     visibility: hidden;
     opacity: 0;
-    color: white;
-    background-color: #007bff;
-    border-radius: 5px;
-    font-size: x-small;
+    width:270px;
+    color:black;
+    background-color: lightpink;
+    border-radius: 10px;
+    font-size: medium;
+    position: absolute;
 }
 
 .kid-details:hover .tooltip {
     visibility: visible;
     opacity: 1;
-    width:180px;
+    width:270px;
+    color:black;
     background-color: lightpink;
+    border-radius: 10px;
+    font-size: medium;
 }
 
-.each-kid:hover .tooltip {
-    visibility: visible;
-    opacity: 1;
-    width:200px;
-    background-color: lightpink;
+.image-and-name-div {
+    padding-top:20px;
+    display: flex;
+    align-items: center;
+    gap:20px;
+}
+.kid-profile-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+
 }
 
+.remove-kid-button {
+    background-color: #6c757d;
+}
+
+.kid-update-button {
+    background-color: orchid;
+}
+
+#friends-icon {
+    font-size: x-large
+}
+
+#friends-button {
+    display: flex;
+    align-items: center; 
+    padding: 10px;  
+    background-color: orchid;
+}
