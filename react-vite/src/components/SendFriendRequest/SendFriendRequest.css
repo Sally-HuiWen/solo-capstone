@@ -3,26 +3,11 @@
     flex-direction: column;
     margin: 0px 50px;
     padding: 50px;
-    width: 800px;
+    width: 600px;
     row-gap: 30px;
-    height : 200px;
     box-shadow: 5px 5px 5px 5px grey;
     border-radius: 10px;
     background-color:lightblue;
-}
-
-#search-by-username-div {
-    display: flex;
-    column-gap: 30px;
-}
-
-#search-by-username-div input {
-    width: 300px;
-}
-
-#search-result-div {
-    display: flex;
-    column-gap: 60px;
 }
 
 #success-message {
@@ -33,5 +18,27 @@
     padding: 10px;
     border-radius: 10px;
     border: 2px solid white;
-    width: 400px;
+}
+
+.each-person {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.person-image-name {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.person-profile-image {
+    border-radius: 50%;
+    width:50px;
+    height: 50px;
+}
+
+.add-friend-button {
+    padding: 5px;
+    height: 30px;
 }

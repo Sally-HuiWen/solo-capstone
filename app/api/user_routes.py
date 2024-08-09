@@ -35,17 +35,23 @@ def get_user_friends():
     friends = current_user.get_friends()
     return friends, 200
 
-@user_routes.route('/search-username')
-def search_username():
-    username = request.args.get('username') #retrieve the value of a query parameter from the request URL
-    if not username:
-        return {'errors': {'message': 'No username provided'}}, 400
+@user_routes.route('/search')
+def search_name():
+    query = request.args.get('query')  # retrieve the value of a query parameter from the request url
+    #The search could look for partial matches, meaning it can find names that contain the query string anywhere within the name.
+    if not query:
+        return {'errors': {'message': 'No search term provided'}}, 400
     
-    user = User.query.filter(User.username.ilike(username)).first()
+    # trim whitespace from the query
+    query = query.strip()
+
+    # case-insensitive search on first name or last name
+    users = User.query.filter((User.first_name.ilike(f'%{query}%')) | (User.last_name.ilike(f'%{query}%'))).all()
     
-    if user:
-        return {'user_exist': user.to_dict()}, 200
-    return {'message': 'This user does not exist'}, 200
+    if users:
+        # Return a list of users that match the search criteria
+        return {'users_exist': [user.to_dict() for user in users]}, 200
+    return {'message': 'No users found'}, 200
 
 @user_routes.route('/upload-profile-picture', methods=['POST'])
 @login_required

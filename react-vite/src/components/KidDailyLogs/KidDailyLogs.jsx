@@ -4,7 +4,7 @@ import { useNavigate, Link, useParams} from 'react-router-dom';
 import { thunkGetKidDetails } from '../../redux/kids';
 import { thunkGetAllDailyLogs } from '../../redux/dailyLogs';
 import { PiBabyLight } from "react-icons/pi";
-import {calculateKidAgeFromBirthToNow, calculateKidAgeFromBirthToPostDate } from '../utility';
+import {calculateKidAgeFromBirthToNow} from '../utility';
 import './KidDailyLogs.css';
 import LikesAndComments from '../LikesAndComments/LikesAndComments'; 
 import OpenModalButton from '../OpenModalButton';

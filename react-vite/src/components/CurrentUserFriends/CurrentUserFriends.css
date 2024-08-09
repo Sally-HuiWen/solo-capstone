@@ -55,6 +55,7 @@
     color: red;
     font-size: medium;
     padding-top: 5px;
+    font-weight: bold;
 }
 
 .friend-profile-image {
@@ -107,5 +108,41 @@
     margin-top: 40px;
     font-size: small;
     padding:0px;
-
 }
+
+.each-request-friend {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0px;
+    gap: 20px;
+}
+
+.request-friend-info-div {
+    display: flex;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px 5px grey;
+    align-items: center;
+    gap:10px;
+    margin: 0px;
+    padding-left: 10px;  
+    padding-right: 20px;
+    width:160px;
+}
+
+#sent-request-box {
+    display: flex;
+    flex-direction: column;
+    row-gap:20px;
+}
+
+.remove-friend-button {
+    padding:5px 3px;
+    
+}
+
+.accept-and-deny-buttons {
+    display: flex;
+    gap:10px;
+}
+

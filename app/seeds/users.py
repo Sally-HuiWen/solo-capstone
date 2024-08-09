@@ -11,7 +11,7 @@ def seed_users():
     bobbie = User(
         username='bobbie', first_name='Bobbie', last_name='Brown', email='bobbie@aa.io', password='password', user_image_url='https://bundle-of-joy-july24.s3.us-west-1.amazonaws.com/capston-upload-images/user-Bobbie-profile-image.png')
     william= User(
-        username='William', first_name='William', last_name='Davis', email='william@gmail.com', password='password', user_image_url='https://bundle-of-joy-july24.s3.us-west-1.amazonaws.com/capston-upload-images/user-William-profile-image.png')
+        username='William', first_name='William', last_name='Davis', email='william@gmail.com', password='password', user_image_url='https://bundle-of-joy-july24.s3.us-west-1.amazonaws.com/capston-upload-images/user-William-profile-image.jpeg')
     james = User(
         username='James', first_name='James', last_name='Lin', email='james@gmail.com', password='password', user_image_url='https://bundle-of-joy-july24.s3.us-west-1.amazonaws.com/capston-upload-images/user-james-profile-image.png')
     juan = User(

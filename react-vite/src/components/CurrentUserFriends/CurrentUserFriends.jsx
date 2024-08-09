@@ -2,7 +2,8 @@ import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; 
 import { useDispatch, useSelector } from 'react-redux';
 import { thunkGetCurrentUserFriendships, thunkGetFriends, thunkUpdateFriendship, thunkDeleteFriendship } from '../../redux/friendships';
-import './CurrentUserFriends.css'
+import './CurrentUserFriends.css';
+import { FaUserCircle } from 'react-icons/fa';
 
 const CurrentUserFriends = () => {
     const dispatch = useDispatch();
@@ -11,10 +12,7 @@ const CurrentUserFriends = () => {
     const confirmedFriends = useSelector(state => state.friendships.confirmedFriends || []);
     const pendingFriends = useSelector(state => state.friendships.pendingFriends || []);
     const deniedFriends = useSelector(state => state.friendships.deniedFriends || []);
-    const currentUserFriendships = useSelector(state => state.friendships.currentUserFriendships|| [])
-    console.log('who are your confirmedFriends', confirmedFriends)
-    console.log('who are your pendingFriends', pendingFriends)
-    console.log('who are your deniedFriends', deniedFriends);
+    const currentUserFriendships = useSelector(state => state.friendships.currentUserFriendships || []);
 
     useEffect(() => {
         dispatch(thunkGetFriends());
@@ -25,8 +23,8 @@ const CurrentUserFriends = () => {
     }, [dispatch]);
     
     const handleAddFriend = () => {
-        navigate('/friendships/new')
-    }
+        navigate('/friendships/new');
+    };
 
     const handleAcceptRequest = async (friendshipId) => {
         const res = await dispatch(thunkUpdateFriendship(friendshipId, 'accepted'));
@@ -71,9 +69,8 @@ const CurrentUserFriends = () => {
         (friendship.user_id === sessionUser?.id) && (friendship.status === 'denied')
     );
 
-    const getUsernameById = (id) => {
-        const friend = [...pendingFriends, ...confirmedFriends, ...deniedFriends].find(friend => friend.id === id);
-        return friend ? friend.username : 'Unknown';
+    const getUserById = (id) => {
+        return [...pendingFriends, ...confirmedFriends, ...deniedFriends].find(friend => friend.id === id) || null;
     };
 
     const handleRemoveFriend = async (friendId) => {
@@ -100,7 +97,7 @@ const CurrentUserFriends = () => {
         <div id='three-lists'>
             <div id='friends-container'>
                 <div id='friends-list-container'>
-                    <h3>Your Friends List</h3>
+                    <h3>All Friends</h3>
                     <div >
                         <button onClick={handleAddFriend} id='add-new-friend-button'>
                             Add a new friend
@@ -113,7 +110,7 @@ const CurrentUserFriends = () => {
                     confirmedFriends.map((friend, index) => (
                     <div key={friend.id || index} className='each-friend'>
                         <div className='friend-info-div'>
-                            {friend?.user_image_url? (
+                            {friend?.user_image_url ? (
                             <img className="friend-profile-image" src={friend?.user_image_url} alt="Friend Profile Image" />
                             ) : (
                             <FaUserCircle className='friend-profile-icon'/>
@@ -124,8 +121,8 @@ const CurrentUserFriends = () => {
                                 <div key={kid.id || kidIndex} className='each-kid'>
                                     <Link to={`/kids/${kid?.id}/dailyLogs`} className='Link-friend-kid'>
                                         <div className='friend-kid-div'>
-                                           <p>{friend.username}&apos;s kid: {kid.name}</p>  
-                                           {kid?.kid_image_url && (<img className='friend-kid-image'src={kid?.kid_image_url}/>)}
+                                           <p>kid: {kid.name}</p>  
+                                           {kid?.kid_image_url && (<img className='friend-kid-image' src={kid?.kid_image_url} alt="Kid Profile Image"/>)}
                                         </div>
                                         <div className='tooltip'>click here to see {kid?.name}&apos;s dailyLogs</div>
                                     </Link>
@@ -134,7 +131,7 @@ const CurrentUserFriends = () => {
                             </div>
                         </div>
                         <div>
-                            <button className='button-button' onClick={() => handleRemoveFriend(friend.id)}>remove</button>
+                            <button className='remove-friend-button' onClick={() => handleRemoveFriend(friend.id)}>Remove friend</button>
                         </div>
                         
                     </div>
@@ -147,16 +144,29 @@ const CurrentUserFriends = () => {
                 <h3>No friend requests received</h3>
                 ) : (
                 <div className='friend-request-div'>
-                  <h3>You Have A Pending Request From </h3>
-                {receivedFriendRequests.map((friendship, index) => (
-                    <div key={friendship.id || index} className='each-friend'>
-                        <h4>{getUsernameById(friendship.user_id)}</h4>
-                        <div className='update-and-remove-box'>
-                        <button onClick={() => handleAcceptRequest(friendship.id)}>Accept</button>
-                        <button onClick={() => handleDenyRequest(friendship.id)}>Deny</button>
+                    <h3>Friend Requests</h3>
+                    <div id='requests-received-box'>
+                        {receivedFriendRequests.map((friendship, index) => {
+                            const friend = getUserById(friendship.user_id);
+                            return (
+                            <div key={friendship.id || index} className='each-request-friend'>
+                                <div className='request-friend-info-div'>
+                                    {friend?.user_image_url ? (
+                                    <img className="friend-profile-image" src={friend?.user_image_url} alt="Friend Profile Image" />
+                                    ) : (
+                                    <FaUserCircle className='friend-profile-icon'/>
+                                    )}
+                                  <h4>{friend?.username}</h4> 
+                                </div>
+                                <div className='accept-and-deny-buttons'>
+                                    <button onClick={() => handleAcceptRequest(friendship.id)}>Accept</button>
+                                    <button onClick={() => handleDenyRequest(friendship.id)}>Deny</button>
+                                </div>
+                            </div>
+                            );
+                        })}
                         </div>
-                    </div>
-                ))}
+                
                </div>
                 )}
             </div>
@@ -167,25 +177,47 @@ const CurrentUserFriends = () => {
                 ) : (
                     <div className='sent-request-div'>
                         <h3>You Sent A Friend Request To</h3>
-                        {sentFriendRequests.map((friendship, index) => (
-                            <div key={friendship.id || index} className='each-friend'>
-                                <h4>{getUsernameById(friendship.friend_id)}</h4>
-                                <div className='update-and-remove-box'>
+                        <div id='sent-request-box'>
+                        {sentFriendRequests.map((friendship, index) => {
+                            const friend = getUserById(friendship.friend_id);
+                            return (
+                            <div key={friendship.id || index} className='each-request-friend'>
+                                <div className='request-friend-info-div'>
+                                    {friend?.user_image_url ? (
+                                    <img className="friend-profile-image" src={friend?.user_image_url} alt="Friend Profile Image" />
+                                    ) : (
+                                    <FaUserCircle className='friend-profile-icon'/>
+                                    )}
+                                  <h4>{friend?.username}</h4> 
+                                </div>
+                                <div >
                                     <button onClick={() => handleDeleteRequest(friendship.id)}>Cancel Request</button>
                                 </div>
                             </div>
-                        ))}
+                            );
+                        })}
+                        </div>
                         {deniedSentRequests.length > 0 && (
                             <div>
-                                {deniedSentRequests.map((friendship, index) => (
-                                    <div key={friendship.id || index} className='each-friend'>
-                                        <h4>{getUsernameById(friendship.friend_id)}</h4>
-                                        <div className='update-and-remove-box'>
-                                            <div className='denied-label'>Denied</div>
-                                            <button onClick={() => handleDeleteRequest(friendship.id)}>Delete Request</button>
+                            {deniedSentRequests.map((friendship, index) => {
+                                const friend = getUserById(friendship.friend_id);
+                                return (
+                                    <div key={friendship.id || index} className='each-request-friend'>
+                                        <div className='request-friend-info-div'>
+                                            {friend?.user_image_url ? (
+                                                <img className="friend-profile-image" src={friend?.user_image_url} alt="Friend Profile Image" />
+                                                ) : (
+                                                <FaUserCircle className='friend-profile-icon'/>
+                                            )}
+                                            <h4>{friend?.username}</h4> 
                                         </div>
+                                            
+                                        <div className='denied-label'>Denied</div>
+                                        <button onClick={() => handleDeleteRequest(friendship.id)}>Delete Request</button>
+                                        
                                     </div>
-                                ))}
+                                );
+                            })}
                             </div>
                         )}
                     </div>
