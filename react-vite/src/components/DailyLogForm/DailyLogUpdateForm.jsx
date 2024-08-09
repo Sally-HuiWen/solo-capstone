@@ -68,7 +68,7 @@ const DailyLogUpdateForm = () => {
 
     return (
         <form className='daily-logs-form' onSubmit={handleSubmit} encType="multipart/form-data">
-            <div id='title-box1'>
+            <div className='title-box1'>
                 <label htmlFor='dailyLog-title'>Title
                     {hasSubmitted && errors?.includes('Title is required') && (
                         <span className='validation-errors'> Title is required</span>
@@ -85,7 +85,7 @@ const DailyLogUpdateForm = () => {
                 />
             </div>
 
-            <div id='content-box2'>
+            <div className='content-box2'>
                 <label htmlFor='dailyLog-content'>Content
                     {hasSubmitted && errors?.includes('Content is required') && (
                         <span className='validation-errors'> Content is required</span>
@@ -98,8 +98,6 @@ const DailyLogUpdateForm = () => {
                     id='dailyLog-content'
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
-                    rows='10'
-                    cols='50'
                 />
             </div>
             
@@ -107,7 +105,7 @@ const DailyLogUpdateForm = () => {
                 <p>Current Image</p>
                 {image && <img src={image} alt="Current Daily Log" id='current_image'/>}
             </div>
-            <div id='images-box3'>
+            <div className='images-box3'>
                 <label htmlFor='update-image'>Update Image</label>
                 <input
                     id='update_image'
@@ -115,8 +113,12 @@ const DailyLogUpdateForm = () => {
                     accept="image/*"
                     onChange={(e) => setUpdateImage(e.target.files[0])}
                 />
-            </div>                
-            <button type='submit' id='dailyLog-submit-button'>Update your daily log</button>
+            </div> 
+            <div id='update-cancel-div'>
+                <button type='submit'>Update</button>
+                <button id='dailyLog-cancel-button'type='button' onClick={() => navigate(`/kids/${daily_log.kid_id}/dailyLogs`)}>Cancel</button>
+            </div>               
+            
         </form>
     );
 };

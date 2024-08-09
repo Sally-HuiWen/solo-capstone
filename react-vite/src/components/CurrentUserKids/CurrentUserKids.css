@@ -70,6 +70,8 @@
     background-color: orchid;
     border-radius: 10px;
     font-size: medium;
+    text-align: center;
+    margin-top: 10px;
 }
 
 .image-and-name-div {

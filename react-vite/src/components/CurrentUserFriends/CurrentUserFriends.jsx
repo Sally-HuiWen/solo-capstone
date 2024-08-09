@@ -97,7 +97,7 @@ const CurrentUserFriends = () => {
     };
 
     return (
-        <div id='two-lists'>
+        <div id='three-lists'>
             <div id='friends-container'>
                 <div id='friends-list-container'>
                     <h3>Your Friends List</h3>
@@ -113,17 +113,30 @@ const CurrentUserFriends = () => {
                     confirmedFriends.map((friend, index) => (
                     <div key={friend.id || index} className='each-friend'>
                         <div className='friend-info-div'>
-                            <h4>Friend: {friend.username}</h4>
+                            {friend?.user_image_url? (
+                            <img className="friend-profile-image" src={friend?.user_image_url} alt="Friend Profile Image" />
+                            ) : (
+                            <FaUserCircle className='friend-profile-icon'/>
+                            )}
+                            <div>
+                                <h4>{friend.username}</h4>
+                                {friend?.kids?.map((kid, kidIndex) => (
+                                <div key={kid.id || kidIndex} className='each-kid'>
+                                    <Link to={`/kids/${kid?.id}/dailyLogs`} className='Link-friend-kid'>
+                                        <div className='friend-kid-div'>
+                                           <p>{friend.username}&apos;s kid: {kid.name}</p>  
+                                           {kid?.kid_image_url && (<img className='friend-kid-image'src={kid?.kid_image_url}/>)}
+                                        </div>
+                                        <div className='tooltip'>click here to see {kid?.name}&apos;s dailyLogs</div>
+                                    </Link>
+                                </div>
+                                ))}
+                            </div>
+                        </div>
+                        <div>
                             <button className='button-button' onClick={() => handleRemoveFriend(friend.id)}>remove</button>
                         </div>
-                        {friend?.kids?.map((kid, kidIndex) => (
-                            <div key={kid.id || kidIndex} className='each-kid'>
-                                <Link to={`/kids/${kid?.id}/dailyLogs`} className='Link-link'>
-                                <p>{friend.username}&apos;s kid: {kid.name}</p>
-                                <p className='tooltip'>click here to see {kid?.name}&apos;s dailyLogs</p>
-                                </Link>
-                            </div>
-                        ))}
+                        
                     </div>
                     ))
                 )}

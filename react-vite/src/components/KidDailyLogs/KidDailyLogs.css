@@ -3,23 +3,13 @@
     justify-content: space-between;
     align-items: center;
     margin: 50px;
+    padding: 0px 20px;
     border: 1px solid #ccc;
     border-radius: 10px;
-    width: 500px;
-    box-shadow: 3px 3px 2px 2px lightslategray;
-}
-#baby-icon {
-    font-size: xx-large;
-    color: pink;
-}
-#kid-icon-and-name {
-    display: flex;
-    align-items: center;
+    width: 1000px;
+    box-shadow: 2px 2px 2px 2px rgb(244, 197, 204);
 }
 
-#kid-age-p {
-    padding-left: 30px;
-}
 .daily-logs-content {
     margin: 50px;
     border-radius: 10px;
@@ -29,7 +19,7 @@
 
 .update-delete-actions {
     display: flex;
-    column-gap: 10px;
+    column-gap: 30px;
 }
 
 .log-item {
@@ -38,54 +28,74 @@
     border-radius: 15px;
     padding: 20px;
     margin-bottom: 20px;
-    align-items: center;
+    align-items: flex-start;
     background-color: rgb(244, 197, 204);
     text-decoration: none;
     color: black;
 }
 
 .log-image {
-    width: 350px;
-    text-align: center;
     padding-top: 10px;
 }
 
-.log-details {
-    display: flex;
-    flex-direction: column;
-    width: 60%;
-    height: 230px;
-}
-
-
 #daily-log-image {
-    width: 300px;
-    height: 200px;
+    width: 400px;
+    height: 300px;
     object-fit: cover;
     border-radius: 10px;
     margin-right: 20px;
 } 
 
-.tooltip {
-    visibility: hidden;
-    opacity: 0;
-    background-color: #007bff;
-    color: white;
-    border-radius: 5px;
-    width:250px;
-    padding: 5px 15px;
-}
-
-.log-item:hover .tooltip {
-    visibility: visible;
-    opacity: 1;
+.log-details {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    padding-top: 10px;
+    padding-left: 10px;
 }
 
 #log-details-link {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
     color: black;
 }
 
 #likesAndComments-div {
     margin: 0px;
     padding: 0px;
+}
+
+.kid-profile-img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    color: rgb(244, 197, 204);
+}
+
+#kid-name-age {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-right: 530px;
+}
+
+#add-dailyLog-button {
+    color: black;
+    background-color: rgb(244, 197, 204);
+}
+
+.post-date {
+    font-style: italic;
+    font-size: small;
+}
+
+.update-action, .delete-action {
+    padding:5px 10px;
+    font-size: small;
+    border-radius: 8px;
+}
+
+.delete-action {
+    background-color: #6c757d;
 }

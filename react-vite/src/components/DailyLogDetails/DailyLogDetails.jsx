@@ -6,7 +6,6 @@ import './DailyLogDetails.css';
 import OpenModalButton from '../OpenModalButton';
 import DeleteDailyLogModal from './DeleteDailyLogModal';
 import LikesAndComments from '../LikesAndComments/LikesAndComments'; 
-import { calculateKidAgeFromBirthToPostDate } from '../utility';
 
 const DailyLogDetails = () => {
     const { dailyLogId } = useParams();
@@ -26,20 +25,21 @@ const DailyLogDetails = () => {
             </div>
             <div className="details-details">
                 <h1>{kid?.name}</h1>
-                <h3>{kid ? calculateKidAgeFromBirthToPostDate(kid.birth_date, daily_log.created_at) : ''}</h3>
                 <h3>{daily_log?.title}</h3>
+                <p id='detail-post-date'>{daily_log?.created_at}</p>
                 <p>{daily_log?.content}</p>
 
                 {kid?.user_id === sessionUser?.id && (
-                    <div className="update-delete-actions">
-                        <Link to={`/dailyLogs/${dailyLogId}/update`}>
-                            <button>Update</button>
-                        </Link>
-                        <OpenModalButton
-                            buttonText='Delete'
-                            modalComponent={<DeleteDailyLogModal kidId={kid?.id} dailyLogId={daily_log?.id} />}
-                        />
-                    </div>
+                <div className="update-delete-actions">
+                    <Link to={`/dailyLogs/${dailyLogId}/update`}>
+                        <button className='detail-update-button'>Update</button>
+                    </Link>
+                    <OpenModalButton
+                        className='detail-delete-button'
+                        buttonText='Delete'
+                        modalComponent={<DeleteDailyLogModal kidId={kid?.id} dailyLogId={daily_log?.id} />}
+                    />
+                </div>
                 )}
                 
                 <LikesAndComments dailyLogId={dailyLogId} />

@@ -7,6 +7,8 @@ import { PiBabyLight } from "react-icons/pi";
 import {calculateKidAgeFromBirthToNow, calculateKidAgeFromBirthToPostDate } from '../utility';
 import './KidDailyLogs.css';
 import LikesAndComments from '../LikesAndComments/LikesAndComments'; 
+import OpenModalButton from '../OpenModalButton';
+import DeleteDailyLogModal from '../DailyLogDetails/DeleteDailyLogModal'
 
 const KidDailyLogs = () => {
   const { kidId } = useParams();
@@ -30,21 +32,22 @@ const KidDailyLogs = () => {
   return (
     <div id="daily-logs-container">
       <div className="daily-logs-header">
-        <div>
-            <div id='kid-icon-and-name'>  
-                <PiBabyLight id='baby-icon'/>
-                <h2>{kid?.name}</h2>
-            </div>
-            <p id='kid-age-p'>{calculateKidAgeFromBirthToNow(kid?.birth_date)}</p> 
-        </div>
-       
-       {sessionUser.id === kid?.user_id && (
-        <div>
-          <button className="add-dailyLog-button" onClick={handleCreateAddDailyLog}>
-            Add Sweet Moment
-          </button>
-        </div> 
-       )}
+          {kid?.kid_image_url? (
+          <img className='kid-profile-img' src={kid.kid_image_url} />
+           ): <PiBabyLight className='kid-profile-img'/> }
+
+          <div id='kid-name-age'>
+              <h2>{kid?.name}</h2>
+              <p id='kid-age-p'>{calculateKidAgeFromBirthToNow(kid?.birth_date)}</p> 
+          </div>
+         
+          {kid?.user_id === sessionUser?.id && (
+          <div>
+            <button id="add-dailyLog-button" onClick={handleCreateAddDailyLog}>
+              Add Sweet Moment
+            </button>
+          </div> 
+          )}
       </div>
     
 
@@ -67,12 +70,23 @@ const KidDailyLogs = () => {
 
                     <div className="log-details">
                       <Link to={`/dailyLogs/${log?.id}`} id='log-details-link'>
-                        <h3>Post Date: {log?.created_at}</h3>
-                        <h5>{kid?.name}&apos;s Age: {calculateKidAgeFromBirthToPostDate(kid?.birth_date, log?.created_at)}</h5>
-                        <h5>Title: {log?.title}</h5>
+                        <h3>{log?.title}</h3>
+                        <p className='post-date'>{log?.created_at}</p>
                         <p>{log?.content}</p>
-                        <p className='tooltip'>Please Click here to see details</p>
                       </Link>
+                      
+                      {kid?.user_id === sessionUser?.id && (
+                      <div className="update-delete-actions">
+                        <Link to={`/dailyLogs/${log?.id}/update`}>
+                            <button className='update-action'>Update</button>
+                        </Link>
+                        <OpenModalButton
+                            className='delete-action'
+                            buttonText='Delete'
+                            modalComponent={<DeleteDailyLogModal kidId={kid?.id} dailyLogId={log?.id} />}
+                        />
+                      </div>
+                      )}
 
                       <div id='likesAndComments-div'><LikesAndComments dailyLogId={log.id} /></div>
                     </div>

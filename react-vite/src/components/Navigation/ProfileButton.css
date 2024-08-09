@@ -11,12 +11,12 @@
     border: none;
 }
 
-#user-profile-image {
+.user-profile-image {
     width: 100%;
     border-radius: 50%;
 }
 
-#user-profile-icon {
+.user-profile-icon {
    font-size: xxx-large;
    color: #007bff;
 }

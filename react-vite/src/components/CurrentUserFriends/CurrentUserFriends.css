@@ -1,4 +1,4 @@
-#two-lists {
+#three-lists {
     display: flex;
     align-items: flex-start;
 }
@@ -13,7 +13,7 @@
     border: 1px solid #1cc;
     border-radius: 10px;
     margin-left: 50px;
-    width: 350px;
+    width: 500px;
 }
 
 .friend-request-div {
@@ -27,14 +27,17 @@
 
 .friend-info-div {
     display: flex;
-    column-gap: 10px;
+    gap: 10px;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px 5px grey;
+    padding-left: 5px;
+    margin-bottom: 20px;
 }
 
 .each-friend {
-width: 220px;
-border-radius: 10px;
-box-shadow: 5px 5px 5px 5px grey;
-padding-left: 5px;
+    display: flex;
+    gap: 20px;
 }
 
 #friends-list-container {
@@ -52,4 +55,57 @@ padding-left: 5px;
     color: red;
     font-size: medium;
     padding-top: 5px;
+}
+
+.friend-profile-image {
+    border-radius: 50%;
+    background-color: transparent;
+    width:60px;
+    height:60px;
+    padding:5px;
+  
+}
+
+.friend-kid-image {
+    border-radius: 50%;
+    width:40px;
+    height:40px;
+}
+
+.friend-kid-div {
+    display: flex;
+    gap:10px
+}
+
+.Link-friend-kid {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    color: darkorchid;
+}
+
+.tooltip {
+    visibility: hidden;
+    opacity: 0;
+    width:270px;
+    color:black;
+    border-radius: 10px;
+    font-size: medium;
+    position: absolute;
+}
+
+.each-kid:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+    width:220px;
+    color:black;
+    background-color: #007bff;
+    color: white;
+    border-radius: 10px;
+    font-size: medium;
+    text-align: center;
+    margin-top: 40px;
+    font-size: small;
+    padding:0px;
+
 }

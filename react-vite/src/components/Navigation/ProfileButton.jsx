@@ -53,9 +53,9 @@ function ProfileButton() {
     <>
       <button onClick={toggleMenu} id='profile-account-button'>
        {user?.user_image_url ? (
-        <img id="user-profile-image" src={user?.user_image_url} alt="User Profile Image" />
+        <img className="user-profile-image" src={user?.user_image_url} alt="User Profile Image" />
        ) : (
-       <FaUserCircle id='user-profile-icon'/>
+       <FaUserCircle className='user-profile-icon'/>
        )}
       </button>
       {showMenu && (

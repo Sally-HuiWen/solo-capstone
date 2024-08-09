@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from app.models import DailyLog, Kid, Friendship, db
 from app.forms import DailyLogForm
 from datetime import datetime
-from app.api.AWS_helpers import (upload_file_to_s3, get_unique_filename)
+from app.api.AWS_helpers import (upload_file_to_s3, get_unique_filename, remove_file_from_s3)
 
 daily_log_routes = Blueprint('daily_logs', __name__)
 
@@ -69,6 +69,11 @@ def update_daily_log(daily_log_id):
 
             if 'url' not in upload:
                 return {'errors': upload['errors']}, 400
+            
+             # Delete old image from S3
+            if updated_daily_log.image_url:
+                remove_file_from_s3(updated_daily_log.image_url)
+
             url = upload['url']
             updated_daily_log.image_url = url
 
@@ -92,6 +97,10 @@ def delete_daily_log(daily_log_id):
     kid = Kid.query.get(daily_log.kid_id)
     if (kid.user_id != current_user.id):
         return {'errors': {'message': 'You are not authorized'}}, 403
+    
+     # Delete old image from S3
+    if daily_log.image_url:
+        remove_file_from_s3(daily_log.image_url)
     
     db.session.delete(daily_log)
     db.session.commit()

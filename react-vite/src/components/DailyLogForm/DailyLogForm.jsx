@@ -51,7 +51,7 @@ const DailyLogForm = () => {
 
     return (
         <form className='daily-logs-form' onSubmit={handleSubmit} encType="multipart/form-data">
-            <div id='title-box1'>
+            <div className='title-box1'>
                 <label htmlFor='dailyLog-title'>Title
                 {hasSubmitted && errors?.includes('Title is required') && (
                     <span className='validation-errors'> Title is required</span> 
@@ -68,7 +68,7 @@ const DailyLogForm = () => {
                     />
             </div>
 
-            <div id='content-box2'>
+            <div className='content-box2'>
                 <label htmlFor='dailyLog-content'>Content
                 {hasSubmitted && errors?.includes('Content is required') && (
                     <span className='validation-errors'> Content is required</span> 
@@ -81,12 +81,12 @@ const DailyLogForm = () => {
                       id='dailyLog-content'
                       value={content}
                       onChange={(e)=> setContent(e.target.value)}
-                      rows='10'
+                      rows='3'
                       cols='50'
                     />
             </div>
 
-            <div id='images-box3'>
+            <div className='images-box3'>
                 <label htmlFor='dailyLog-image'>Image Upload
                 {hasSubmitted && errors?.includes('Image is required') && (
                     <span className='validation-errors'> Image is required</span> 
@@ -100,7 +100,7 @@ const DailyLogForm = () => {
                 />
             </div>
                             
-            <button type='submit' id='dailyLog-submit-button'>Add your new dailyLog</button>
+            <button type='submit' className='dailyLog-submit-button'>Add your new dailyLog</button>
         </form>
     );
 };
