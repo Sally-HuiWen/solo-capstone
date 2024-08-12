@@ -20,6 +20,7 @@
     height:50px;
     width:350px;
     border: none;
+    background-color: #6c757d;
 }
 
 .yes-button:hover, .no-button:hover {

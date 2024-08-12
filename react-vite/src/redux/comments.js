@@ -23,7 +23,7 @@ export const updateComment = (comment) => ({
     comment,
 });
 
-export const deleteComment = (commentId) => ({
+export const deleteComment = (commentId, dailyLogId) => ({
     type: DELETE_COMMENT,
     dailyLogId,
     commentId,
@@ -59,7 +59,7 @@ export const thunkLeaveComment = (dailyLogId, content) => async (dispatch) => {
 };
 
 export const thunkUpdateComment = (commentId, content) => async (dispatch) => {
-    const res = await fetch(`/api/comments/${commentId}`, {
+    const res = await fetch(`/api/comments/${commentId}/update`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ comment: content }),
@@ -68,9 +68,9 @@ export const thunkUpdateComment = (commentId, content) => async (dispatch) => {
     if (res.ok) {
         const updatedComment = await res.json();
         dispatch(updateComment(updatedComment));
-        return updateComment;
+        return updatedComment; // Make sure to return the updated comment
     } else {
-        const error = await res.json()
+        const error = await res.json();
         return error;
     }
 };
@@ -107,12 +107,11 @@ const commentsReducer = (state = initialState, action) => {
                 ],
             };
         case UPDATE_COMMENT: {
-            const updatedComments = state[action.dailyLogId].map(comment => 
-                comment.id === action.comment.id ? action.comment : comment
-            );
             return {
                 ...state,
-                [action.dailyLogId]: updatedComments,
+                [action.dailyLogId]: state[action.dailyLogId].map(comment =>
+                    comment.id === action.comment.id ? action.comment : comment
+                ),
             };
         }
         case DELETE_COMMENT: {

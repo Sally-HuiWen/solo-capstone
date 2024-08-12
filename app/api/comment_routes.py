@@ -46,19 +46,16 @@ def leave_comment(daily_log_id):
     else:
         return {'errors': form.errors}, 400
 
-@comment_routes.route('/<int:comment_id>', methods=['GET', 'PUT'])
+@comment_routes.route('/<int:comment_id>/update', methods=['PUT'])
 @login_required
 def update_comment(comment_id):
-    """
-    Update a comment by log-in user
-    """
     updated_comment = Comment.query.get(comment_id)
     if not updated_comment:
         return {'error': {'message': 'Comment not found'}}, 404
-    
+
     if updated_comment.user_id != current_user.id:
         return {'error': {'message': 'You are not authorized to edit this comment'}}, 403
-    
+
     form = CommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     
@@ -67,11 +64,8 @@ def update_comment(comment_id):
         updated_comment.created_at = datetime.utcnow()
         db.session.commit()
         return updated_comment.to_dict(), 200
-    elif form.errors:
-        return {'errors': form.errors}, 400
     else:
-        form.process(obj=updated_comment)
-        return updated_comment.to_dict()
+        return {'errors': form.errors}, 400
 
 @comment_routes.route('/<int:comment_id>', methods=['DELETE'])
 @login_required
