@@ -57,17 +57,17 @@ const KidDailyLogs = () => {
         {allDailyLogsForThisKid.length === 0 ? (
           <p>No Moments found</p>
         ) : (
-            <div>
+            <div id='logs-div'>
             {allDailyLogsForThisKid?.map((log, index) => (
               <div key={log?.id || index} >
                  <div className="log-item">
-                    <div className='log-image'>
+                    <Link to={`/dailyLogs/${log?.id}`} className='log-image'>
                       {log?.image_url?(
                         <img src={log?.image_url} id='daily-log-image'/>
                       ) : (
                         <p>No image available</p>
                       )}
-                    </div>
+                    </Link>
 
                     <div className="log-details">
                       <Link to={`/dailyLogs/${log?.id}`} id='log-details-link'>
