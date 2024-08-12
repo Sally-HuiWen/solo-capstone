@@ -11,6 +11,7 @@ from .api.kid_routes import kid_routes
 from .api.daily_log_routes import daily_log_routes
 from .api.friendship_routes import friendship_routes
 from .api.like_routes import like_routes
+from .api.comment_routes import comment_routes
 from .seeds import seed_commands
 from .config import Config
 
@@ -36,6 +37,7 @@ app.register_blueprint(kid_routes, url_prefix='/api/kids')
 app.register_blueprint(daily_log_routes, url_prefix='/api/daily_logs')
 app.register_blueprint(friendship_routes, url_prefix='/api/friendships')
 app.register_blueprint(like_routes, url_prefix='/api/likes')
+app.register_blueprint(comment_routes, url_prefix='/api/comments')
 db.init_app(app)
 Migrate(app, db)
 

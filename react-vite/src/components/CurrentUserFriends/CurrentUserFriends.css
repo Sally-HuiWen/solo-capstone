@@ -138,11 +138,15 @@
 
 .remove-friend-button {
     padding:5px 3px;
-    
+    background-color:#6c757d; 
 }
 
 .accept-and-deny-buttons {
     display: flex;
     gap:10px;
+}
+
+.cancel-friend-request-button, .deny-friend-request-button, .delete-friend-request-button {
+    background-color:#6c757d; 
 }
 

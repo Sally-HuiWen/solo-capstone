@@ -160,7 +160,7 @@ const CurrentUserFriends = () => {
                                 </div>
                                 <div className='accept-and-deny-buttons'>
                                     <button onClick={() => handleAcceptRequest(friendship.id)}>Accept</button>
-                                    <button onClick={() => handleDenyRequest(friendship.id)}>Deny</button>
+                                    <button className='deny-friend-request-button' onClick={() => handleDenyRequest(friendship.id)}>Deny</button>
                                 </div>
                             </div>
                             );
@@ -191,7 +191,7 @@ const CurrentUserFriends = () => {
                                   <h4>{friend?.username}</h4> 
                                 </div>
                                 <div >
-                                    <button onClick={() => handleDeleteRequest(friendship.id)}>Cancel Request</button>
+                                    <button className='cancel-friend-request-button' onClick={() => handleDeleteRequest(friendship.id)}>Cancel Request</button>
                                 </div>
                             </div>
                             );
@@ -213,7 +213,7 @@ const CurrentUserFriends = () => {
                                         </div>
                                             
                                         <div className='denied-label'>Denied</div>
-                                        <button onClick={() => handleDeleteRequest(friendship.id)}>Delete Request</button>
+                                        <button className='delete-friend-request-button'onClick={() => handleDeleteRequest(friendship.id)}>Delete Request</button>
                                         
                                     </div>
                                 );

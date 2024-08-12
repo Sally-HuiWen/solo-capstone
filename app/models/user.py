@@ -57,12 +57,15 @@ class User(db.Model, UserMixin):
         back_populates = 'users'
     )
 
-    #many-to-many: users(many)<=>daily_logs(many)
+    #many-to-many: users(many)<=>daily_logs(many); relationship to dailyLogs through comments table
     daily_logs = db.relationship(
         'DailyLog',
         secondary = Comment.__table__,
         back_populates = 'users'
     )
+
+    # relationship to comments
+    comments = db.relationship('Comment', back_populates='user')
     
     def get_friends(self):
         UserAlias = aliased(User, name='user_alias')

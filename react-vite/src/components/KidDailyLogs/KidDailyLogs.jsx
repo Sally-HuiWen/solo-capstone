@@ -32,15 +32,16 @@ const KidDailyLogs = () => {
   return (
     <div id="daily-logs-container">
       <div className="daily-logs-header">
-          {kid?.kid_image_url? (
-          <img className='kid-profile-img' src={kid.kid_image_url} />
-           ): <PiBabyLight className='kid-profile-img'/> }
+          <div id='kid-image-name-age-div'>
+            {kid?.kid_image_url? (
+            <img className='kid-profile-img' src={kid.kid_image_url} />
+            ): <PiBabyLight className='kid-profile-img'/> }
 
-          <div id='kid-name-age'>
-              <h2>{kid?.name}</h2>
-              <p id='kid-age-p'>{calculateKidAgeFromBirthToNow(kid?.birth_date)}</p> 
+            <div id='kid-name-age'>
+                <h2>{kid?.name}</h2>
+                <p id='kid-age-p'>{calculateKidAgeFromBirthToNow(kid?.birth_date)}</p> 
+            </div>
           </div>
-         
           {kid?.user_id === sessionUser?.id && (
           <div>
             <button id="add-dailyLog-button" onClick={handleCreateAddDailyLog}>

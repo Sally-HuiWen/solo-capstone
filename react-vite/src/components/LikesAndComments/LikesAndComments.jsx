@@ -1,20 +1,31 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { thunkClickLike, thunkRemoveLike, thunkGetLikes } from '../../redux/likes';
+import { thunkGetComments,thunkLeaveComment, thunkUpdateComment, thunkDeleteComment } from '../../redux/comments';
 import { BiMessageRounded } from "react-icons/bi";
 import { IoMdThumbsUp } from "react-icons/io";
+import { FaUserCircle } from 'react-icons/fa';
+import { BsFillSendFill } from "react-icons/bs";
 import './LikesAndComments.css';
 
 const LikesAndComments = ({ dailyLogId }) => {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const likes = useSelector(state => state.likes[dailyLogId] || []);
+    const comments = useSelector(state => state.comments[dailyLogId] || []);
+    console.log('what is comments', comments)
     const [isProcessing, setIsProcessing] = useState(false);
     const [showLikesList, setShowLikesList] = useState(false);
+    const [showComments, setShowComments] = useState(false);
+    const [newComment, setNewComment] = useState('');
+    const [editingComment, setEditingComment] = useState(null);
+    const [updatedComment, setUpdatedComment] = useState('');
+    
 
     useEffect(() => {
         if (dailyLogId) {
             dispatch(thunkGetLikes(dailyLogId));
+            dispatch(thunkGetComments(dailyLogId));
         }
     }, [dispatch, dailyLogId]);
 
@@ -45,25 +56,67 @@ const LikesAndComments = ({ dailyLogId }) => {
     };
 
     const handleCommentClick = () => {
-        alert('This feature coming soon!');
+        setShowComments(prev => !prev); // goggle the comments section visibility
     };
 
+    const handleCommentSubmit = async () => {
+        if (newComment.trim()) {
+            const result = await dispatch(thunkLeaveComment(dailyLogId, newComment));
+            if (result && result.comment) {
+                console.log('Dispatched LEAVE_COMMENT action:', result.comment);
+                // Clear the input field
+                setNewComment('');
+            } else {
+                console.error('Failed to submit comment:', result.error);
+            }
+        }
+    };
+
+    const handleEditClick = (comment) => {
+        setEditingComment(comment.id);
+        setUpdatedComment(comment.comment);
+    };
+
+    const handleUpdateSubmit = async (commentId) => {
+        if (updatedComment.trim()) {
+            const result = await dispatch(thunkUpdateComment(commentId, updatedComment));
+            if (result && result.comment) {
+                setEditingComment(null);
+                setUpdatedComment('');
+            }
+        }
+    };
+
+    const handleDeleteClick = async (commentId) => {
+        const confirmed = window.confirm("Are you sure you want to delete this comment?");
+        if (confirmed) {
+            await dispatch(thunkDeleteComment(commentId));
+        }
+    };
+
+  
     return (
         <div className='likes-div'>
-            <div 
-                id='likes-count-div' 
-                onMouseEnter={() => setShowLikesList(true)}
-                onMouseLeave={() => setShowLikesList(false)}
-            >
-                <div id='icon-and-count'>
-                    <div><IoMdThumbsUp className='icon'/></div>
-                    <div id='count-num'>{likes.length}</div>
+            <div id='count-like-comment'>
+                <div 
+                    id='likes-count-div' 
+                    onMouseEnter={() => setShowLikesList(true)}
+                    onMouseLeave={() => setShowLikesList(false)}
+                >
+                    <div id='icon-and-count'>
+                        <div><IoMdThumbsUp className='icon'/></div>
+                        <div id='count-num'>{likes.length}</div>
+                    </div>
+                    <ul className={`likes-list ${showLikesList ? 'show' : ''}`}>
+                        {likes.map((like, index) => (
+                            <li key={index}>{like.username}</li>
+                        ))}
+                    </ul>
                 </div>
-                <ul className={`likes-list ${showLikesList ? 'show' : ''}`}>
-                    {likes.map((like, index) => (
-                        <li key={index}>{like.username}</li>
-                    ))}
-                </ul>
+                <div className='count-comment-div'>
+                    <p id='comment-num'>{comments?.length? comments?.length:0}</p>
+                    <p id='comments'>comments</p>
+                </div>
             </div>
 
             <div id='like-and-comment-div'>
@@ -83,6 +136,58 @@ const LikesAndComments = ({ dailyLogId }) => {
                     <div>Comment</div>
                 </button>
             </div>
+
+            {showComments && (
+                <div id='comments-section'>
+                    <ul className='comments-list'>
+                        {comments?.map((comment, index) => (
+                            <li key={index} className='each-comment'>
+                                {comment?.user?.user_image_url ? (
+                                    <img className="comment-user-image" src={comment?.user?.user_image_url} alt="User Profile Image" />
+                                ) : (
+                                    <FaUserCircle className='comment-user-icon'/>
+                                )}
+                                <div className='comment-user-info-content'>
+                                    <p className='comment-user-name'>{comment?.user?.first_name} {comment?.user?.last_name}</p>
+                                    {editingComment === comment.id ? (
+                                        <div>
+                                            <textarea
+                                                value={updatedComment}
+                                                onChange={(e) => setUpdatedComment(e.target.value)}
+                                            />
+                                            <button onClick={() => handleUpdateSubmit(comment.id)}>Update</button>
+                                            <button onClick={() => setEditingComment(null)}>Cancel</button>
+                                        </div>
+                                    ) : (
+                                        <>
+                                            <p className='comment-user-content'>{comment.comment}</p>
+                                            {sessionUser?.id === comment.user_id && (
+                                                <div className='comment-actions'>
+                                                    <button onClick={() => handleEditClick(comment)}>Edit</button>
+                                                    <button onClick={() => handleDeleteClick(comment.id)}>Delete</button>
+                                                </div>
+                                            )}
+                                        </>
+                                    )}
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                    <div id='leave-comment-div'>
+                        {sessionUser?.user_image_url ? (
+                            <img className="comment-user-image" src={sessionUser?.user_image_url} alt="User Profile Image" />
+                        ) : (
+                            <FaUserCircle className='comment-user-icon'/>
+                        )}
+                        <textarea
+                            value={newComment}
+                            onChange={(e) => setNewComment(e.target.value)}
+                            placeholder='Write a comment...'
+                        />
+                        <button id='send-comment-button' onClick={handleCommentSubmit}><BsFillSendFill /></button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

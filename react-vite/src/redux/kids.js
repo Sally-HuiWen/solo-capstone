@@ -32,7 +32,7 @@ const removeKid = (kidId) => ({
     kidId,
 })
 
-//thunk creator
+//thunk creators
 export const thunkGetCurrentKids = () => async (dispatch) => {
     const res = await fetch('/api/kids/current');
     if (res.ok) {

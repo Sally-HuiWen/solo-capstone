@@ -29,12 +29,15 @@ class DailyLog(db.Model):
         back_populates = 'daily_logs'
     )
 
-    #many-to-many: users(many)<=>daily_logs(many)
+    #many-to-many: users(many)<=>daily_logs(many);relationship to users through comments table
     users = db.relationship(
         'User',
         secondary = Comment.__table__,
         back_populates = 'daily_logs'
     )
+
+    # relationship to comments
+    comments = db.relationship('Comment', back_populates='daily_log')
 
     def to_dict(self):
         return {

@@ -13,7 +13,6 @@ const SendFriendRequest = () => {
 
     const [query, setQuery] = useState('');
     const [searchResult, setSearchResult] = useState([]);
-    const [friendId, setFriendId] = useState('');
     const [errors, setErrors] = useState([]);
     const [message, setMessage] = useState('');
 
@@ -66,8 +65,8 @@ const SendFriendRequest = () => {
         }
     }
 
-    const handleSubmit = async (friendId, firstName, lastName) => {
-        if (friendId === sessionUser?.id) {
+    const handleSubmit = async (userId, firstName, lastName) => {
+        if (userId === sessionUser?.id) {
             setErrors(['You cannot send a friend request to yourself.']);
             setSearchResult([]); // clear search result if trying to send request to self
             setQuery(''); // clear the input field
@@ -75,19 +74,18 @@ const SendFriendRequest = () => {
         }
         // not apply to useEffect, put it here; This ensures that the frontend logic runs before the backend logic.
         const current = currentUserFriendships.find(friendship =>
-            (friendship.user_id === sessionUser?.id && friendship.friend_id === friendId) ||
-            (friendship.user_id === friendId && friendship.friend_id === sessionUser?.id)
+            (friendship.user_id === sessionUser?.id && friendship.friend_id === userId) ||
+            (friendship.user_id === userId && friendship.friend_id === sessionUser?.id)
         );
     
         if (current) {
             setErrors(['Friendship already exists. Please try another name.']);
-            setFriendId('');
             setSearchResult([]); // clear search result if friendship exists
             setQuery(''); // clear the input field
             return;
         }
 
-        const res = await dispatch(thunkCreateFriendship(friendId));
+        const res = await dispatch(thunkCreateFriendship(userId));
         if (res.errors) {
             setErrors([res.errors.message || res.errors]);
         } else {
@@ -98,7 +96,6 @@ const SendFriendRequest = () => {
                 setMessage('');
                 setErrors([]);
                 setQuery('');
-                setFriendId('');
             },3000);
         }
     };
