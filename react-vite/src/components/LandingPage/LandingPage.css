@@ -1,57 +1,72 @@
 #landing-page-container {
     display: flex;
     justify-content: space-around;
-    align-items:flex-start;
-    column-gap: 50px;
-    padding: 0px 50px;
+    column-gap: 2.5vw; /* sse viewport width for gap */
+    padding: 0 2.5vw; 
+    height: 80vh; 
+}
+
+#landing-page-left-box, #landing-page-right-box {
+    width: 45%;
+    height: 100%;
 }
 
 #landing-page-left-box {
     display: flex;
     flex-direction: column;
-    width: 40%;
+    row-gap: 2.5vw;
+    justify-content: space-between;
+}
+
+#big-des, #small-des {
+    padding: 0vw 2.5vw;
+    color: black;
+    display: flex;
+    align-items: center; 
+    flex-grow: 0.5; /* allows them to grow and distribute space evenly */
 }
 
 #big-des {
-    font-size: 4.7em;
+    font-size: 4.0vw; 
     font-weight: bold;
-    color: black
 }
 
 #small-des {
-    font-size: 2em;
-    color: black;
-}
-
-#landing-page-right-box {
-    width: 50%;
+    font-size: 2.5vw;
 }
 
 #landing-page-img {
     width: 100%;
+    height: 100%;
     border-radius: 10px;
 }
 
+   
 @media (max-width: 768px) {
     #landing-page-container {
         flex-direction: column;
-        padding: 20px;
-        height: auto; 
+        padding: 4vw;
+        height: auto;
+        align-items: center;
     }
-
+    
     #landing-page-left-box, #landing-page-right-box {
         width: 100%;
-        height: auto; 
+        height: auto;
+        align-items: center;
     }
 
     #big-des {
-        font-size: 6vw; 
+        font-size: 6vw;
+        text-align: center;
     }
 
     #small-des {
-        font-size: 3vw; 
+        font-size: 4vw;
     }
+
     #landing-page-img {
         max-width: 100%;
+        margin-top: 4vw;
     }
 }

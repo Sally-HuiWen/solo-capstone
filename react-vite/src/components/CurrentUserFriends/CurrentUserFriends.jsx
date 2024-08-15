@@ -159,7 +159,7 @@ const CurrentUserFriends = () => {
                                   <h4>{friend?.username}</h4> 
                                 </div>
                                 <div className='accept-and-deny-buttons'>
-                                    <button onClick={() => handleAcceptRequest(friendship.id)}>Accept</button>
+                                    <button className='accept-friend-request-button' onClick={() => handleAcceptRequest(friendship.id)}>Accept</button>
                                     <button className='deny-friend-request-button' onClick={() => handleDenyRequest(friendship.id)}>Deny</button>
                                 </div>
                             </div>

@@ -2,7 +2,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 50px;
+  padding: 2.5vw; 
+  height: 15vh; 
 }
 
 #left-header-box {
@@ -13,24 +14,41 @@
 }
 
 #logo {
-  font-size: xx-large;
+  font-size: 3vw; 
+  margin-right: 1vw; 
 }
 
 #website-name {
   background-color: transparent;
-  font-size: xx-large;
+  font-size: 3vw; 
   color: #ff544b;
 }
-
 
 .profile-dropdown {
   position: absolute;
   list-style-type: none;
   background-color: pink;
-  padding:10px;
-  right:50px;
+  padding: 1vw; 
+  right: 2.5vw; 
   border-radius: 10px;
-  font-size: large;
-  width:270px;
+  font-size: 1.5vw; 
+  width: 22vw; 
 }
 
+
+@media (max-width: 768px) {
+  #header-container {
+      padding: 4vw;
+  }
+
+  #logo, #website-name {
+      font-size: 5vw;
+      text-align: center;
+  }
+  
+  .profile-dropdown {
+    font-size: 3vw; 
+    width: 38vw;
+  }
+ 
+}

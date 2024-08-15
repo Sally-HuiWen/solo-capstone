@@ -26,12 +26,18 @@ const CurrentUserKids = () => {
     }
 
     return (
-        <div id='kids-and-friends-container'>
           <div id='kids-list-container'>
-            <h1>Your Kids</h1>
+            <div id='my-kids-and-friends'>
+              <h1 id='my-kids-h1'>My Kids</h1>
+              <button id='friends-button' onClick={handleFriends}>
+                <FaUserFriends id='friends-icon'/>
+                <span>Friends</span>
+              </button>
+            </div>
+            
             <div >
                 <button onClick={handleAddNewKid} id='add-kid-button'>
-                    Add my new kid
+                    Add New Kid
                 </button>
             </div>
             <div className='your-kids-content'>
@@ -46,12 +52,14 @@ const CurrentUserKids = () => {
                                             {kid?.kid_image_url? (
                                               <img className='kid-profile-image' src={kid?.kid_image_url}/>  
                                             ): (<PiBabyThin className='kid-profile-image'/>)}
-                                            <div>
-                                               <h2>{kid?.name}</h2> 
-                                               <p>{calculateKidAgeFromBirthToNow(kid?.birth_date)}</p> 
-                                            </div>
                                         </div>
-                                        <p className='tooltip'>click here to see {kid?.name}&apos;s dailyLogs</p>
+
+                                        <div>
+                                            <h2 id='kid-name-h2'>{kid?.name}</h2> 
+                                            <h4 id='kid-age-h4'>{calculateKidAgeFromBirthToNow(kid?.birth_date)}</h4> 
+                                        </div>
+                                        
+                                        <div className='tooltip'>click here to see {kid?.name}&apos;s dailyLogs</div>
                                     </Link>
                                     <div className='update-and-remove-box'>
                                         <Link to={`/kids/${kid?.id}/update`} className='Link-link'>
@@ -69,14 +77,6 @@ const CurrentUserKids = () => {
                 )}
             </div>
           </div>
-
-          <div>
-            <button id='friends-button' onClick={handleFriends}>
-                <FaUserFriends id='friends-icon'/>
-                <span>Friends</span>
-            </button>
-          </div>
-        </div>
     )
 }
 

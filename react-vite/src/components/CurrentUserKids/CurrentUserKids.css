@@ -1,52 +1,65 @@
-#kids-and-friends-container {
-    display: flex;
-    gap: 50px;
-}
 #kids-list-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    row-gap:20px;
-    padding: 20px;
-    border: 1px solid orchid;
+    align-items: center;
+    row-gap: 2vw;
+    padding: 2vw;
     border-radius: 10px;
-    margin-left: 50px;
+    margin-left: 1vw;
+    box-sizing: border-box; 
+    width: 100%;
+}
+
+#my-kids-and-friends {
+    display: flex;
+    align-items: center;
+}
+
+#friends-button {
+    padding: 0.5vw;
+    background-color: orchid;
+    font-size: 2vw;
+    position: absolute; 
+    right: 3vw; 
 }
 
 #kids-list-box {
     display: flex;
-    flex-direction: column;
-    row-gap: 30px;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 3vw;
 }
+
 .kid-details {
    display: flex;
    flex-direction: column;
-   width: 320px;
    border-radius: 10px;
-   box-shadow: 5px 5px 5px 5px grey;
-   padding-left: 20px;
-   height:200px;
+   box-shadow: 0.3vw 0.3vw 0.3vw 0.3vw gray;
+   padding: 1.5vw;
+   height: auto; 
+   box-sizing: border-box;
 }
 
 .update-and-remove-box {
     display: flex;
     justify-content: space-around;
-    padding-top:50px
+    padding-top:1vw;
 }
 
 #add-kid-button {
     border-radius: 10px;
-    width: 320px;
-    font-size: larger;
-    background-color:orchid;
-}
-
-.button-button {
-   padding:6px;
-   border-radius: 6px;
+    width: 18vw;
+    font-size: 1.5vw;
+    background-color: orchid;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .Link-link{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1vw;
     text-decoration: none;
     color: darkorchid;
 }
@@ -54,53 +67,153 @@
 .tooltip {
     visibility: hidden;
     opacity: 0;
-    width:270px;
     color:black;
-    background-color: orchid;
+    background-color: darkorchid;
     border-radius: 10px;
-    font-size: medium;
-    position: absolute;
+    font-size: 2vw;
+    transform: translate(0, -60%); /* Center the tooltip and move it above .kid-details */
+    box-sizing: border-box;
+    padding: 0.25vw;
+    z-index: 10; 
 }
 
 .kid-details:hover .tooltip {
     visibility: visible;
     opacity: 1;
-    width:270px;
-    color:black;
-    background-color: orchid;
-    border-radius: 10px;
-    font-size: medium;
     text-align: center;
-    margin-top: 10px;
+    color: white;
+    width:18vw;
 }
 
 .image-and-name-div {
-    padding-top:20px;
+    padding-top:1vw;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap:20px;
+    gap:1vw;
 }
+
 .kid-profile-image {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
+    width: 18vw;
+    object-fit: cover; 
+    border-radius: 10px;
 }
 
 .remove-kid-button {
     background-color: #6c757d;
+    font-size: 1vw;
 }
 
 .kid-update-button {
     background-color: orchid;
+    font-size: 1vw;
 }
 
 #friends-icon {
-    font-size: x-large
+    font-size: 2vw;
 }
 
-#friends-button {
-    display: flex;
-    align-items: center; 
-    padding: 10px;  
-    background-color: orchid;
+#my-kids-h1 {
+    font-size: 2vw;
+}
+#kid-name-h2 {
+    font-size:1.5vw;
+    text-align: center;
+}
+#kid-age-h4 {
+    font-size:1vw;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    #kids-list-container {
+        margin: 0 auto;
+        padding: 4vw; 
+        width: 90%; 
+    }
+
+    #kids-and-friends-container {
+        gap: 4vw;
+        padding: 0 4vw;
+        align-items: start;
+    }
+
+    #kids-list-box {
+        flex-direction: column;
+        gap: 4vw; 
+        width: 100%;
+    }
+  
+    .kid-details {
+        padding: 4vw;
+        width: 100%;
+    }
+    .Link-link {
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    #add-kid-button {
+        font-size: 3vw; 
+        padding: 1.5vw 3vw; 
+        width: 100%;
+    }
+
+    .update-and-remove-box {
+        align-items: center;
+        gap: 3vw; 
+        width: 100%;
+    }
+
+    .image-and-name-div {
+        padding-top: 1vw;
+        gap: 2vw; 
+        width: 100%;
+    }
+
+    .kid-profile-image {
+        padding: 0;
+        width: 40vw; 
+        border-radius: 50%; 
+    }
+
+    #my-kids-h1 {
+        font-size: 5vw; 
+        text-align: center;
+    }
+
+    #kid-name-h2 {
+        font-size: 4vw; 
+        text-align: center;  
+    }
+
+    #kid-age-h4 {
+        font-size: 2vw; 
+        text-align: center;
+        margin-bottom: 1vw; 
+    }
+
+    #friends-button {
+        font-size: 4vw; 
+        padding: 1.5vw 3vw; 
+    }
+
+    #friends-icon {
+        font-size: 4vw;
+    }
+
+    .remove-kid-button, .kid-update-button {
+        font-size: 2.5vw; 
+        padding: 1vw 2vw; 
+    }
+
+    .kid-details:hover .tooltip {
+        font-size: 2.5vw; 
+        transform: translate(0%, -440%);
+        width: 50vw;
+        box-sizing: border-box;
+        padding: 0.5vw; 
+        z-index: 10;
+    }
 }
