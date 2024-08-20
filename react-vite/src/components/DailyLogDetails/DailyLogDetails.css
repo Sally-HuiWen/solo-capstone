@@ -1,166 +1,113 @@
 .daily-log-details {
     display: flex;
     flex-direction: column;
-    border: 1px solid #ccc;
     border-radius: 15px;
-    padding: 20px;
-    margin: 0px 50px;
-    background-color: rgb(244, 197, 204);
+    margin: 0px auto;
     text-decoration: none;
     color: black;
-    column-gap: 30px;
-    width: 1000px;
-}
-
-.details-image {
-   padding-top:10px;
+    width: 40vw; 
 }
 
 .details-details {
     display: flex;
+    border-radius: 50px;
     flex-direction: column;
-    row-gap: 15px;
-    padding:0px 30px;
+    row-gap: 0.5vw;
+    padding:1vw 3vw;
+    background-color: rgb(244, 197, 204);
 }
 
 .image-image {
-    border-radius: 10px;
+    border-radius: 50px;
     width: 100%;
-    height: 500px;
+    height: auto;
+    aspect-ratio: 16 / 12;
     object-fit: cover;
-    margin-right: 20px;
-    padding:0px 30px;
+    object-position: top; 
 } 
-
-.likes-div {
-    position: relative;
-    margin-top: 30px;
-}
-
-#likes-count-div {
-    display: flex;
-    align-items: center;
-    position: relative;
-}
-
-.likes-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    top: 30px;
-    left: 0;
-    display: none;
-    background-color: #CCCCCC;
-    color: black;
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1;
-}
-
-.likes-list.show {
-    display: block;
-    border-radius: 10px;
-}
-
-.likes-list li {
-    padding: 5px;
-}
-
-.likes-list li:last-child {
-    border-bottom: none;
-}
-
-#like-and-comment-div {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding-left: 30px;
-}
-
-#comment-button {
-    display: flex;
-    gap: 10px;
-    border-radius: 0%;
-    padding: 5px 10px;
-    background-color: transparent;
-    color: black;
-}
-
-.like-button {
-    display: flex;
-    background-color: transparent;
-    border-radius: 0%;
-    gap: 10px;
-    border: none;
-    padding: 5px 10px;
-}
-
-#comment-button:hover, .like-button:hover {
-    background-color:#CCCCCC;
-}
-
-.icon {
-    font-size: x-large;
-    background-color: #007bff;
-    color: white;
-    border-radius: 50%; /* This makes the corners round */
-    padding: 2px;
-}
-
-.icon-two {
-    color: black;                                                      
-    padding: 0px;
-}
-
-.div-like {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-#icon-and-count {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.icon-container,.icon-two-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: transparent;
-    border-radius: 50%;
-    padding: 5px;
-}
-
-.like-like {
-    color: black;
-}
-
-.liked .like-like {
-    color: #007bff;
-    font-weight: bold;
-}
-
-.liked .icon-two {
-    color: #007bff;
-}
-
-#count-num {
-    padding-bottom: 8px;
-}
 
 .detail-delete-button {
     background-color: #6c757d;
-    padding:5px 8px;
+    padding:0.5vw 0.8vw;
+    font-size: 1.2vw;
 }
 
 .detail-update-button {
-    padding:5px 8px;
+    padding:0.5vw 0.8vw;
+    font-size: 1.2vw;
+    background-color: #D970D6;
 }
 
+.dailyLogDetails-kid-name {
+    font-size: 2.5vw;
+}
+
+.dailyLogDetails-title {
+    font-size: 1.5vw;
+    color: darkorchid;
+}
 #detail-post-date {
-    font-size: small;
+    font-size:1vw;
     font-style: italic;
+}
+
+.dailyLogDetails-content {
+    font-size:1.2vw;
+}
+
+.details-details {
+    padding:2vw 5vw;
+}
+@media (max-width:1200px) {
+    .daily-log-details {
+        width:60%;
+    }
+    .dailyLogDetails-kid-name {
+        font-size: 3.5vw;
+    }
+    #detail-post-date {
+        font-size:2vw;
+    }
+    .dailyLogDetails-title {
+        font-size: 2.5vw;
+    }
+    
+    .dailyLogDetails-content {
+        font-size:2.2vw;
+    }
+    .detail-delete-button {
+        font-size: 2.2vw;
+    }
+    
+    .detail-update-button {
+        font-size: 2.2vw;
+    }
+}
+@media (max-width: 768px) {
+    .daily-log-details {
+        width:80%;
+    }
+    .dailyLogDetails-kid-name {
+        font-size: 4.5vw;
+    }
+    #detail-post-date {
+        font-size:3vw;
+    }
+    .dailyLogDetails-title {
+        font-size: 3.5vw;
+    }
+    
+    .dailyLogDetails-content {
+        font-size:3.2vw;
+    }
+    .detail-delete-button {
+        font-size: 3.2vw;
+    }
+    
+    .detail-update-button {
+        font-size: 3.2vw;
+    }
+    .details-details {
+        padding:3vw 6vw;
+    }
 }

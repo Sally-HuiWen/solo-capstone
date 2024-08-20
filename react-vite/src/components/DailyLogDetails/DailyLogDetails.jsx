@@ -20,14 +20,12 @@ const DailyLogDetails = () => {
 
     return (
         <div className="daily-log-details">
-            <div className="details-image">
-                <img className='image-image' src={daily_log?.image_url} alt={daily_log?.title} />
-            </div>
+            <img className='image-image' src={daily_log?.image_url} alt={daily_log?.title} />
             <div className="details-details">
-                <h1>{kid?.name}</h1>
-                <h3>{daily_log?.title}</h3>
+                <h1 className='dailyLogDetails-kid-name'>{kid?.name}</h1>
+                <h3 className ='dailyLogDetails-title'>{daily_log?.title}</h3>
                 <p id='detail-post-date'>{daily_log?.created_at}</p>
-                <p>{daily_log?.content}</p>
+                <p className='dailyLogDetails-content'>{daily_log?.content}</p>
 
                 {kid?.user_id === sessionUser?.id && (
                 <div className="update-delete-actions">

@@ -2,7 +2,7 @@
     border-radius: 50%;
     background-color: transparent;
     width:5vw;
-    height:4vw;
+    height:5vw;
     padding: 0;
     margin: 0;
 }
@@ -18,7 +18,7 @@
 }
 
 .user-profile-icon {
-   font-size: 3vw;
+   font-size: 5vw;
    color: #007bff;
 }
 
@@ -40,20 +40,35 @@
 }
 
 #logout-button {
-    padding:1vw;
-    font-size:1.5vw;
+    padding:0.5vw;
+    font-size:1.2vw;
+    background-color: #D970D6;
 }
-
-@media (max-width: 768px) {
+@media (max-width:1200px) {
     #profile-account-button {
-        width:10vw;
-        height:10vw;
+        width:8vw;
+        height:8vw;
     }
     .user-profile-icon {
         font-size:8vw;
     }
     .profile-buttons {
-        font-size:2.5vw;
+        font-size:2vw;
+    }
+    #logout-button {
+        font-size:2vw;
+    }
+}
+@media (max-width: 768px) {
+    #profile-account-button {
+        width:9vw;
+        height:9vw;
+    }
+    .user-profile-icon {
+        font-size:9vw;
+    }
+    .profile-buttons {
+        font-size:2.8vw;
     }
     #logout-button {
         padding:2vw;

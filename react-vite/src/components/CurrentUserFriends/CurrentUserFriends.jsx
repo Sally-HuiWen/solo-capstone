@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { thunkGetCurrentUserFriendships, thunkGetFriends, thunkUpdateFriendship, thunkDeleteFriendship } from '../../redux/friendships';
 import './CurrentUserFriends.css';
 import { FaUserCircle } from 'react-icons/fa';
+import { PiBabyThin } from "react-icons/pi";
 
 const CurrentUserFriends = () => {
     const dispatch = useDispatch();
@@ -97,7 +98,7 @@ const CurrentUserFriends = () => {
         <div id='three-lists'>
             <div id='friends-container'>
                 <div id='friends-list-container'>
-                    <h3>All Friends</h3>
+                    <h3 className='title-h3'>All Friends</h3>
                     <div >
                         <button onClick={handleAddFriend} id='add-new-friend-button'>
                             Add a new friend
@@ -105,7 +106,7 @@ const CurrentUserFriends = () => {
                     </div>
                 </div>
                 {confirmedFriends.length === 0 ? (
-                    <p>No friends found</p>
+                    <h3 className='title-h3'>No friends found</h3>
                 ) : (
                     confirmedFriends.map((friend, index) => (
                     <div key={friend.id || index} className='each-friend'>
@@ -116,13 +117,13 @@ const CurrentUserFriends = () => {
                             <FaUserCircle className='friend-profile-icon'/>
                             )}
                             <div>
-                                <h4>{friend.username}</h4>
+                                <h4 className='friend-username-h4'>{friend.username}</h4>
                                 {friend?.kids?.map((kid, kidIndex) => (
                                 <div key={kid.id || kidIndex} className='each-kid'>
                                     <Link to={`/kids/${kid?.id}/dailyLogs`} className='Link-friend-kid'>
                                         <div className='friend-kid-div'>
-                                           <p>kid: {kid.name}</p>  
-                                           {kid?.kid_image_url && (<img className='friend-kid-image' src={kid?.kid_image_url} alt="Kid Profile Image"/>)}
+                                           <p className='kid-name-p'>kid: {kid.name}</p>  
+                                           {kid?.kid_image_url? (<img className='friend-kid-image' src={kid?.kid_image_url} alt="Kid Profile Image"/>): (<PiBabyThin className='friend-kid-image'/>)}
                                         </div>
                                         <div className='tooltip'>click here to see {kid?.name}&apos;s dailyLogs</div>
                                     </Link>
@@ -141,10 +142,10 @@ const CurrentUserFriends = () => {
           
             <div id='request-received-container'>
             {receivedFriendRequests.length === 0 ? (
-                <h3>No friend requests received</h3>
+                <h3 className='title-h3'>No friend requests received</h3>
                 ) : (
                 <div className='friend-request-div'>
-                    <h3>Friend Requests</h3>
+                    <h3 className='title-h3'>Friend Requests</h3>
                     <div id='requests-received-box'>
                         {receivedFriendRequests.map((friendship, index) => {
                             const friend = getUserById(friendship.user_id);
@@ -156,7 +157,7 @@ const CurrentUserFriends = () => {
                                     ) : (
                                     <FaUserCircle className='friend-profile-icon'/>
                                     )}
-                                  <h4>{friend?.username}</h4> 
+                                  <h4 className='friend-username-h4'>{friend?.username}</h4> 
                                 </div>
                                 <div className='accept-and-deny-buttons'>
                                     <button className='accept-friend-request-button' onClick={() => handleAcceptRequest(friendship.id)}>Accept</button>
@@ -173,10 +174,10 @@ const CurrentUserFriends = () => {
 
             <div id='request-send-container'>
                 {sentFriendRequests.length === 0 && deniedSentRequests.length === 0 ? (
-                    <h3>No sent friend requests</h3>
+                    <h3 className='title-h3'>No friend requests sent</h3>
                 ) : (
                     <div className='sent-request-div'>
-                        <h3>You Sent A Friend Request To</h3>
+                        <h3 className='title-h3'>You Sent A Friend Request To</h3>
                         <div id='sent-request-box'>
                         {sentFriendRequests.map((friendship, index) => {
                             const friend = getUserById(friendship.friend_id);
@@ -188,7 +189,7 @@ const CurrentUserFriends = () => {
                                     ) : (
                                     <FaUserCircle className='friend-profile-icon'/>
                                     )}
-                                  <h4>{friend?.username}</h4> 
+                                  <h4 className='friend-username-h4'>{friend?.username}</h4> 
                                 </div>
                                 <div >
                                     <button className='cancel-friend-request-button' onClick={() => handleDeleteRequest(friendship.id)}>Cancel Request</button>

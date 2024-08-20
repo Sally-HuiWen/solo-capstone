@@ -1,28 +1,71 @@
 .remove-box {
-    width: 450px;
-    height: 300px;
+    width: 40vw; 
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    row-gap: 15px;
-    padding:20px;
-    border-radius: 50px;
+    row-gap: 2vw; 
+    padding: 4vw; 
+    border-radius: 20px; 
     overflow: hidden;
+    background-color: #E5E5E5;
 }
-
+.remove-box h1 {
+    font-size: 2vw;
+}
+.remove-question {
+    font-size: 2vw;
+}
 .yes-button {
-    height:50px;
-    width:350px;
+    height: 4vw; 
+    width: 30vw; 
     border: none;
+    background-color:#D970D6;
+    font-size: 1.5vw;
 }
 
 .no-button {
-    height:50px;
-    width:350px;
+    height: 4vw; 
+    width: 30vw; 
     border: none;
     background-color: #6c757d;
+    font-size: 1.5vw;
 }
 
 .yes-button:hover, .no-button:hover {
     background-color: red;
+}
+
+@media (max-width:1200px) {
+    .remove-box {
+        width: 60vw; 
+    }
+    .remove-box h1 {
+        font-size: 2.5vw;
+    }
+    .remove-question {
+        font-size: 2.5vw;
+    }
+    .yes-button, .no-button {
+        width: 30vw; 
+        height: 5vw; 
+        font-size: 2vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .remove-box {
+        width: 80vw; 
+    }
+    .remove-box h1 {
+        font-size: 3vw;
+    }
+    .remove-question {
+        font-size: 3.5vw;
+    }
+    .yes-button, .no-button {
+        width: 50vw; 
+        height: 7vw; 
+        font-size: 3vw;
+    }
 }

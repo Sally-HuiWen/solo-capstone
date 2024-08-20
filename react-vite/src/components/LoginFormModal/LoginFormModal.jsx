@@ -15,11 +15,12 @@ function LoginFormModal() {
   const { closeModal } = useModal();
 
   useEffect(()=> {
+    const changedEmail = email.trim().toLowerCase(); 
     const errorObj = {};
-        if (!email) errorObj.email='Email is required.';
-        if (!email.includes('@')) errorObj.emailInclude = 'Please provide a valid email.';
+        if (!changedEmail) errorObj.email='Email is required.';
+        if (changedEmail && !changedEmail.includes('@')) errorObj.emailInclude = 'Please provide a valid email.';
         if (!password) errorObj.password = 'Password is required.';
-        if (password.length < 6 || password.length > 20) errorObj.passwordLength = "Password must be between 6 and 20 characters."
+        if (password && password.length < 6 || password.length > 20) errorObj.passwordLength = "Password must be between 6 and 20 characters."
         setErrors(errorObj);
     }, [email, password]);
 
@@ -43,11 +44,13 @@ function LoginFormModal() {
     e.preventDefault();
     setHasSubmitted(true);
 
+    const changedEmail = email.trim().toLowerCase(); 
+
     if (Object.values(errors).length > 0) return;
 
     const serverResponse = await dispatch(
       thunkLogin({
-        email,
+        email: changedEmail,
         password,
       })
     );
@@ -62,7 +65,7 @@ function LoginFormModal() {
 
   return (
     <div className="login-modal-container">
-      <h2>Log In</h2>
+      <h2 className='log-in-title'>Log In</h2>
       <form className="login-form" onSubmit={handleSubmit}>
 
         <div>

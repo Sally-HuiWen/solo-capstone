@@ -51,7 +51,7 @@ const CurrentUserKids = () => {
                                         <div className='image-and-name-div'>
                                             {kid?.kid_image_url? (
                                               <img className='kid-profile-image' src={kid?.kid_image_url}/>  
-                                            ): (<PiBabyThin className='kid-profile-image'/>)}
+                                            ): (<PiBabyThin className='kid-profile-icon'/>)}
                                         </div>
 
                                         <div>

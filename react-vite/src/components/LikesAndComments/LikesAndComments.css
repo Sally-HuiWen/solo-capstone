@@ -1,3 +1,129 @@
+.likes-div {
+    position: relative;
+    margin-top: 1.5vw;
+}
+
+#likes-count-div {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.likes-list {
+    list-style: none;
+    padding: 0vw 1vw;
+    margin: 0;
+    position: absolute;
+    top: 2.5vw;
+    left: 0;
+    display: none;
+    background-color: #CCCCCC;
+    color: black;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.likes-list.show {
+    display: block;
+    border-radius: 10px;
+}
+
+.likes-list li {
+    font-size:1.5vw;
+}
+
+.likes-list li:last-child {
+    border-bottom: none;
+}
+
+#like-and-comment-div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-left: 3vw;
+}
+
+#comment-button {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border-radius: 0%;
+    gap: 0.5vw;
+    color: black;
+    padding: 0
+}
+
+.like-button {
+    display: flex;
+    background-color: transparent;
+    border-radius: 0%;
+    gap: 0.5vw;
+    border: none;
+    padding: 0;
+}
+
+#comment-button:hover, .like-button:hover {
+    background-color:#CCCCCC;
+}
+
+.icon {
+    font-size: 2vw;
+    background-color: darkorchid;
+    color: white;
+    border-radius: 50%;
+    padding: 0.2vw;
+}
+
+.icon-two {
+    color: black;                                                      
+    padding: 0;
+    font-size:1.5vw;
+}
+.icon-three {
+    font-size:1.5vw;
+    padding-top:0.5vw;
+}
+
+.div-like {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+}
+
+#icon-and-count {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+}
+
+.icon-container,.icon-two-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border-radius: 50%;
+    padding: 0.5vw;
+}
+
+.like-like {
+    color: black;
+    font-size: 1.2vw;
+}
+
+.liked .like-like {
+    color: darkorchid;
+    font-weight: bold;
+}
+
+.liked .icon-two {
+    color: darkorchid;
+}
+
+#count-num {
+    padding-bottom: 0.6vw;
+    font-size: 1.5vw;
+}
 #count-like-comment {
     display: flex;
     justify-content: space-between;
@@ -7,99 +133,114 @@
 .count-comment-div {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.8vw;
 }
 
 #comment-num {
-    font-size: large;
+    font-size: 1.5vw;
+    padding-bottom: 0.5vw;
 }
 
 #comments {
-    color: #007bff;
+    font-size: 1.5vw;
+    padding-bottom: 0.25vw;
+    color: darkorchid;
     font-weight: bold;
 }
 .comments-list {
     display: flex;
     flex-direction: column;
-    row-gap: 20px;
-    padding-top:20px
+    row-gap: 1vw;
+    padding-top:1vw;
 }
 
 .each-comment {
     display: flex;
-    gap: 20px;
+    gap: 2vw;
 }
 
-
 .comment-user-image {
-    width:50px;
-    height:50px;
+    width:5vw;
+    height:5vw;
+    border-radius: 50%;
+}
+.comment-user-icon {
+    width:5vw;
+    height:5vw;
     border-radius: 50%;
 }
 
 #like-and-comment-div {
-    padding:10px;
+    padding:0.5vw;
     border-bottom: 1px solid grey;
 }
 
 .comment-user-info-content {
-    background-color: lightsteelblue;
     border-radius: 10px;
-    padding:10px;
 }
 
 .comment-user-name {
     font-weight: bold;
-    font-size: small;
+    font-size: 1vw;
 }
 
 .comment-user-content {
-    font-size: small;
+    font-size: 1vw;
 }
 
 #leave-comment-div {
     display: flex;
-    gap:20px;
+    gap:2vw;
 }
 
 #leave-comment-div  textarea{
    background-color: lightsteelblue;
-   font-size: small;
-
+   font-size: 1vw;
 }
 
 #comments-section {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 1vw;
 }
 
 #send-comment-button {
     background-color: rgb(244, 197, 204);
-    color:#007bff;
-    font-size: larger;
+    color: lightsteelblue;
+    font-size: 2vw;
+    font-weight: bold;
 }
 
 .comment-actions-buttons {
     display: flex;
-    gap: 10px;
+    gap: 1vw;
+    padding-top: 0.25vw;
 }
 
-.edit-comment-button, .delete-comment-button {
-    padding: 5px;
-    font-size: small;
+.delete-action {
+    padding: 0.25vw 1vw;
+    font-size: 1vw;
+}
+.edit-comment-button {
+    background-color: #D970D6;
+    padding: 0.25vw 1vw;
+    font-size: 1vw;
 }
 
 .edited-comment-textarea {
-    font-size: small;
+    font-size: 1vw;
+    background-color: lightsteelblue;
 }
 
 .edit-comment-update-button, .edit-comment-cancel-button {
-    padding:5px;
-    font-size: small;
-    margin: 0px;
-
+    padding: 0.5vw;
+    font-size: 1vw;
+    margin: 0;
 }
+.edit-comment-update-button {
+    background-color: #D970D6;
+}
+
 
 #update-cancel-comment-buttons {
     display: flex;
@@ -109,4 +250,136 @@
 
 .edit-comment-cancel-button {
     background-color: #6c757d;
+}
+.comment-comment {
+    font-size: 1.2vw;
+}
+
+@media (max-width:1200px) {
+    .icon {
+        font-size: 3vw;
+    }
+    #count-num {
+        font-size: 2.5vw;
+    }
+    #comment-num {
+        font-size: 2.5vw;
+    }
+    .likes-list li {
+        font-size:2.5vw;
+    }
+    .like-like {
+        font-size: 2vw;
+    }
+    .icon {
+        font-size: 3vw;
+    }
+    .icon-two {
+        font-size: 2.5vw;
+    }
+    #comments {
+        font-size:2vw;
+    }
+    .icon-three {
+        font-size: 2.5vw;
+    }
+    .comment-comment {
+        font-size: 2vw;
+    }
+    .comment-user-image {
+        width:7vw;
+        height:7vw;
+    }
+    .comment-user-icon {
+        width:7vw;
+        height:7vw;
+    }
+    .comment-user-name {
+        font-size: 1.5vw;
+    }
+    
+    .comment-user-content {
+        font-size: 1.5vw;
+    }
+    .comments-list {
+        row-gap: 2vw;
+        padding-top:2vw;
+    }
+    #leave-comment-div  textarea{
+        font-size: 1.5vw;
+    }
+    .edited-comment-textarea {
+        font-size: 1.5vw;
+    }
+    .edit-comment-update-button, .edit-comment-cancel-button {
+        font-size: 1.5vw;
+    }
+    #send-comment-button {
+        font-size: 3vw;
+    }
+    .edit-comment-button, .delete-action{
+        font-size: 1.5vw;
+    }
+}
+@media (max-width: 768px) {
+    .icon {
+        font-size: 4vw;
+    }
+    #count-num {
+        font-size: 3vw;
+    }
+    #comment-num {
+        font-size: 3vw;
+    }
+    .likes-list li {
+        font-size:3.5vw;
+    }
+    .like-like {
+        font-size: 3vw;
+    }
+    .icon {
+        font-size: 3.5vw;
+    }
+    .icon-two {
+        font-size: 3vw;
+    }
+    #comments {
+        font-size:3vw;
+    }
+    .icon-three {
+        font-size: 3.5vw;
+    }
+    .comment-comment {
+        font-size: 3vw;
+    }
+    .comment-user-image {
+        width:12vw;
+        height:12vw;
+    }
+    .comment-user-icon {
+        width:12vw;
+        height:12vw;
+    }
+    #leave-comment-div  textarea{
+        font-size: 2.5vw;
+    }
+    .edited-comment-textarea {
+        font-size: 2.5vw;
+    }
+    .comment-user-name {
+        font-size: 2.5vw;
+    }
+    
+    .comment-user-content {
+        font-size: 2.5vw;
+    }
+    #send-comment-button {
+        font-size: 5vw;
+    }
+    .edit-comment-button, .delete-action{
+        font-size: 2.5vw;
+    }
+    .edit-comment-update-button, .edit-comment-cancel-button {
+        font-size: 2.5vw;
+    }
 }

@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    row-gap: 2vw;
+    row-gap: 1vw;
     padding: 2vw;
     border-radius: 10px;
     margin-left: 1vw;
@@ -24,6 +24,10 @@
     right: 3vw; 
 }
 
+#friends-icon {
+    font-size: 2vw;
+}
+
 #kids-list-box {
     display: flex;
     flex-wrap: wrap;
@@ -35,10 +39,12 @@
    display: flex;
    flex-direction: column;
    border-radius: 10px;
-   box-shadow: 0.3vw 0.3vw 0.3vw 0.3vw gray;
+   /* box-shadow: 0.3vw 0.3vw 0.3vw 0.3vw gray; */
    padding: 1.5vw;
    height: auto; 
    box-sizing: border-box;
+   background-color: #A2D9D9;
+   width:23vw;
 }
 
 .update-and-remove-box {
@@ -49,10 +55,10 @@
 
 #add-kid-button {
     border-radius: 10px;
-    width: 18vw;
     font-size: 1.5vw;
     background-color: orchid;
-    padding: 10px;
+    padding: 0.5vw;
+    margin-bottom: 1vw;
     box-sizing: border-box;
 }
 
@@ -82,7 +88,7 @@
     opacity: 1;
     text-align: center;
     color: white;
-    width:18vw;
+    width:20vw;
 }
 
 .image-and-name-div {
@@ -94,9 +100,12 @@
 }
 
 .kid-profile-image {
-    width: 18vw;
+    width: 100%;
     object-fit: cover; 
     border-radius: 10px;
+}
+.kid-profile-icon {
+    font-size: 20vw;
 }
 
 .remove-kid-button {
@@ -109,12 +118,10 @@
     font-size: 1vw;
 }
 
-#friends-icon {
-    font-size: 2vw;
-}
-
 #my-kids-h1 {
     font-size: 2vw;
+    color: darkorchid;
+    text-shadow: 2px 2px 4px #fff;
 }
 #kid-name-h2 {
     font-size:1.5vw;
@@ -124,7 +131,43 @@
     font-size:1vw;
     text-align: center;
 }
-
+@media (max-width:1200px) {
+    .kid-details {
+        width:35vw;
+    }
+    #add-kid-button {
+        font-size: 2vw;
+    }
+    #friends-icon {
+        font-size: 2.5vw;
+    }
+    .kid-profile-icon {
+        font-size: 25vw;
+    }
+    #my-kids-h1 {
+        font-size: 3vw;
+    }
+    #kid-name-h2 {
+        font-size:2.5vw;
+    }
+    #kid-age-h4 {
+        font-size:1.5vw;
+    }
+    #friends-button {
+        font-size: 2.5vw;
+    }
+    .kid-details:hover .tooltip {
+        width:32vw;
+        font-size: 1.2vw;
+    }
+    .remove-kid-button {
+        font-size: 1.5vw;
+    }
+    
+    .kid-update-button {
+        font-size: 1.5vw;
+    }
+}
 @media (max-width: 768px) {
     #kids-list-container {
         margin: 0 auto;
@@ -177,6 +220,9 @@
         width: 40vw; 
         border-radius: 50%; 
     }
+    .kid-profile-icon {
+        font-size: 30vw;
+    }
 
     #my-kids-h1 {
         font-size: 5vw; 
@@ -189,31 +235,39 @@
     }
 
     #kid-age-h4 {
-        font-size: 2vw; 
-        text-align: center;
-        margin-bottom: 1vw; 
+        font-size: 2.5vw; 
     }
 
     #friends-button {
         font-size: 4vw; 
-        padding: 1.5vw 3vw; 
     }
 
     #friends-icon {
-        font-size: 4vw;
+        font-size: 3vw;
     }
 
     .remove-kid-button, .kid-update-button {
         font-size: 2.5vw; 
-        padding: 1vw 2vw; 
     }
 
     .kid-details:hover .tooltip {
         font-size: 2.5vw; 
         transform: translate(0%, -440%);
-        width: 50vw;
+        width: 74.5vw;
         box-sizing: border-box;
         padding: 0.5vw; 
         z-index: 10;
     }
+    #friends-button {
+        font-size: 4.5vw; 
+        padding: 1vw;
+    }
+
+    #friends-icon {
+        font-size: 4vw;
+    }
+    .kid-details {
+        padding: 4vw 0vw;
+        padding-right: 3vw;
+     }
 }

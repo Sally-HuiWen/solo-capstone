@@ -102,7 +102,7 @@ const DailyLogUpdateForm = () => {
             </div>
             
             <div>
-                <p>Current Image</p>
+                <p className='current-image-update'>Current Image</p>
                 {image && <img src={image} alt="Current Daily Log" id='current_image'/>}
             </div>
             <div className='images-box3'>
@@ -115,8 +115,8 @@ const DailyLogUpdateForm = () => {
                 />
             </div> 
             <div id='update-cancel-div'>
-                <button type='submit'>Update</button>
-                <button id='dailyLog-cancel-button'type='button' onClick={() => navigate(`/kids/${daily_log.kid_id}/dailyLogs`)}>Cancel</button>
+                <button id='dailyLog-update-button' type='submit'>Update</button>
+                <button id='dailyLog-cancel-button' type='button' onClick={() => navigate(`/kids/${daily_log.kid_id}/dailyLogs`)}>Cancel</button>
             </div>               
             
         </form>

@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/Modal";
-import { thunkUploadProfileImage, thunkUpdateProfileImage, thunkDeleteProfileImage } from "../../redux/session"; 
+import { thunkUploadProfileImage, thunkUpdateProfileImage } from "../../redux/session"; 
+import OpenModalButton from '../OpenModalButton';
+import DeleteUserImageModal from './DeleteUserImageModal';
 import './UpdateUserPictureModal.css';
+
 
 export default function UpdateUserPictureModal({ user }) {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { closeModal } = useModal();
     const [image, setImage] = useState(null);
     const [errors, setErrors] = useState([]);
@@ -13,9 +18,9 @@ export default function UpdateUserPictureModal({ user }) {
 
     useEffect(() => {
         const errorArr = [];
-        if (!image && !user?.user_image_url) errorArr.push('Image is required');
+        if (!image) errorArr.push('Image is required');
         setErrors(errorArr);
-    }, [image, user?.user_image_url]);
+    }, [image]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -32,6 +37,7 @@ export default function UpdateUserPictureModal({ user }) {
                 setErrors(updatedImage.errors);
             } else {
                 closeModal();
+                navigate('/your-kids-list')
             }
         } else {
             const newImage = await dispatch(thunkUploadProfileImage(image));
@@ -39,22 +45,14 @@ export default function UpdateUserPictureModal({ user }) {
                 setErrors(newImage.errors);
             } else {
                 closeModal();
+                navigate('/your-kids-list')
             }
-        }
-    };
-
-    const handleDelete = async () => {
-        const result = await dispatch(thunkDeleteProfileImage());
-        console.log('what is handleDelete result', result)
-        if (result?.errors) {
-            setErrors(result.errors);
-        } else {
-            closeModal();
         }
     };
 
     const handleCancel = () => {
         closeModal();
+        navigate('/your-kids-list')
     };
 
     return (
@@ -64,7 +62,11 @@ export default function UpdateUserPictureModal({ user }) {
                     <h2 className='modal-title'>Update Or Delete Your Profile Picture</h2>
                     <div id='current-profile-picture'>
                         <img src={user.user_image_url} alt="Current Profile Picture" className='profile-image' />
-                        <button type='button' id='profile-picture-delete-button' onClick={handleDelete}>Delete Image</button>
+                        <OpenModalButton
+                            className='delete-user-image-modal'
+                            buttonText='Delete Image'
+                            modalComponent={<DeleteUserImageModal />}
+                        />
                     </div>
                     <div id='upload-profile-picture-div'>
                         <label htmlFor='profile-picture'>Profile Picture Upload
@@ -85,7 +87,7 @@ export default function UpdateUserPictureModal({ user }) {
                     </div>
                 </>
             ) : (
-                <>
+                <div id='add-user-image-box'>
                     <h2 className='modal-title'>Add Your Profile Picture</h2>
                     <div id='upload-profile-picture-div'>
                         <label htmlFor='profile-picture'>Profile Picture Upload
@@ -101,10 +103,10 @@ export default function UpdateUserPictureModal({ user }) {
                         />
                     </div>
                     <div className='submit-and-cancel-box'>
-                        <button type='submit' id='profile-picture-submit-button'>Submit</button>
+                        <button type='submit' id='profile-picture-submit-button'>Upload</button>
                         <button type='button' id='profile-picture-cancel-button' onClick={handleCancel}>Cancel</button>
                     </div>
-                </>
+                </div>
             )}
         </form>
     );

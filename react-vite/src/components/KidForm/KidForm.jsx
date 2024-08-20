@@ -62,7 +62,7 @@ const KidForm = () => {
 
     return (
         <form onSubmit={handleSubmit} className='kid-form' encType="multipart/form-data">
-            <div id='name-box1'>
+            <div className='name-box1'>
                 <label htmlFor='kid-names'>Name
                     {hasSubmitted && errors?.includes('Name is required') && (
                        <span className='validation-errors'> Name is required</span> 
@@ -81,7 +81,7 @@ const KidForm = () => {
 
             <div className='birth-date-box2'>
                 <label htmlFor='kid-birth-dates'>Birth Date</label>
-                <div id='year-month-day-box'>
+                <div className='year-month-day-box'>
                     <div className='kid-year-month-day'>
                         <select value={year} onChange={e => setYear(e.target.value)}>
                             <option value="">Select Year</option>
@@ -139,7 +139,7 @@ const KidForm = () => {
                 </select>
             </div>
 
-            <div id='image-box4'>
+            <div className='image-box4'>
                 <label htmlFor='kid-image'>Profile Image Upload</label>
                 <input
                     id='kid-image'
@@ -148,7 +148,7 @@ const KidForm = () => {
                     onChange={(e) => setImage(e.target.files[0])}
                 />
             </div>
-            <button type="submit">Add a new kid</button>
+            <button className='form-add-kid-button' type="submit">Add a new kid</button>
         </form>
     )
 

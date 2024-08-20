@@ -2,26 +2,27 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2.5vw; 
+  padding: 3.5vw; 
   height: 15vh; 
 }
 
 #left-header-box {
   display: flex;
   align-items: center;
-  color: #ff544b;
+  color: orchid;
   text-decoration: none;
 }
 
 #logo {
-  font-size: 3vw; 
+  font-size: 5vw; 
   margin-right: 1vw; 
 }
 
 #website-name {
   background-color: transparent;
   font-size: 3vw; 
-  color: #ff544b;
+  color: orchid;
+  text-shadow: 2px 2px 4px black;
 }
 
 .profile-dropdown {
@@ -31,24 +32,36 @@
   padding: 1vw; 
   right: 2.5vw; 
   border-radius: 10px;
-  font-size: 1.5vw; 
-  width: 22vw; 
+  width: 25vw; 
+  z-index: 10;
+  font-size: 1.5vw;
 }
 
-
+@media (max-width: 1200px) {
+  #logo {
+    font-size: 7vw; 
+  }
+  #website-name {
+    font-size: 5vw; 
+  }
+  .profile-dropdown {
+    width: 35vw; 
+    font-size: 2vw;
+  }
+}
 @media (max-width: 768px) {
   #header-container {
       padding: 4vw;
   }
-
-  #logo, #website-name {
-      font-size: 5vw;
-      text-align: center;
+  #logo {
+    font-size: 8vw; 
   }
-  
+  #website-name {
+    font-size: 6vw; 
+  }
   .profile-dropdown {
-    font-size: 3vw; 
-    width: 38vw;
+    font-size: 3vw;
+    width: 47vw; 
+    padding: 2vw;
   }
- 
 }

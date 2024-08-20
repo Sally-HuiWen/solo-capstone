@@ -24,7 +24,7 @@ export default function RemoveKidModal({ kidId }) {
   return (
     <div className="remove-box">
       <h1>Confirm Remove</h1>
-      <p>Are you sure you want to remove this kid from your kids list?</p>
+      <p className='remove-question'>Are you sure you want to remove this kid from your kids list?</p>
       <button className='yes-button' onClick={(e) => ClickYes(e)}>Yes (Remove Kid)</button>
       <button className='no-button' onClick={(e) => ClickNo(e)}>No (Keep Kid)</button>
     </div>

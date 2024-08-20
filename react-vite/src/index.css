@@ -9,9 +9,14 @@
   body {
     line-height: 1.6;
     background-color: #f8f9fa;
-    color: #333;
-  }
-
+    color: black;
+    background-image: url('https://bundle-of-joy-july24.s3.us-west-1.amazonaws.com/background.png');
+    background-size: cover; /* ensures the image covers the entire background */
+    background-repeat: no-repeat; /* prevents the image from repeating */
+    background-position: center center; /* centers the background image */
+    background-attachment: fixed; /* keeps the background fixed during scroll */
+    min-height: 100vh; /* ensures the background covers the full viewport height */
+}
  /* modal round corners*/
   #modal-content {
     border-radius: 30px;

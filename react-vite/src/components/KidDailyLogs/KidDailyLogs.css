@@ -1,79 +1,26 @@
 .daily-logs-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin: 0px 50px;
-    padding: 0px 20px;
-    border: 1px solid #ccc;
+    gap: 13vw;
+    margin: 0px 5vw;
+    border: 1px solid transparent;
     border-radius: 10px;
-    width: 1000px;
-    box-shadow: 2px 2px 2px 2px rgb(244, 197, 204);
+    width: 90vw;
+    /* box-shadow: 2px 2px 2px 2px rgb(244, 197, 204); */
 }
 
-.daily-logs-content {
-    margin: 50px;
-    border-radius: 10px;
-    width: 1000px;
-    row-gap: 50px;
-}
-
-.update-delete-actions {
+#kid-image-name-age-div {
     display: flex;
-    column-gap: 30px;
-}
-
-.log-item {
-    display: flex;
-    flex-direction: column;
-    width:480px;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 20px;
-    align-items: flex-start;
-    background-color: rgb(244, 197, 204);
-    text-decoration: none;
-    color: black;
-}
-
-.log-image {
-    padding-top: 10px;
-    width: 100%;
-}
-
-#daily-log-image {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-right: 20px;
-} 
-.log-details {
-    display: flex;
-    flex-direction: column;
-    row-gap: 20px;
-    padding-top: 10px;
-    padding-left: 10px;
-}
-
-#log-details-link {
-    display: flex;
-    flex-direction: column;
-    row-gap: 10px;
-    color: black;
-}
-
-#likesAndComments-div {
-    margin: 0px;
-    padding: 0px;
+    align-items: center;
+    gap:1vw;
 }
 
 .kid-profile-img {
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 6vw;
+    height: 6vw;
     color: rgb(244, 197, 204);
-    margin-right: 10px;
+    margin-right: 1vw;
 }
 
 #kid-name-age {
@@ -81,35 +28,246 @@
     flex-direction: column;
     justify-content: flex-start;
 }
+.kidDailyLogs-kid-name {
+    font-size: 2vw;
 
+}
+.kidDailyLogs-kid-age {
+    font-size: 1.5vw;
+}
 #add-dailyLog-button {
     color: black;
-    background-color: rgb(244, 197, 204);
+    background-color: #D970D6;
+    font-size: 1.8vw;
+    color: #fff;
 }
 
-.post-date {
-    font-style: italic;
-    font-size: small;
+.daily-logs-content {
+    margin: 5vw;
+    border-radius: 10px;
+    width: 90vw;
+    row-gap: 6vw;
 }
 
-.update-action, .delete-action {
-    padding:5px 10px;
-    font-size: small;
-    border-radius: 8px;
+.kid-moments {
+    font-size:2vw;
 }
-
-.delete-action {
-    background-color: #6c757d;
+.kid-no-moments {
+    font-size:2vw;
 }
-
-#kid-image-name-age-div {
-    display: flex;
-    align-items: center;
-    gap:10px;
-}
-
 #logs-div {
     display: flex;
     flex-wrap: wrap;
-    column-gap: 30px;
+    column-gap: 3vw;
+    width: 100%;
+}
+.log-item {
+    display: flex;
+    flex-direction: column;
+    width:28vw;
+    border: 1px solid rgb(244, 197, 204);
+    border-radius: 15px;
+    padding: 1vw;
+    margin-bottom: 2vw;
+    align-items: flex-start;
+    background-color: rgb(244, 197, 204);
+    text-decoration: none;
+    color: black;
+}
+
+.log-item-link {
+    width: 100%;
+    color: black;
+}
+
+#daily-log-image {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 1vw;
+    margin-right: 2vw;
+} 
+.log-details {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5vw;
+    padding-top: 1vw;
+    padding-left: 1vw;
+}
+.kidDailyLogs-log-title {
+    font-size:1.2vw;
+}
+
+.kidDailyLogs-log-post-date {
+    font-style: italic;
+    font-size: 1vw;
+}
+.kidDailyLogs-log-content {
+    font-size:1vw;
+}
+.update-delete-actions {
+    display: flex;
+    width: 100%;
+    justify-content:space-around;
+    column-gap: 3vw;
+    padding-top: 1vw;
+    padding-left: 1vw;
+}
+
+.update-action-button {
+    padding:0.5vw 1vw;
+    font-size: 1vw;
+    background-color: #D970D6;
+}
+
+.delete-action-button {
+    padding:0.5vw 1vw;
+    font-size: 1vw;
+    background-color: #6c757d;
+}
+
+#likesAndComments-div {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+#likesAndComments-div .icon {
+    font-size: 1.5vw;
+}
+#likesAndComments-div #count-num {
+    font-size: 1.2vw;
+}
+#likesAndComments-div #comment-num {
+    font-size: 1.2vw;
+}
+#likesAndComments-div #comments {
+    font-size: 1.2vw;
+}
+
+@media (max-width:1200px) {
+    .kidDailyLogs-kid-name {
+        font-size: 3vw;
+    }
+    .kidDailyLogs-kid-age {
+        font-size: 2.5vw;
+    }
+    .kid-profile-img {
+        width: 7vw;
+        height: 7vw;
+    }
+    .kid-moments {
+        padding-left: 1.2vw;
+    }
+    #logs-div {
+        padding-left: 1.2vw;
+    }
+    .log-item {
+        width:42vw;
+    }
+    .kidDailyLogs-kid-age {
+        font-size: 2.5vw;
+    }
+    #add-dailyLog-button {
+        font-size: 2.8vw;
+    }
+    .kid-moments {
+        font-size:3vw;
+    }
+    .kidDailyLogs-log-title {
+        font-size:2.2vw;
+    }
+    
+    .kidDailyLogs-log-post-date {
+        font-size: 2vw;
+    }
+    .kidDailyLogs-log-content {
+        font-size:2vw;
+    }
+    .update-action-button {
+        font-size: 2vw;
+    }
+    
+    .delete-action-button {
+        font-size: 2vw;
+    }
+    #likesAndComments-div .icon {
+        font-size: 2vw;
+    }
+    #likesAndComments-div #count-num {
+        font-size: 2.2vw;
+    }
+    #likesAndComments-div #comment-num {
+        font-size: 2.2vw;
+    }
+    #likesAndComments-div #comments {
+        font-size: 2vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .kidDailyLogs-kid-name {
+        font-size: 4vw;
+    }
+    .kidDailyLogs-kid-age {
+        font-size: 3.5vw;
+    }
+    .kid-profile-img {
+        width: 10vw;
+        height: 10vw;
+    }
+    .kid-moments {
+        padding-left: 2vw;
+    }
+    #logs-div {
+        padding-left: 2vw;
+    }
+    .log-item {
+        width:85vw;
+    }
+    .kidDailyLogs-kid-age {
+        font-size: 3vw;
+    }
+    #add-dailyLog-button {
+        font-size: 3.8vw;
+    }
+    .kid-moments {
+        font-size:4vw;
+    }
+    .kid-moments {
+        font-size:4vw;
+    }
+    .kidDailyLogs-log-title {
+        font-size:3.2vw;
+    }
+    
+    .kidDailyLogs-log-post-date {
+        font-size: 3vw;
+    }
+    .kidDailyLogs-log-content {
+        font-size:3vw;
+    }
+    .update-action-button {
+        font-size: 3vw;
+    }
+    
+    .delete-action-button {
+        font-size: 3vw;
+    }
+    #likesAndComments-div .icon {
+        font-size: 3.5vw;
+    }
+    #likesAndComments-div #count-num {
+        font-size: 3.2vw;
+    }
+    #likesAndComments-div #comment-num {
+        font-size: 3.2vw;
+    }
+    #likesAndComments-div #comments {
+        font-size: 3.2vw;
+    }
+    .log-item {
+        padding: 3vw;
+    }
+    .update-delete-actions {
+        padding-top: 2vw;
+    }
 }

@@ -26,7 +26,7 @@ export default function DeleteDailyModal({kidId, dailyLogId }) {
   return (
     <div className='remove-box'>
       <h1>Confirm Delete</h1>
-      <p>Are you sure you want to delete this moment?</p>
+      <p className='remove-question'>Are you sure you want to delete this moment?</p>
       <button className='yes-button' onClick={(e) => ClickYes(e)}>Yes (Remove Daily Log)</button>
       <button className='no-button' onClick={(e) => ClickNo(e)}>No (Keep Daily Log)</button>
     </div>

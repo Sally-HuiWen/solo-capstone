@@ -4,41 +4,43 @@
     gap: 2vw;
     padding-right:3vw;
 }
-
+.title-h3 {
+    font-size: 2vw;
+}
 #friends-container, #request-received-container, #request-send-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     gap:2vw;
     padding: 2vw;
-    border: 1px solid #1cc;
     border-radius: 10px;
     margin-left: 3vw;
     width: 30vw;
     min-width: 250px;  
     max-width: 100%;
     box-sizing: border-box;
+    background-color: #A0BDC1;
 }
 
 .friend-request-div {
     display: flex;
     flex-direction: column;
-    gap:1vw;
+    gap:0.5vw;
 
 }
 
 .friend-info-div {
     display: flex;
-    gap: 1vw;
-    width: 20vw;
+    gap: 0.5vw;
+    width: 22vw;
     border-radius: 10px;
     box-shadow: 0.3vw 0.3vw 0.3vw 0.3vw grey;
-    padding-left: 1vw;
     min-width: 200px;
 }
 
 .each-friend {
     display: flex;
+    align-items: center;
     gap: 1.5vw;
 }
 
@@ -46,7 +48,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1vw;
+    padding: 1vw 0vw;
     gap: 1.5vw;
 }
 
@@ -57,7 +59,7 @@
 }
 
 #add-new-friend-button {
-    font-size: 1.2vw;
+    font-size: 1.5vw;
     width: 24vw; 
     min-width: 150px;
     text-align: center;
@@ -73,15 +75,22 @@
 .friend-profile-image {
     border-radius: 50%;
     background-color: transparent;
-    width: 4vw;
-    height: 4vw;
+    width: 6vw;
+    height: 6vw;
     padding: 0.5vw;
+}
+.friend-profile-icon {
+    border-radius: 50%;
+    width: 6vw;
+    height: 6vw;
+    padding: 0.5vw;
+    color: #007bff;
 }
 
 .friend-kid-image {
     border-radius: 50%;
-    width: 2.5vw; 
-    height: 2.5vw;
+    width: 4vw; 
+    height: 4vw;
 }
 
 .friend-kid-div {
@@ -124,34 +133,46 @@
     border-radius: 10px;
     box-shadow: 0.3vw 0.3vw 0.3vw 0.3vw grey; 
     align-items: center;
-    gap: 1vw;
+    gap: 0.5vw;
     padding-right: 0.5vw;
-    width: 12vw; 
+    width: 18vw; 
     min-width: 150px;
+    background-color: #A0BDC1;
 }
 
 #requests-received-box, #sent-request-box {
     display: flex;
     flex-direction: column;
-    gap: 2vw; 
+    gap: 0.5vw; 
 }
 
 .remove-friend-button {
     padding: 0.5vw 0.3vw; 
     background-color: #6c757d;
+    font-size: 1vw;
 }
 
 .accept-and-deny-buttons {
     display: flex;
-    gap: 1vw; 
+    gap: 0.5vw; 
     justify-content: space-between;
+}
+
+.accept-friend-request-button {
+    font-size: 1vw;
 }
 
 .cancel-friend-request-button, 
 .deny-friend-request-button, 
 .delete-friend-request-button {
     background-color: #6c757d;
-    padding: 0.5vw; 
+    font-size: 1vw;
+}
+.friend-username-h4 {
+    font-size:1.5vw;
+}
+.kid-name-p {
+    font-size: 1vw;
 }
 
 @media (max-width:1200px) {
@@ -159,16 +180,39 @@
         flex-direction: column;
         align-items: center;
         margin-bottom: 1vw;;
-        row-gap:2.5vw;
+        row-gap:2vw;
     }
     .each-request-friend {
         flex-direction: column;
         align-items: center;
     }
-   
+    #add-new-friend-button {
+        font-size: 1.5vw;
+        width: 23vw; 
+    }
     .each-kid:hover .tooltip {
-        width: 25vw; 
+        width: 24vw; 
         font-size: 1.5vw; 
+        transform: translate(-30%, -35%);
+    }
+    .friend-username-h4 {
+        font-size:2vw;
+    }
+    .kid-name-p {
+        font-size: 1.5vw;
+    }
+    .accept-friend-request-button {
+        font-size: 1.5vw;
+    }
+    
+    .cancel-friend-request-button, 
+    .deny-friend-request-button, 
+    .delete-friend-request-button {
+        font-size: 1.5vw;
+    }
+    .remove-friend-button {
+        padding: 1vw 1.5vw;
+        font-size: 1.5vw;
     }
 
 }
@@ -182,6 +226,7 @@
         margin: 0vw 2vw;
         padding:4vw;
         max-width: 100%;
+        background-color: transparent;
     }
     .each-friend, .each-request-friend, .friend-kid-div {
         flex-direction: row;
@@ -190,10 +235,13 @@
     .friend-info-div, .request-friend-info-div {
         width: 100%;
         gap:3vw;
+        background-color: #A0BDC1;
+        padding: 2vw 4vw;
     }
     .each-kid:hover .tooltip {
         width: 50vw; 
         font-size: 3vw; 
+        transform: translate(-15%, 50%);
     }
 
     .accept-and-deny-buttons {
@@ -202,21 +250,43 @@
 
     .accept-and-deny-buttons button {
         width: 100%; 
-        padding:0.5vw 2.5vw;
+        padding:1vw 2.5vw;
         border-radius: 8px;
     } 
 
     #add-new-friend-button {
-        font-size: 5vw;
-        width: 68vw; 
+        font-size: 4vw;
+        width: 66vw; 
     }
 
-    .friend-profile-image, .friend-kid-image {
-        width: 10vw; 
-        height: 10vw;
+    .friend-profile-image, .friend-kid-image, .friend-profile-icon {
+        width: 15vw; 
+        height: 15vw;
     }
 
     .accept-friend-request-button {
         padding:0.5vw 2.5vw;
+    }
+
+    .title-h3 {
+        font-size: 5vw;
+    }
+    .friend-username-h4 {
+        font-size:5vw;
+    }
+    .kid-name-p {
+        font-size: 4vw;
+    }
+    .accept-friend-request-button {
+        font-size: 3vw;
+    }
+    
+    .cancel-friend-request-button, 
+    .deny-friend-request-button, 
+    .delete-friend-request-button {
+        font-size: 3vw;
+    }
+    .remove-friend-button {
+        font-size: 3vw;
     }
 }

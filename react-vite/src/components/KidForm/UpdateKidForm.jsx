@@ -102,36 +102,42 @@ const UpdateKidForm = () => {
 
             <div className='birth-date-box2'>
                 <label htmlFor='kid-birth-dates'>Birth Date</label>
-                <div id='kid-birth-dates' className='year-month-day-box'>
-                    <select value={year} onChange={e => setYear(e.target.value)}>
-                        <option value="">Select Year</option>
-                        {years.map((year, i) => (
+                <div className='year-month-day-box'>
+                    <div className='kid-year-month-day'>
+                      <select value={year} onChange={e => setYear(e.target.value)}>
+                          <option value="">Select Year</option>
+                          {years.map((year, i) => (
                             <option key={`year-${i}`} value={year}>{year}</option>
-                        ))}
-                    </select>
-                    {hasSubmitted && errors.includes('Please choose a year') && (
-                        <p className='validation-errors'> Please choose a year</p>
-                    )}
+                          ))}
+                      </select>
+                      {hasSubmitted && errors.includes('Please choose a year') && (
+                         <p className='validation-errors'> Please choose a year</p>
+                      )}
+                    </div>
+                    
+                    <div className='kid-year-month-day'>
+                        <select value={month} onChange={(e) => setMonth(e.target.value)}>
+                            <option value="">Select Month</option>
+                            {months.map((month, i) => (
+                                <option key={`month-${i}`} value={month}>{month}</option>
+                            ))}
+                        </select>
+                        {hasSubmitted && errors.includes('Please choose a month') && (
+                            <p className='validation-errors'> Please choose a month</p>
+                        )}
+                    </div>
 
-                    <select value={month} onChange={(e) => setMonth(e.target.value)}>
-                        <option value="">Select Month</option>
-                        {months.map((month, i) => (
-                            <option key={`month-${i}`} value={month}>{month}</option>
-                        ))}
-                    </select>
-                    {hasSubmitted && errors.includes('Please choose a month') && (
-                        <p className='validation-errors'> Please choose a month</p>
-                    )}
-
-                    <select value={day} onChange={(e) => setDay(e.target.value)}>
-                        <option value="">Select Day</option>
-                        {days.map((day, i) => (
-                            <option key={`day-${i}`} value={day}>{day}</option>
-                        ))}
-                    </select>
-                    {hasSubmitted && errors.includes('Please choose a day') && (
-                        <p className='validation-errors'> Please choose a day</p>
-                    )}
+                    <div className='kid-year-month-day'>
+                        <select value={day} onChange={(e) => setDay(e.target.value)}>
+                            <option value="">Select Day</option>
+                            {days.map((day, i) => (
+                                <option key={`day-${i}`} value={day}>{day}</option>
+                            ))}
+                        </select>
+                        {hasSubmitted && errors.includes('Please choose a day') && (
+                            <p className='validation-errors'> Please choose a day</p>
+                        )}
+                    </div>
                 </div>
             </div>
 
@@ -152,13 +158,15 @@ const UpdateKidForm = () => {
                     ))}
                 </select>
             </div>
+            
+            {kid?.kid_image_url && (
+            <div className="current-kid-image-div">
+                <div className='updated-kid-current-img-title'>Current Image</div>
+                <img className='updated-kid-current-img' src={kid.kid_image_url} alt="Current Kid Profile Image" />
+                </div>
+            )}
 
-            <div id='images-box4'>
-                {kid?.kid_image_url && (
-                    <div className="current-kid-profile-image">
-                        <img src={kid.kid_image_url} alt="Current Kid Profile Image" />
-                    </div>
-                )}
+            <div className='image-box4'>
                 <label htmlFor='kid-image'>Profile Image Upload</label>
                 <input
                     id='kid-image'
@@ -169,8 +177,8 @@ const UpdateKidForm = () => {
             </div>
 
             <div id='kid-update-two-buttons'>
-                <button type="submit">Update</button>
-                <button type="button" onClick={handleCancel}>Cancel</button>
+                <button className='form-update-kid-button' type="submit">Update</button>
+                <button className='form-cancel-kid-button'type="button" onClick={handleCancel}>Cancel</button>
             </div>
         </form>
     );

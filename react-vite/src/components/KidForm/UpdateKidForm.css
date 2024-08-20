@@ -1,28 +1,56 @@
-.kid-form {
-    display: flex;
-    flex-direction: column;
-    row-gap: 20px;
-    margin-left: 50px;
-    padding: 20px 50px;
-    width: 600px;
-    border-radius: 10px;
-    box-shadow: 5px 5px 5px 5px grey;
-}
 #kid-update-two-buttons {
     display: flex;
-    column-gap: 30px;
+    column-gap: 3vw;
     justify-content: center;
 }
-
-.current-kid-profile-image img{
-    width:500px;
-    height:400px;
+.updated-kid-current-img-title {
+    font-size: 2vw;
+}
+.updated-kid-current-img {
+    width:40vw;
     border-radius: 10px;
+    aspect-ratio: 16 / 12; 
 }
 
-#kid-birth-dates {
-    display: flex;
-    justify-content: space-between;
-    gap:20px;
-
+.form-update-kid-button {
+    font-size: 1.5vw;
+    background-color: #D970D6;
 }
+
+.form-cancel-kid-button {
+    font-size: 1.5vw;
+    background-color: #6c757d;;
+}
+@media (max-width: 1200px) {
+    .name-box1 label, .birth-date-box2 label, .relationship-box3 label, .image-box4 label {
+        font-size: 3vw;
+    }
+    .updated-kid-current-img-title {
+        font-size: 3vw;
+    }
+    .name-box1 input, .kid-year-month-day select, .relationship-box3 select {
+        font-size: 3vw; 
+    }
+    .form-update-kid-button, .form-cancel-kid-button {
+        font-size: 2.5vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .name-box1 label, .birth-date-box2 label, .relationship-box3 label, .image-box4 label {
+        font-size: 4vw;
+    }
+    .updated-kid-current-img-title {
+        font-size: 4vw;
+    }
+    .name-box1 input, .kid-year-month-day select, .relationship-box3 select {
+        font-size: 4vw; 
+    }
+    .updated-kid-current-img {
+        width:70vw;
+    }
+    .form-update-kid-button, .form-cancel-kid-button {
+        font-size: 3vw;
+    }
+}
+

@@ -112,8 +112,8 @@ const LikesAndComments = ({ dailyLogId }) => {
                     </ul>
                 </div>
                 <div className='count-comment-div'>
-                    <p id='comment-num'>{comments?.length? comments?.length:0}</p>
-                    <p id='comments'>comments</p>
+                    <div id='comment-num'>{comments?.length? comments?.length:0}</div>
+                    <div id='comments'>{comments?.length === 1 ? 'comment' : 'comments'}</div>
                 </div>
             </div>
 
@@ -130,8 +130,8 @@ const LikesAndComments = ({ dailyLogId }) => {
                 </button>
         
                 <button id='comment-button' onClick={handleCommentClick}>
-                    <div><BiMessageRounded/></div>
-                    <div>Comment</div>
+                    <div className='icon-three'><BiMessageRounded/></div>
+                    <div className='comment-comment'>Comment</div>
                 </button>
             </div>
 

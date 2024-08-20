@@ -1,23 +1,43 @@
 #send-friend-request-container {
     display: flex;
     flex-direction: column;
-    margin: 0px 50px;
-    padding: 50px;
-    width: 600px;
-    row-gap: 30px;
-    box-shadow: 5px 5px 5px 5px grey;
-    border-radius: 10px;
+    gap: 2vw 5vw; 
+    margin: 3vw auto; 
+    padding: 3vw; 
+    width: 40vw; 
+    border-radius: 10px; 
+    transform: translateY(50%, -50%); 
     background-color:lightblue;
+}
+#send-friend-request-container input {
+    font-size: 1.5vw;
+    background-color: #E5E5E5;
+    border: 1px solid #E5E5E5;
+}
+
+.send-friend-request-error-message {
+    font-size: 1.2vw;
+    color: red;
+}
+
+.result-div {
+    display: flex;
+    flex-direction: column;
+    row-gap:0.5vw;
+}
+.search-result {
+    font-size: 1.2vw;
 }
 
 #success-message {
     color: black;
-    font-size: medium;
-    font-weight: bold;
+    font-size: 1.2vw;
     background-color: #007bff;
-    padding: 10px;
+    padding: 0.5vw;
     border-radius: 10px;
-    border: 2px solid white;
+    border: 1px solid #007bff;
+    color: white;
+    text-align: center;
 }
 
 .each-person {
@@ -29,16 +49,100 @@
 .person-image-name {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 2vw;
 }
 
 .person-profile-image {
     border-radius: 50%;
-    width:50px;
-    height: 50px;
+    width:5vw;
+    height: 5vw;
+}
+.person-profile-icon {
+    border-radius: 50%;
+    width:5vw;
+    height: 5vw;
+}
+.first-last-name {
+    font-size: 1.2vw;
 }
 
 .add-friend-button {
-    padding: 5px;
-    height: 30px;
+    padding: 0.5vw;
+    font-size: 1.2vw;
+}
+
+@media (max-width:1200px) {
+    #send-friend-request-container {
+        width: 60vw;
+        padding: 5vw;
+        row-gap: 3vw;
+    }
+    #send-friend-request-container input {
+        font-size: 2vw;
+    }
+    .send-friend-request-error-message {
+        font-size: 2vw;
+    }
+
+    .search-result {
+        font-size: 2.2vw;
+    }
+    #success-message {
+        font-size: 2vw;
+    }
+    .person-profile-image {
+        width:7vw;
+        height: 7vw;
+    }
+    .person-profile-icon {
+        width:7vw;
+        height: 7vw;
+    }
+    .first-last-name {
+        font-size: 2.2vw;
+    }
+    
+    .add-friend-button {
+        font-size: 2vw;
+        padding: 1vw 1.5vw;
+    }
+}
+
+@media (max-width: 768px) {
+    #send-friend-request-container {
+        width: 80vw;
+        padding: 6vw;
+        row-gap: 4vw;
+    }
+    #send-friend-request-container input {
+        font-size: 3vw;
+    }
+    .send-friend-request-error-message {
+        font-size: 2.5vw;
+    }
+    #success-message {
+        font-size: 2.5vw;
+    }
+    .result-div {
+        row-gap:1.5vw;
+    }
+    .search-result {
+        font-size: 3vw;
+    }
+    .person-profile-image {
+        width:10vw;
+        height: 10vw;
+    }
+    .person-profile-icon {
+        width:10vw;
+        height: 10vw;
+    }
+    .first-last-name {
+        font-size: 3vw;
+    }
+    
+    .add-friend-button {
+        padding: 1vw 2vw;
+        font-size: 3vw;
+    }
 }

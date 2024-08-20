@@ -1,39 +1,106 @@
-
 .login-modal-container {
     display: flex;
     flex-direction: column;
-    align-items: left;
+    align-items: center;
     justify-content: center;
-    padding: 30px;
-    border-radius: 30px;
-    row-gap: 30px;
-    background-color: white;
+    padding: 3vw;
+    border-radius: 20px;
+    row-gap: 2vw;
+    background-color: #E5E5E5;
+    border: 1px solid #E5E5E5;
 }
 
 .login-form {
-    width: 600px;
+    width: 40vw;
     display: flex;
     flex-direction: column;
-    row-gap: 30px;
+    row-gap: 2vw;
 }
-
+.log-in-title  {
+    font-size: 2vw;
+}
+.login-form label {
+    font-size: 1.5vw;
+}
 .login-form input {
-    padding: 5px;
-    margin-top: 5px;
-    border-radius: 5px;
+    padding: 1vw;
+    margin-top: 0.5vw;
+    border-radius: 0.5vw;
+    background-color: #E5E5E5;
+    border: 1px solid black;
+    font-size: 1.5vw;
 }
 
 .login-form button {
-    padding: 10px;
+    padding: 0.8vw;
     color: white;
-    margin-top: 20px;
+    margin-top: 1vw;
+    font-size: 1.5vw;
+    background-color: #D970D6;
 }
 
 .error-message {
     color: red;
+    font-size: 1.5vw;
+    padding-left: 1vw;
 }
 
 #demo-user-button {
-    background-color: white;
+    background-color: transparent;
     color: black;
+    font-size: 1.5vw;
+}
+
+#demo-user-button:hover {
+    color: #D970D6;
+}
+
+@media (max-width: 1200px) {
+    .login-form {
+        width: 60vw;
+        padding:3vw;
+    }
+    .log-in-title  {
+        font-size: 2.5vw;
+    }
+    .login-form label {
+        font-size: 2vw;
+    }
+    .login-form input {
+        font-size: 2vw;
+    }
+    .login-form button {
+        font-size: 2.5vw;
+    }
+    .error-message {
+        font-size: 2vw;
+    }
+    #demo-user-button {
+        font-size: 2.5vw;
+    }
+}
+@media (max-width: 768px) {
+    .login-modal-container {
+        row-gap: 1vw;
+    }
+    .login-form {
+        width: 80vw;
+        padding:5vw;
+    }
+    .log-in-title  {
+        font-size: 3vw;
+    }
+    .login-form label {
+        font-size: 2.5vw;
+    }
+    .login-form input {
+        font-size: 2.5vw;
+    }
+    .login-form button {
+        font-size: 3vw;
+    }
+    .error-message {
+        font-size: 2.5vw;
+    }
+    
 }

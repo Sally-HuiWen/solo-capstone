@@ -1,7 +1,6 @@
 import { thunkDeleteComment } from '../../redux/comments';
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import './DeleteCommentModal.css';
 
 export default function DeleteCommentModal({ commentId, dailyLogId }) {
   const dispatch = useDispatch();
@@ -22,9 +21,9 @@ export default function DeleteCommentModal({ commentId, dailyLogId }) {
   };
 
   return (
-    <div className="delete-comment-div">
-      <h2>Confirm Delete Comment</h2>
-      <h4>Are you sure you want to delete this comment?</h4>
+    <div className="remove-box">
+      <h1 className='remove-box-title'>Confirm Delete Comment</h1>
+      <p className='remove-question'>Are you sure you want to delete this comment?</p>
       <button className='yes-button' onClick={(e) => ClickYes(e)}>Yes (Delete Comment)</button>
       <button className='no-button' onClick={(e) => ClickNo(e)}>No (Keep Comment)</button>
     </div>

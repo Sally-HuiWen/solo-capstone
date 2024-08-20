@@ -52,7 +52,7 @@ const SendFriendRequest = () => {
             if (data.users_exist) {
                 setSearchResult(data.users_exist);
             } else {
-                setErrors(['This user found! Please try another name.']);
+                setErrors(['This user not found! Please try another name.']);
                 setQuery(''); // clear the input field
             }
         }
@@ -111,11 +111,11 @@ const SendFriendRequest = () => {
             />
             
             {errors.length > 0 && (
-                <p className="error-message">{errors[0]}</p>
+                <p className="send-friend-request-error-message">{errors[0]}</p>
             )}
             {searchResult?.length > 0 && errors?.length === 0 && (
-                <>
-                    <h3>Search Results</h3>
+                <div className='result-div'>
+                    <h3 className='search-result'>Search Results</h3>
                     {searchResult?.map((person, index)=> (
                         <div key={person.id || index} className='each-person'>
                            <div className='person-image-name'>
@@ -124,12 +124,12 @@ const SendFriendRequest = () => {
                              ) : (
                              <FaUserCircle className='person-profile-icon'/>
                              )}
-                             <p className='span-span'>{person.first_name} {person.last_name}</p>
+                             <p className='first-last-name'>{person.first_name} {person.last_name}</p>
                            </div>
                            <button className='add-friend-button' onClick={() => handleSubmit(person.id, person.first_name, person.last_name)}>Add friend</button>
                         </div>   
                     ))}   
-                </>
+                </div>
             )}
             {message && <p id="success-message">{message}</p>}
         </div>
