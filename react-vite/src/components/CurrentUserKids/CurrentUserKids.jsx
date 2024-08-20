@@ -37,12 +37,12 @@ const CurrentUserKids = () => {
             
             <div >
                 <button onClick={handleAddNewKid} id='add-kid-button'>
-                    Add New Kid
+                    Add Kid
                 </button>
             </div>
             <div className='your-kids-content'>
                 {kids.length === 0 ? (
-                    <p>No kids found. Please add your kid by click the button</p>
+                    <p className='no-kids-found'>No kids found. Please add your kid.</p>
                 ):(
                     <div id='kids-list-box'>
                         {kids.map((kid, index)=> (

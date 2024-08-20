@@ -143,7 +143,7 @@ const LikesAndComments = ({ dailyLogId }) => {
                                 {comment?.user?.user_image_url ? (
                                     <img className="comment-user-image" src={comment?.user?.user_image_url} alt="User Profile Image" />
                                 ) : (
-                                    <FaUserCircle className='comment-user-icon'/>
+                                    <FaUserCircle className='show-comment-user-icon'/>
                                 )}
                                 <div className='comment-user-info-content'>
                                     <p className='comment-user-name'>{comment?.user?.first_name} {comment?.user?.last_name}</p>
@@ -182,7 +182,7 @@ const LikesAndComments = ({ dailyLogId }) => {
                         {sessionUser?.user_image_url ? (
                             <img className="comment-user-image" src={sessionUser?.user_image_url} alt="User Profile Image" />
                         ) : (
-                            <FaUserCircle className='comment-user-icon'/>
+                            <FaUserCircle className='leave-comment-user-icon'/>
                         )}
                         <textarea
                             value={newComment}

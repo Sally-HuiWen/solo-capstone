@@ -1,46 +1,82 @@
 #landing-page-container {
     display: flex;
-    column-gap: 2.5vw; /* sse viewport width for gap */
-    padding: 0 2.5vw; 
+    flex-wrap: wrap;
+    gap: 6vw; 
+    padding-left: 8vw;
+    padding-right: 4vw;
     height: 80vh; 
-}
-
-#landing-page-left-box, #landing-page-right-box {
-    width: 45%;
-    height: 100%;
+    align-items: center;
 }
 
 #landing-page-left-box {
+    width: 40%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    row-gap: 1.5vw;
-    justify-content: space-between;
+    justify-content: center;
+    row-gap: 2vw;
+}
+
+#landing-page-right-box {
+    width: 45%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #big-des, #small-des {
-    padding: 0vw 2.5vw;
     color: rgba(0, 0, 0, 1);
-    display: flex;
-    align-items: center; 
-    flex-grow: 0.5; /* allows them to grow and distribute space evenly */
-    text-shadow: 2px 2px 2px #ccc;
+    padding: 0 2vw;
+    text-align: left;
 }
 
 #big-des {
-    font-size: 4vw; 
+    text-shadow: 2px 2px 2px #ccc;
+    font-size: 3.5vw; 
     font-weight: bold;
 }
 
 #small-des {
-    font-size: 2.5vw;
+    font-size: 2.2vw;
 }
 
 #landing-page-img {
     width: 100%;
-    height: 100%;
-    border-radius: 3vw;
+    height: auto;
+    aspect-ratio: 1 / 1; 
+    border-radius: 25%;
+    object-fit: cover; 
+    margin-top: 2vw;
+    padding: 1vw 0vw;
 }
 
+@media (max-width: 1200px) {
+    #landing-page-container {
+        padding-left: 6vw;
+        padding-right: 4vw;
+        gap:4vw;
+    }
+
+    #landing-page-left-box {
+        width: 45%;
+    }
+
+    #landing-page-right-box {
+        width: 45%;
+    }
+
+    #big-des {
+        font-size: 4vw;
+    }
+
+    #small-des {
+        font-size: 2.8vw;
+    }
+    #landing-page-img {
+        width: 110%;
+    }
+}
    
 @media (max-width: 768px) {
     #landing-page-container {
@@ -48,6 +84,7 @@
         padding: 4vw;
         height: auto;
         align-items: center;
+        row-gap:4vw;
     }
     
     #landing-page-left-box, #landing-page-right-box {
@@ -57,16 +94,19 @@
     }
 
     #big-des {
-        font-size: 6vw;
+        font-size: 5vw;
         text-align: center;
     }
 
     #small-des {
-        font-size: 4vw;
+        font-size: 3.5vw;
+        text-align: center;
     }
 
     #landing-page-img {
-        max-width: 100%;
-        margin-top: 4vw;
+        width: 90%;
+        margin-top: 0.5vw;
+        padding:0;
+        border-radius: 30px;
     }
 }

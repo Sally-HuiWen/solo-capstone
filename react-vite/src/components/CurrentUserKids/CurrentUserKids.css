@@ -123,6 +123,9 @@
     color: darkorchid;
     text-shadow: 2px 2px 4px #fff;
 }
+.no-kids-found {
+    font-size: 1.5vw;
+}
 #kid-name-h2 {
     font-size:1.5vw;
     text-align: center;
@@ -146,6 +149,9 @@
     }
     #my-kids-h1 {
         font-size: 3vw;
+    }
+    .no-kids-found {
+        font-size: 2vw;
     }
     #kid-name-h2 {
         font-size:2.5vw;
@@ -228,7 +234,9 @@
         font-size: 5vw; 
         text-align: center;
     }
-
+    .no-kids-found {
+        font-size: 3.5vw;
+    }
     #kid-name-h2 {
         font-size: 4vw; 
         text-align: center;  

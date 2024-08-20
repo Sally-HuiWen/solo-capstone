@@ -164,10 +164,15 @@
     height:5vw;
     border-radius: 50%;
 }
-.comment-user-icon {
+.leave-comment-user-icon {
+    width:8vw;
+    height:8vw;
+    color:#007bff;
+}
+.show-comment-user-icon {
     width:5vw;
     height:5vw;
-    border-radius: 50%;
+    color:#007bff;
 }
 
 #like-and-comment-div {
@@ -190,7 +195,9 @@
 
 #leave-comment-div {
     display: flex;
-    gap:2vw;
+    gap:1.5vw;
+    justify-content: center;
+    align-items: center;
 }
 
 #leave-comment-div  textarea{
@@ -201,7 +208,6 @@
 #comments-section {
     display: flex;
     flex-direction: column;
-    gap: 1vw;
 }
 
 #send-comment-button {
@@ -209,6 +215,8 @@
     color: lightsteelblue;
     font-size: 2vw;
     font-weight: bold;
+    padding:0;
+    margin: 0;
 }
 
 .comment-actions-buttons {
@@ -290,7 +298,11 @@
         width:7vw;
         height:7vw;
     }
-    .comment-user-icon {
+    .leave-comment-user-icon {
+        width:10.5vw;
+        height:10.5vw;
+    }
+    .show-comment-user-icon {
         width:7vw;
         height:7vw;
     }
@@ -356,7 +368,11 @@
         width:12vw;
         height:12vw;
     }
-    .comment-user-icon {
+    .leave-comment-user-icon {
+        width:16vw;
+        height:16vw;
+    }
+    .show-comment-user-icon {
         width:12vw;
         height:12vw;
     }

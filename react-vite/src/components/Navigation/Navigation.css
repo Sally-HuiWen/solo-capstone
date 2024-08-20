@@ -9,20 +9,20 @@
 #left-header-box {
   display: flex;
   align-items: center;
-  color: orchid;
   text-decoration: none;
 }
 
 #logo {
   font-size: 5vw; 
   margin-right: 1vw; 
+  color: #D970D6;
 }
 
 #website-name {
   background-color: transparent;
   font-size: 3vw; 
-  color: orchid;
-  text-shadow: 2px 2px 4px black;
+  color: #D970D6;
+  text-shadow: 2px 2px 2px black;
 }
 
 .profile-dropdown {

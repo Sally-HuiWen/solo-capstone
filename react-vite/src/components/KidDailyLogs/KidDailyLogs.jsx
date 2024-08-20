@@ -40,7 +40,7 @@ const KidDailyLogs = () => {
               alt={`${kid?.name}'s profile`} 
             />
           ) : (
-            <PiBabyLight className='kid-profile-img' />
+            <PiBabyLight className='kidDailyLogs-profile-icon' />
           )}
           <div id='kid-name-age'>
             <h2 className='kidDailyLogs-kid-name'>{kid?.name}</h2>
@@ -60,20 +60,18 @@ const KidDailyLogs = () => {
       <div className="daily-logs-content">
         <h2 className='kid-moments'>{kid?.name}&apos;s Moments</h2>
         {allDailyLogsForThisKid.length === 0 ? (
-          <p className='kid-no-moments'>No Moments found</p>
+          <p className='kid-moments'>No Moments found</p>
         ) : (
           <div id='logs-div'>
             {allDailyLogsForThisKid.map((log) => (
               <div key={log?.id} className="log-item">
                 <Link to={`/dailyLogs/${log?.id}`} className='log-item-link'>
-                  {log?.image_url ? (
+                  {log?.image_url && (
                     <img 
                       src={log?.image_url} 
                       id='daily-log-image' 
                       alt={`${log?.title} image`} 
                     />
-                  ) : (
-                    <p>No image available</p>
                   )}
 
                   <div className="log-details">
