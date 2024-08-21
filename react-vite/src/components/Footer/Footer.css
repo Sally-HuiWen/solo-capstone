@@ -1,0 +1,62 @@
+.footer {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    gap:2vw;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-author-name {
+    font-size: 1.2vw;
+    font-weight: bold;
+    color: darkorchid;
+}
+.footer a {
+    margin: 0 10px;
+    font-size: 1.2vw;
+    display: inline-flex;
+    align-items: center;
+    gap:0.2vw;
+    color: black;
+}
+.footer-linkedin-icon {
+    color: #0B65C2;
+    font-size:1.5vw;
+}
+.footer-github-icon {
+    font-size:1.5vw;
+    color: black;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+    color: darkorchid;
+    transform: scale(1.05);
+}
+@media (max-width: 1200px) {
+    .footer {
+        gap:2vw;
+    }
+    .footer-author-name {
+        font-size: 2vw;
+    }
+    .footer a {
+        font-size: 2vw;
+        gap:0.5vw;
+    }
+    .footer-linkedin-icon, .footer-github-icon {
+        font-size:2.5vw;
+    }
+}
+@media (max-width: 768px) {
+    .footer-author-name {
+        font-size:2.5vw;
+    }
+    .footer a {
+        font-size:2.5vw;
+    }
+    .footer-linkedin-icon, .footer-github-icon {
+        font-size:3vw;
+    }
+}
