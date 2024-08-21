@@ -10,7 +10,7 @@
 .footer-author-name {
     font-size: 1.2vw;
     font-weight: bold;
-    color: darkorchid;
+    color: black;
 }
 .footer a {
     margin: 0 10px;
@@ -31,8 +31,11 @@
 
 .footer a:hover {
     text-decoration: underline;
-    color: darkorchid;
+    color: #D870D6;
     transform: scale(1.05);
+}
+.footer strong {
+    color: #D870D6;
 }
 @media (max-width: 1200px) {
     .footer {

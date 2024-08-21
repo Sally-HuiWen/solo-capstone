@@ -5,7 +5,7 @@ import { FaGithub } from "react-icons/fa";
 export default function Footer() {
     return (
         <footer className="footer">
-                <div className='footer-author-name'>&copy; 2024 HUI WEN. All rights reserved.</div>
+                <div className='footer-author-name'>&copy; 2024 <strong>HUI WEN</strong>. All rights reserved.</div>
                 <div>
                     <a href="https://github.com/Sally-HuiWen/solo-capstone" target="_blank" rel="noopener noreferrer">
                       <FaGithub className='footer-github-icon'/> GitHub
