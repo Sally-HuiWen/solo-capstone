@@ -9,6 +9,7 @@
     margin-left: 1vw;
     box-sizing: border-box; 
     width: 100%;
+    min-height: 80vh;
 }
 
 #my-kids-and-friends {

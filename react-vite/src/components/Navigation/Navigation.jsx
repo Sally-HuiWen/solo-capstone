@@ -10,7 +10,7 @@ function Navigation() {
 
   const handleClick = () => {
     if (sessionUser) {
-      navigate('/your-kids-list')
+      navigate('/my-kids-list')
     } else {
       navigate('/')
     }

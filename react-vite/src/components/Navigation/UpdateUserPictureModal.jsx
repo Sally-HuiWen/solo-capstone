@@ -37,7 +37,7 @@ export default function UpdateUserPictureModal({ user }) {
                 setErrors(updatedImage.errors);
             } else {
                 closeModal();
-                navigate('/your-kids-list')
+                navigate('/my-kids-list')
             }
         } else {
             const newImage = await dispatch(thunkUploadProfileImage(image));
@@ -45,14 +45,14 @@ export default function UpdateUserPictureModal({ user }) {
                 setErrors(newImage.errors);
             } else {
                 closeModal();
-                navigate('/your-kids-list')
+                navigate('/my-kids-list')
             }
         }
     };
 
     const handleCancel = () => {
         closeModal();
-        navigate('/your-kids-list')
+        navigate('/my-kids-list')
     };
 
     return (

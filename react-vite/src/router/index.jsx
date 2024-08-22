@@ -30,7 +30,7 @@ export const router = createBrowserRouter([
         element: <SignupFormPage />,
       },
       {
-        path: "/your-kids-list",
+        path: "/my-kids-list",
         element: <CurrentUserKids />,
       },
       {

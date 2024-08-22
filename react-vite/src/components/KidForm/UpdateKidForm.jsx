@@ -71,11 +71,11 @@ const UpdateKidForm = () => {
         if (updatedKidRes.errors) {
             setErrors(updatedKidRes.errors);
         } else {
-            navigate('/your-kids-list');
+            navigate('/my-kids-list');
         }
     };
 
-    const handleCancel = () => navigate('/your-kids-list');
+    const handleCancel = () => navigate('/my-kids-list');
 
     const years = Array.from(new Array(100), (val, i) => new Date().getFullYear() - i);
     const months = Array.from(new Array(12), (val, i) => String(i + 1).padStart(2, '0'));

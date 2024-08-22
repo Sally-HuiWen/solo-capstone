@@ -52,7 +52,7 @@ const KidForm = () => {
         if (newKidRes?.errors) {
             setErrors(newKidRes.errors);
         } else {
-            navigate('/your-kids-list');
+            navigate('/my-kids-list');
         }
     };
 

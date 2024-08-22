@@ -1,3 +1,6 @@
+#daily-logs-container {
+    min-height: 80vh;
+}
 .daily-logs-header {
     display: flex;
     align-items: center;
@@ -6,6 +9,7 @@
     border: 1px solid transparent;
     border-radius: 10px;
     width: 90vw;
+    
     /* box-shadow: 2px 2px 2px 2px rgb(244, 197, 204); */
 }
 
@@ -48,7 +52,7 @@
 }
 
 .daily-logs-content {
-    margin: 5vw;
+    margin: 2vw 5vw;
     border-radius: 10px;
     width: 90vw;
     row-gap: 6vw;

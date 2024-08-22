@@ -101,7 +101,7 @@ const CurrentUserFriends = () => {
                     <h3 className='title-h3'>All Friends</h3>
                     <div >
                         <button onClick={handleAddFriend} id='add-new-friend-button'>
-                            Add a new friend
+                            Add A New Friend
                         </button>
                     </div>
                 </div>
@@ -132,7 +132,7 @@ const CurrentUserFriends = () => {
                             </div>
                         </div>
                         <div>
-                            <button className='remove-friend-button' onClick={() => handleRemoveFriend(friend.id)}>Remove friend</button>
+                            <button className='remove-friend-button' onClick={() => handleRemoveFriend(friend.id)}>Remove Friend</button>
                         </div>
                         
                     </div>

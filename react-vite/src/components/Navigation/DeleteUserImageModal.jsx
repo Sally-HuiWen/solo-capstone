@@ -12,7 +12,7 @@ export default function DeleteUserImageModal() {
     try {
       dispatch(thunkDeleteProfileImage())
       closeModal();
-      navigate('/your-kids-list')
+      navigate('/my-kids-list')
     } catch(error) {
       console.error('fail to delete user image', error);
     }
@@ -21,7 +21,7 @@ export default function DeleteUserImageModal() {
   const ClickNo = (e) => {
     e.preventDefault;
     closeModal();
-    navigate('/your-kids-list')
+    navigate('/my-kids-list')
   };
 
   return (

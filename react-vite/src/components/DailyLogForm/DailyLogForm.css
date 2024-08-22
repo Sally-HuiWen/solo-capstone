@@ -5,6 +5,7 @@
     margin: 0 auto; 
     padding: 3vw; 
     width: 50vw; 
+    min-height: 80vh; 
     border-radius: 10px; 
     transform: translateY(50%, -50%); 
     /* box-shadow: 0.3vw 0.3vw 0.5vw 0.5vw grey; */

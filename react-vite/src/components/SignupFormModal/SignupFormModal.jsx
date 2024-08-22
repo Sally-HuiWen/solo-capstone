@@ -56,7 +56,7 @@ function SignupFormModal() {
       setErrors(serverResponse);
     } else {
       closeModal();
-      navigate('/your-kids-list')
+      navigate('/my-kids-list')
     }
   };
 

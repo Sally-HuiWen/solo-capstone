@@ -22,7 +22,7 @@
     border-radius: 30px;
 }
 
-  /* Link styles */
+  /* link styles */
   a, link {
     text-decoration: none; 
   }
@@ -32,7 +32,7 @@
     cursor: pointer;
   }
   
-  /* Basic layout settings */
+  /* basic layout settings */
   .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -40,7 +40,7 @@
   }
   
   
-  /* Button styles */
+  /* button styles */
   button {
     display: inline-block;
     padding: 10px 15px;

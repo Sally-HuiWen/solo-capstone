@@ -2,17 +2,19 @@
     display: flex;
     flex-direction: column;
     gap: 2vw 5vw; 
-    margin: 3vw auto; 
+    margin: 5vw auto; 
     padding: 3vw; 
     width: 40vw; 
+    min-height: 60vh;
     border-radius: 10px; 
     transform: translateY(50%, -50%); 
-    background-color:lightblue;
+    /* background-color:lightblue; */
 }
 #send-friend-request-container input {
     font-size: 1.5vw;
     background-color: #E5E5E5;
     border: 1px solid #E5E5E5;
+    padding: 1vw
 }
 
 .send-friend-request-error-message {
@@ -77,9 +79,11 @@
         width: 60vw;
         padding: 5vw;
         row-gap: 3vw;
+        min-height: 65vh;
     }
     #send-friend-request-container input {
-        font-size: 2vw;
+        font-size: 2.2vw;
+        padding: 2vw;
     }
     .send-friend-request-error-message {
         font-size: 2vw;
@@ -114,6 +118,7 @@
         width: 80vw;
         padding: 6vw;
         row-gap: 4vw;
+        min-height: 70vh;
     }
     #send-friend-request-container input {
         font-size: 3vw;
