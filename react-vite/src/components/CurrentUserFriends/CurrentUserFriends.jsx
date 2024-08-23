@@ -210,10 +210,12 @@ const CurrentUserFriends = () => {
                                                 ) : (
                                                 <FaUserCircle className='friend-profile-icon'/>
                                             )}
-                                            <h4>{friend?.username}</h4> 
+                                            <div>
+                                                <h4 className='friend-username-h4'>{friend?.username}</h4> 
+                                                <p className='denied-label'>Denied</p>
+                                            </div>
                                         </div>
                                             
-                                        <div className='denied-label'>Denied</div>
                                         <button className='delete-friend-request-button'onClick={() => handleDeleteRequest(friendship.id)}>Delete Request</button>
                                         
                                     </div>

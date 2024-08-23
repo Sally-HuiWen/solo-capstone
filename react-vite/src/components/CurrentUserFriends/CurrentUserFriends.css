@@ -69,7 +69,6 @@
 .denied-label {
     color: red;
     font-size: 1.2vw; 
-    padding-top: 0.5vw;
     font-weight: bold;
 }
 
@@ -215,6 +214,9 @@
         padding: 1vw 1.5vw;
         font-size: 1.5vw;
     }
+    .denied-label {
+        font-size: 1.5vw; 
+    }
 
 }
 @media (max-width: 768px) {
@@ -289,5 +291,8 @@
     }
     .remove-friend-button {
         font-size: 3vw;
+    }
+    .denied-label {
+        font-size: 4vw; 
     }
 }
