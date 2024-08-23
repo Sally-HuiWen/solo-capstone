@@ -147,7 +147,7 @@ https://solo-capstone.onrender.com/
 
 ## kid Routes
 
-### Add a new kid
+### Add a New Kid
 ##
 * Purpose: This fetch is to add a new kid to kids list
 * Method: ```POST```
@@ -193,7 +193,7 @@ https://solo-capstone.onrender.com/
 }
 ```
 
-### View Current User kids list
+### Get Current User's Kids
 ##
 *Purpose: This fetch is to view the kids list of the current logged-in user.
 * Method: ```GET```
@@ -221,418 +221,353 @@ https://solo-capstone.onrender.com/
     ]
 }
 ```
-### Update Cart Item Quantity
-##
-* Purpose: This fetch is sent to update the quantity value of a cart item.
-* Method: ```PUT```
-* URL: ```/api/cart/quantity```
-* Body:
-```python
-{
-   'id': INT,
-   'val': INT
-}
-```
-* Successful Response: HTTP Status 200
-```python
-{
-   'id': INT,
-   'category': STRING,
-   'vendor_name': STRING,
-   'manufacturer_id': STRING,
-   'name': STRING,
-   'model': STRING,
-   'serial': STRING,
-   'description': STRING,
-   'tech_specs': STRING,
-   'price': FLOAT,
-   'quantity': INT
-}
-```
-* Error Response1: HTTP Status 404
-```python
-{
-   'errors': 'Item with given id Not Found'
-}
-```
-* Error Response2: HTTP Status 400
-```python
-{
-   'errors': ARRAY_OF_STRINGS
-}
-```
-### Remove Item from Cart
-##
-* Purpose: This fetch is sent to delete an item from the cart.
-* Method: ```DELETE```
-* URL: ```/api/cart/delete/int:id```
-* Successful Response: HTTP Status 200
-```python
-{
-   'message': 'Success'
-}
-```
-* Error Response: HTTP Status 404
-```python
-{
-   'errors': 'Item with given id Not Found'
-}
-```
 
-### Empty Cart
+### Get a Specific Kid by ID
 ##
-* Purpose: This fetch is sent to delete all items from the cart.
-* Method: ```DELETE```
-* URL: ```/api/cart/clear/int:id```
-* Successful Response: HTTP Status 200
-```python
-{
-   'message': 'Cart Emptied'
-}
-```
-* Error Response: HTTP Status 404
-```python
-{
-   'errors': 'Cart with given id Not Found'
-}
-```
-
-## Shipping Info Routes
-
-### Get Current User Shipping Info
-##
-* Purpose: This fetch is sent to retrieve all shipping info records for the user specified by the id.
+*Purpose: This fetch is to retrieve a specific kid's details by their ID for the current logged-in user.
 * Method: ```GET```
-* URL: ```/api/shipping/int:user_id```
+* URL: ```/api/kids/<int:kid_id>```
 * Successful Response: HTTP Status 200
 ```python
-[
-   {
-      apt_number: INT,
-      city: STRING,
-      company: STRING,
-      country: STRING,
-      primary: BOOLEAN,
-      shipping_name: STRING,
-      state: STRING,
-      street: STRING,
-      user_id: INT,
-      zip: STRING
-   }
-]
-```
-* Error Response: HTTP Status 404
-```python
 {
-   'errors': 'User with given id Not Found'
+    "birth_date": "Wed, 06 Jun 2018 00:00:00 GMT",
+    "id": 1,
+    "kid_image_url": "https://bundle-of-joy-july24.s3.us-west-1.amazonaws.com/capston-upload-images/kid-Elsa-profile-image.png",
+    "name": "Elsa",
+    "relationship": "Mom",
+    "user_id": 1
 }
 ```
 
-### Create a new Shipping Record
+### Update a Kid by ID
 ##
-* Purpose: This fetch is sent to add a new entry to the shipping info table.
-* Method: ```POST```
-* URL: ```/api/shipping/add```
-* Body:
-```python
-   {
-      apt_number: INT,
-      city: STRING,
-      company: STRING,
-      country: STRING,
-      primary: BOOLEAN,
-      shipping_name: STRING,
-      state: STRING,
-      street: STRING,
-      user_id: INT,
-      zip: STRING
-   }
-```
-* Success Response: HTTP Status 201
-```python
-[
-   {
-      apt_number: INT,
-      city: STRING,
-      company: STRING,
-      country: STRING,
-      primary: BOOLEAN,
-      shipping_name: STRING,
-      state: STRING,
-      street: STRING,
-      user_id: INT,
-      zip: STRING
-   }
-]
-```
-* Error Response1: HTTP Status 400
-```python
-{
-   'errors': ARRAY_OF_STRINGS
-}
-```
-* Error Response2: HTTP Status 404
-```python
-{
-   'errors': 'User with given id Not Found'
-}
-```
-
-### Update Shipping Record
-##
-* Purpose: This fetch is sent to update the shipping info record specified by the shipping id.
+* Purpose: This fetch is to allow the current logged-in user to update the details of a specific kid by their ID.
 * Method: ```PUT```
-* URL: ```/api/shipping/update/int:shipping_id```
+* URL: ```/api/kids/<int:kid_id>```
 * Body:
 ```python
-   {
-      apt_number: INT,
-      city: STRING,
-      company: STRING,
-      country: STRING,
-      primary: BOOLEAN,
-      shipping_name: STRING,
-      state: STRING,
-      street: STRING,
-      user_id: INT,
-      zip: STRING
-   }
+{
+    "birth_date": "2024-02-01",
+    "kid_image_url": "image-test2",
+    "name": "Hans",
+    "relationship": "Mom",
+}
 ```
 * Successful Response: HTTP Status 200
 ```python
-[
-   {
-      apt_number: INT,
-      city: STRING,
-      company: STRING,
-      country: STRING,
-      primary: BOOLEAN,
-      shipping_name: STRING,
-      state: STRING,
-      street: STRING,
-      user_id: INT,
-      zip: STRING
-   }
-]
-```
-* Error Response1: HTTP Status 400
-```python
 {
-   'errors': ARRAY_OF_STRINGS
+    "birth_date": "Thu, 01 Feb 2024 00:00:00 GMT",
+    "id": 15,
+    "kid_image_url": "image-test2",
+    "name": "Hans",
+    "relationship": "Mom",
+    "user_id": 1
 }
 ```
-* Error Response2: HTTP Status 404
+* Error Response 1: HTTP Status 400
 ```python
 {
-   'errors': 'Shipping Record with given id Not Found'
+    "errors": {
+        "name": [
+            "This field is required.",
+            "Name can not be more than 50 characters"
+        ],
+        "birth_date": [
+            "This field is required."
+        ],
+        "relationship": [
+            "This field is required."
+        ],
+        "image": [
+            "File type is not allowed."
+        ]
+    }
+}
+```
+* Error Response 2: HTTP Status 403
+```python
+{
+    "errors": {
+        "message": "You are not authorized"
+    }
+}
+```
+* Error Response 3: HTTP Status 404
+```python
+{
+    "errors": {
+        "message": "Kid not found"
+    }
 }
 ```
 
-### Delete Shipping Record
+### Remove a Kid by ID
 ##
-* Purpose: This fetch sends a shipping info id in the body of the request of the record to be deleted.
+* Purpose: This fetch is to allow the current logged-in user to delete a specific kid by their ID.
 * Method: ```DELETE```
-* URL: ```/api/shipping/delete```
+* URL: ```/api/kids/<int:kid_id>```
+* Successful Response: HTTP Status 200
+```python
+{
+    "message": "kid remove successfully"
+}
+```
+
+* Error Response 1: HTTP Status 403
+```python
+{
+    "errors": {
+        "message": "You are not authorized"
+    }
+}
+```
+* Error Response 2: HTTP Status 404
+```python
+{
+    "errors": {
+        "message": "Kid not found"
+    }
+}
+```
+
+## Daily logs routes
+### Create a New Daily Log for a Specific Kid
+##
+* Purpose: This fetch is to allow the current logged-in user to create a new daily log for a specific kid by their ID.
+* Method: ```POST```
+* URL: ```/kids/<int:kid_id>/daily_logs/new```
 * Body:
 ```python
 {
-   'id': INT
+    "title": "pumpkin farm fun",
+    "content": "Elsa went to the Queens Farm and had a wonderful time!",
+    "image": "Elsa-pumpkin-farm-image.png", 
 }
 ```
-* Successful Response: HTTP Status 200
-```python
-[
-   {
-      apt_number: INT,
-      city: STRING,
-      company: STRING,
-      country: STRING,
-      primary: BOOLEAN,
-      shipping_name: STRING,
-      state: STRING,
-      street: STRING,
-      user_id: INT,
-      zip: STRING
-   }
-]
-```
-* Error Response: HTTP Status 404
+* Successful Response: HTTP Status 201
 ```python
 {
-   'errors': 'Shipping Record with given id Not Found'
+    "content": "Elsa went to the Queens Farm and had a wonderful time!",
+    "created_at": "Fri, 23 Aug 2024",
+    "id": 44,
+    "image_url": "https://bundle-of-joy-july24.s3.amazonaws.com/c03faf5e0e8842378b80865f228461a2.png",
+    "kid_id": 1,
+    "title": "pumpkin farm fun"
 }
 ```
-## Billing Info Routes
-
-### Get Current User Billing Info
+* Error Response: HTTP Status 400
+```python
+{
+    "errors": {
+        "content": [
+            "This field is required."
+        ],
+        "title": [
+            "This field is required."
+        ],
+        "image": [
+            "File type is not allowed."
+        ]
+    }
+}
+```
+### Get All Daily Logs by Kid ID
 ##
-* Purpose: This fetch is sent to retrieve all billing info records for the user specified by the id.
+* Purpose: This fetch is to retrieve all daily logs for a specific kid by their ID for the current logged-in user.
 * Method: ```GET```
-* URL: ```/api/billing/int:user_id```
+* URL: ```/api/kids/<int:kid_id>/daily_logs```
 * Successful Response: HTTP Status 200
 ```python
-[
-   {
-      apt_number: INT,
-      city: STRING,
-      company: STRING,
-      country: STRING,
-      primary: BOOLEAN,
-      shipping_name: STRING,
-      state: STRING,
-      street: STRING,
-      user_id: INT,
-      zip: STRING
-   }
-]
+{
+    "daily_logs": [
+        {
+            "content": "Elsa went to the Queens Farm and had a wonderful time!",
+            "created_at": "Fri, 23 Aug 2024",
+            "id": 45,
+            "image_url": "https://bundle-of-joy-july24.s3.amazonaws.com/c03faf5e0e8842378b80865f228461a2.png",
+            "kid_id": 1,
+            "title": "punpkin farm fun cool"
+        },
+        {
+            "content": "ELsa invited all her kindergarten classmates to attend her birthday party. She had so much fun",
+            "created_at": "Thu, 06 Jun 2024",
+            "id": 1,
+            "image_url": "https://bundle-of-joy-july24.s3.us-west-1.amazonaws.com/capston-upload-images/daily-log-image1-Elsa-birthday-party.png",
+            "kid_id": 1,
+            "title": "Six-year-old Birthday Party"
+        },
+        {
+            "content": "First day of kindergarten! She is a elementary student now! ",
+            "created_at": "Wed, 16 Aug 2023",
+            "id": 2,
+            "image_url": "https://bundle-of-joy-july24.s3.us-west-1.amazonaws.com/capston-upload-images/daily-log-image2-Elsa-first-day.png",
+            "kid_id": 1,
+            "title": "First Day of Kindergarten"
+        },
+        {
+            "content": "chasing waves near the beautiful beach!",
+            "created_at": "Sat, 15 Jul 2023",
+            "id": 3,
+            "image_url": "https://bundle-of-joy-july24.s3.us-west-1.amazonaws.com/capston-upload-images/daily-log-image3-elsa-chase-waves.png",
+            "kid_id": 1,
+            "title": "Running Near Carmel-by-the-sea"
+        },
+        {
+            "content": "ELsa just unlock the skill of  backward crossover! ",
+            "created_at": "Sat, 20 May 2023",
+            "id": 4,
+            "image_url": "https://bundle-of-joy-july24.s3.us-west-1.amazonaws.com/capston-upload-images/daily-log-image4-elsa-iceskating.png",
+            "kid_id": 1,
+            "title": "Ice-skating Progress "
+        }
+    ]
+}
 ```
-* Error Response: HTTP Status 404
+* Error Response 1: HTTP Status 403
 ```python
 {
-   'errors': 'User with the given id Not Found'
+    "errors": {
+        "message": "You are not authorized"
+    }
+}
+```
+* Error Response 2: HTTP Status 404
+```python
+{
+    "errors": {
+        "message": "Kid not found"
+    }
 }
 ```
 
-### Create new Billing Record
-* Purpose: This fetch is sent to add a new entry to the billing info table.
-* Method: ```POST```
-* URL: ```/api/billing/add```
-* Body:
+### Get Daily Log by ID
+##
+* Purpose: This fetch is to retrieve the details of a specific daily log by its ID. 
+* Method: ```GET```
+* URL: ```/api/daily_logs/<int:daily_log_id>```
+* Successful Response: HTTP Status 200
 ```python
 {
-   apt_number: INT,
-   city: STRING,
-   company: STRING,
-   country: STRING,
-   primary: BOOLEAN,
-   shipping_name: STRING,
-   state: STRING,
-   street: STRING,
-   user_id: INT,
-   zip: STRING
+    "content": "ELsa invited all her kindergarten classmates to attend her birthday party. She had so much fun",
+    "created_at": "Thu, 06 Jun 2024",
+    "id": 1,
+    "image_url": "https://bundle-of-joy-july24.s3.us-west-1.amazonaws.com/capston-upload-images/daily-log-image1-Elsa-birthday-party.png",
+    "kid_id": 1,
+    "title": "Six-year-old Birthday Party"
 }
 ```
-* Successful Response: HTTP 201
-```python
-[
-   {
-      apt_number: INT,
-      city: STRING,
-      company: STRING,
-      country: STRING,
-      primary: BOOLEAN,
-      shipping_name: STRING,
-      state: STRING,
-      street: STRING,
-      user_id: INT,
-      zip: STRING
-   }
-]
-```
-* Error Response1: HTTP Status 400
+* Error Response 1: HTTP Status 403
 ```python
 {
-   'errors': ARRAY_OF_STRINGS
+    "errors": {
+        "message": "You are not authorized"
+    }
 }
 ```
-* Error Response2: HTTP Status 404
+* Error Response 2: HTTP Status 404
 ```python
 {
-   'errors': 'User with given id Not Found'
+    "errors": {
+        "message": "daily_log not found"
+    }
 }
 ```
 
-### Update Billing Record
-* Purpose: This fetch is sent to update the billing info record specified by the billing id.
+### Update Daily Log by ID
+##
+* Purpose: This fetch is to update the details of a specific daily log by its ID for the current logged-in user..
 * Method: ```PUT```
-* URL: ```/api/shipping/update/int:billing_id```
+* URL: ```/api/daily_logs/<int:daily_log_id>```
 * Body:
 ```python
 {
-   apt_number: INT,
-   city: STRING,
-   company: STRING,
-   country: STRING,
-   primary: BOOLEAN,
-   shipping_name: STRING,
-   state: STRING,
-   street: STRING,
-   user_id: INT,
-   zip: STRING
+    "title": "first-time playing chess",
+    "content": "Elsa enjoy playing chess with Grandpa",
+    "image": "Elsa-playing-chess.png",
 }
 ```
 * Successful Response: HTTP Status 200
 ```python
-[
-   {
-      apt_number: INT,
-      city: STRING,
-      company: STRING,
-      country: STRING,
-      primary: BOOLEAN,
-      shipping_name: STRING,
-      state: STRING,
-      street: STRING,
-      user_id: INT,
-      zip: STRING
-   }
-]
-```
-* Error Response1: HTTP Status 400
-```python
 {
-   'errors': ARRAY_OF_STRINGS
+    "content": "Elsa enjoy playing chess with Grandpa",
+    "created_at": "Fri, 23 Aug 2024",
+    "id": 44,
+    "image_url": "https://bundle-of-joy-july24.s3.amazonaws.com/efdc5c1297ae4b459fefaf2b416ab98d.png",
+    "kid_id": 1,
+    "title": "first-time playing chess"
 }
 ```
-* Error Response2: HTTP Status 404
+* Error Response 1: HTTP Status 400
 ```python
 {
-   'errors': 'Billing Record with given id Not Found'
+    "errors": {
+        "content": [
+            "This field is required."
+        ],
+        "title": [
+            "This field is required."
+        ],
+        "image": [
+            "File type is not allowed."
+        ]
+    }
 }
 ```
-* Error Response3: HTTP Status 404
+* Error Response 2: HTTP Status 403
 ```python
 {
-   'errors': 'User with given id Not Found'
+    "errors": {
+        "message": "You are not authorized"
+    }
 }
 ```
-### Delete Billing Record
+* Error Response 3: HTTP Status 404
+```python
+{
+    "errors": {
+        "message": "daily_log not found"
+    }
+}
+```
+### Delete Daily Log by ID
 ##
-* Purpose: This fetch sends a billing info id in the body of the request. Upon successful deletion we return the updated array of user entries.
+* Purpose: This fetch is to delete a specific daily log by its ID for the current logged-in user..
 * Method: ```DELETE```
-* URL: ```/api/billing/delete```
-* Body:
-```python
-{
-   'id': INT
-}
-```
+* URL: ```/api/daily_logs/<int:daily_log_id>```
 * Successful Response: HTTP Status 200
 ```python
-[
-   {
-      apt_number: INT,
-      city: STRING,
-      company: STRING,
-      country: STRING,
-      primary: BOOLEAN,
-      shipping_name: STRING,
-      state: STRING,
-      street: STRING,
-      user_id: INT,
-      zip: STRING
-   }
-]
+{
+    "message": "This daily_log is deleted successfully"
+}
 ```
-* Error Response: HTTP Status 404
+
+* Error Response 1: HTTP Status 403
 ```python
 {
-   'errors': 'Billing record with given id Not Found'
+    "errors": {
+        "message": "You are not authorized"
+    }
+}
+```
+* Error Response 2: HTTP Status 404
+```python
+{
+    "errors": {
+        "message": "daily_log not found"
+    }
 }
 ```
 ##
 
+# Feature List
+1. Kids
+2. Daily Logs
+3. Friendships
+4. Likes
+5. Comments
 
 # Connect
-[LinkedIn](https://www.linkedin.com/in/hui-wen-best/)
+<a href="https://www.linkedin.com/in/hui-wen-best/" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" width="30" height="30" />
+</a>
 
