@@ -19,7 +19,7 @@ def seed_users():
     amanda = User(
         username='Amanda', first_name='Amanda', last_name='Wilson', email='amanda@gmail.com', password='password', user_image_url='https://bundle-of-joy-july24.s3.us-west-1.amazonaws.com/capston-upload-images/user-Amanda-profile-image.png')
     jessica = User(
-        username='Jessica', first_name='Jessica', last_name='Johnson', email='Jessica@gmail.com', password='password', user_image_url='https://bundle-of-joy-july24.s3.us-west-1.amazonaws.com/capston-upload-images/user-Jessica-profile-image.png')
+        username='Jessica', first_name='Jessica', last_name='Johnson', email='jessica@gmail.com', password='password', user_image_url='https://bundle-of-joy-july24.s3.us-west-1.amazonaws.com/capston-upload-images/user-Jessica-profile-image.png')
     
     all_users = [demo, marnie, bobbie, william, james, juan, amanda, jessica]
     [db.session.add(user) for user in all_users]
