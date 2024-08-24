@@ -145,7 +145,7 @@ const CurrentUserFriends = () => {
                 <h3 className='title-h3'>No friend requests received</h3>
                 ) : (
                 <div className='friend-request-div'>
-                    <h3 className='title-h3'>Friend Requests</h3>
+                    <h3 className='title-h3'>Friend Requests Received</h3>
                     <div id='requests-received-box'>
                         {receivedFriendRequests.map((friendship, index) => {
                             const friend = getUserById(friendship.user_id);
