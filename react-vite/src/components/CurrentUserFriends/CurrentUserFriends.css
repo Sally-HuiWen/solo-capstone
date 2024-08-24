@@ -154,8 +154,10 @@
 
 .accept-and-deny-buttons {
     display: flex;
+    flex-direction: column;
     gap: 0.5vw; 
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
 }
 
 .accept-friend-request-button {
@@ -217,7 +219,10 @@
     .denied-label {
         font-size: 1.5vw; 
     }
-
+    .accept-and-deny-buttons {
+        flex-direction: row;
+        gap: 1vw; 
+    }
 }
 @media (max-width: 768px) {
     #three-lists {
@@ -294,5 +299,8 @@
     }
     .denied-label {
         font-size: 4vw; 
+    }
+    .accept-and-deny-buttons {
+        flex-direction: row;
     }
 }
