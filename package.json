@@ -1,0 +1,14 @@
+{
+  "name": "hui-wen-capstone-project",
+  "version": "1.0.0",
+  "description": "Bundle of Joy is a heartwarming website for users to capture and share their children's cherished moments with family members and friends. Celebrate every smile, step, and adventure together, no matter the distance.",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.47.1",
+    "@types/node": "^22.5.4"
+  }
+}
