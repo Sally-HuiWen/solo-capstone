@@ -44,6 +44,7 @@ Migrate(app, db)
 # Application Security
 CORS(app)
 
+print('what is app.url_map', app.url_map)
 
 # Since we are deploying with Docker and Flask,
 # we won't be using a buildpack when we deploy to Heroku.
@@ -99,3 +100,5 @@ def react_root(path):
 @app.errorhandler(404)
 def not_found(e):
     return app.send_static_file('index.html')
+
+
